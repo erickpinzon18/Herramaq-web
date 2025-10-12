@@ -107,6 +107,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         
         {/* Schema.org structured data para Google */}
+        <meta name="google-site-verification" content="s7SHsRJMa0xNkVvdEtxwwzLj5SmS6HCWUVZmxOeEctA" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
