@@ -10,7 +10,6 @@ interface HoverBorderGradientProps extends React.HTMLAttributes<HTMLElement> {
   as?: React.ElementType;
   duration?: number;
   clockwise?: boolean;
-  [key: string]: any; // Allow any additional props
 }
 
 export const ACHoverBorderGradient = ({

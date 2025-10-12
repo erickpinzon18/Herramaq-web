@@ -25,10 +25,6 @@ interface Service {
     testimonial: Testimonial;
 }
 
-interface HeaderProps {
-    activeTab: string;
-}
-
 interface ServiceCardProps {
     service: Service;
 }
@@ -132,7 +128,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
                         <div className="absolute top-4 left-4 opacity-50">
                             <QuoteIcon />
                         </div>
-                        <p className="italic text-lg mb-4 z-10 relative">"{service.testimonial.quote}"</p>
+                        <p className="italic text-lg mb-4 z-10 relative">&ldquo;{service.testimonial.quote}&rdquo;</p>
                         <div className="text-right font-semibold text-blue-200">
                             <p>{service.testimonial.author}</p>
                             <p className="text-sm">{service.testimonial.company}</p>

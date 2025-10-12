@@ -27,14 +27,15 @@ export const ACWavyBackground = ({
   waveOpacity = 0.5,
   ...props
 }: WavyBackgroundProps) => {
-  const noise = () => {
-    let seed = 1;
-    const random = () => {
-      const x = Math.sin(seed++) * 10000;
-      return x - Math.floor(x);
-    };
-    return random;
-  };
+  // Noise function for potential future use
+  // const noise = () => {
+  //   let seed = 1;
+  //   const random = () => {
+  //     const x = Math.sin(seed++) * 10000;
+  //     return x - Math.floor(x);
+  //   };
+  //   return random;
+  // };
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | undefined>(undefined);

@@ -14,10 +14,6 @@ interface FormData {
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
-interface HeaderProps {
-    activeTab: string;
-}
-
 // --- Iconos SVG ---
 const MapPinIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

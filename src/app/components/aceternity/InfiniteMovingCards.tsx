@@ -29,6 +29,7 @@ export const ACInfiniteMovingCards = ({
 
   React.useEffect(() => {
     addAnimation();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function addAnimation() {
@@ -103,7 +104,7 @@ export const ACInfiniteMovingCards = ({
                 className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
               ></div>
               <span className="relative z-20 text-base leading-[1.6] text-slate-700 font-normal italic">
-                "{item.quote}"
+                &ldquo;{item.quote}&rdquo;
               </span>
               <div className="relative z-20 mt-6 flex flex-row items-center">
                 <span className="flex flex-col gap-1">
