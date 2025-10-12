@@ -1,0 +1,18 @@
+# robots.txt para Herramaq
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://herramaq.com/sitemap.xml
+
+# Crawl-delay para bots educados
+Crawl-delay: 1
+
+# Disallow admin o áreas privadas si las hay
+# Disallow: /admin/
+# Disallow: /api/
+
+# Permitir específicamente páginas importantes
+Allow: /products
+Allow: /services
+Allow: /contact

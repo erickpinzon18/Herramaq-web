@@ -1,0 +1,644 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Header, Footer, RBButton, RBCard, RBBadge, RBStatCard, RBGlassCard, RBAnimatedText } from '../components';
+import { ACHero } from '../components/aceternity/Hero';
+import { ACFeature } from '../components/aceternity/FeatureCard';
+import { ACSpotlight } from '../components/aceternity/Spotlight';
+import { ACBackgroundBeams } from '../components/aceternity/BackgroundBeams';
+import { ACMeteors } from '../components/aceternity/Meteors';
+import { ACHoverBorderGradient } from '../components/aceternity/HoverBorderGradient';
+import { ACBentoGrid, ACBentoGridItem } from '../components/aceternity/BentoGrid';
+import { ACInfiniteMovingCards } from '../components/aceternity/InfiniteMovingCards';
+import { ACInfiniteLogoScroll } from '../components/aceternity/InfiniteLogoScroll';
+
+// --- Tipos ---
+interface BrandItem {
+    name: string;
+    logo: string;
+    description: string;
+    images: string[];
+}
+
+interface CardSliderProps {
+    title: string;
+    items: BrandItem[];
+}
+
+// --- Iconos SVG como componentes de React ---
+const IconExperience = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+  </svg>
+);
+
+const IconBrands = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 8v5c0 .512.195 1.024.586 1.414l7 7a2 2 0 002.828 0l7-7a2 2 0 000-2.828l-7-7A2 2 0 0012 3H7z" />
+  </svg>
+);
+
+const IconClients = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm-2 5a2 2 0 11-4 0 2 2 0 014 0z" />
+  </svg>
+);
+
+const ChevronLeftIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+    </svg>
+);
+
+const ChevronRightIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+    </svg>
+);
+
+
+// --- Componente para la animación mejorada ---
+const AnimatedShapes = () => {
+  return (
+    <div className="w-full h-full min-h-[400px] lg:min-h-[500px] relative flex items-center justify-center bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 rounded-3xl overflow-hidden shadow-2xl">
+      {/* Animated gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 via-transparent to-yellow-500/20 animate-pulse"></div>
+      
+      {/* Formas animadas con CSS mejoradas */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute w-40 h-40 bg-white/10 rounded-3xl animate-spin-slow backdrop-blur-sm" style={{ animationDuration: '25s' }}></div>
+        <div className="absolute w-32 h-32 bg-yellow-400/20 rounded-full animate-bounce backdrop-blur-sm" style={{ animationDelay: '1s', animationDuration: '4s' }}></div>
+        <div className="absolute w-48 h-48 border-4 border-white/20 rounded-2xl rotate-45 animate-pulse backdrop-blur-sm"></div>
+        <div className="absolute w-24 h-24 bg-blue-300/20 rounded-lg animate-spin-slow" style={{ animationDelay: '2s', animationDuration: '15s' }}></div>
+      </div>
+      
+      {/* Logo central con efecto glass */}
+      <div className="relative z-10 text-center p-8 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
+        <div className="text-7xl font-bold text-white mb-2 drop-shadow-2xl">HERRAMAQ</div>
+        <div className="text-xl text-blue-100 font-medium">Precisión Industrial</div>
+      </div>
+      
+      {/* Partículas flotantes */}
+      <div className="absolute top-10 left-10 w-2 h-2 bg-white/60 rounded-full animate-ping"></div>
+      <div className="absolute bottom-20 right-20 w-3 h-3 bg-yellow-400/60 rounded-full animate-ping" style={{ animationDelay: '0.5s' }}></div>
+      <div className="absolute top-1/3 right-10 w-2 h-2 bg-white/60 rounded-full animate-ping" style={{ animationDelay: '1s' }}></div>
+    </div>
+  );
+};
+
+// --- Componente para el slider de tarjetas mejorado ---
+const CardSlider = ({ title, items }: CardSliderProps) => {
+    const [currentIndex, setCurrentIndex] = useState<number>(0);
+    const [activeImage, setActiveImage] = useState<Record<number, string>>({});
+
+    const handlePrev = () => {
+        setCurrentIndex(prev => (prev === 0 ? items.length - 1 : prev - 1));
+    };
+
+    const handleNext = () => {
+        setCurrentIndex(prev => (prev === items.length - 1 ? 0 : prev + 1));
+    };
+    
+    useEffect(() => {
+        // Reset active image when slide changes
+        setActiveImage({});
+    }, [currentIndex]);
+    
+    const currentItem = items[currentIndex];
+
+    return (
+        <div className="relative">
+            {/* Fondo decorativo con gradiente */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-slate-50 rounded-3xl -z-10"></div>
+            
+            <RBCard className="overflow-hidden shadow-2xl border border-blue-100/50">
+                <div className="flex items-center justify-between mb-8">
+                    <RBAnimatedText animation="fadeInLeft">
+                        <h3 className="text-4xl font-bold bg-gradient-to-r from-blue-800 to-blue-600 bg-clip-text text-transparent">
+                            {title}
+                        </h3>
+                    </RBAnimatedText>
+                    <RBAnimatedText animation="scaleIn" delay={200}>
+                        <RBBadge variant="primary">{currentIndex + 1} / {items.length}</RBBadge>
+                    </RBAnimatedText>
+                </div>
+                
+                <div className="relative">
+                    {/* Contenedor del Slider */}
+                    <div className="overflow-hidden relative min-h-[650px]">
+                         {items.map((item, index) => (
+                            <div key={index} className={`absolute w-full transition-all duration-700 ease-in-out transform ${index === currentIndex ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'}`}>
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                                    {/* Galería de Imágenes con efecto glass */}
+                                    <div className="space-y-6">
+                                        <div className="bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl overflow-hidden shadow-2xl relative h-96 group">
+                                            <Image 
+                                                src={activeImage[index] || item.images[0]} 
+                                                alt={`${item.name} main view`} 
+                                                fill
+                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                                sizes="(max-width: 768px) 100vw, 50vw"
+                                                priority={index === 0}
+                                            />
+                                            {/* Overlay gradient */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                        </div>
+                                        
+                                        {/* Thumbnails mejorados */}
+                                        <div className="grid grid-cols-4 gap-3 ml-4">
+                                            {item.images.map((imgSrc, imgIndex) => (
+                                                <div 
+                                                    key={imgIndex} 
+                                                    className={`relative h-24 bg-slate-100 rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${(activeImage[index] || item.images[0]) === imgSrc ? 'ring-4 ring-blue-600 shadow-xl scale-105' : 'opacity-70 hover:opacity-100 hover:scale-105'}`}
+                                                    onClick={() => setActiveImage(prev => ({ ...prev, [index]: imgSrc }))}
+                                                >
+                                                    <Image 
+                                                        src={imgSrc} 
+                                                        alt={`${item.name} thumb ${imgIndex + 1}`} 
+                                                        fill
+                                                        className="object-cover"
+                                                        sizes="120px"
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    
+                                    {/* Descripción mejorada */}
+                                    <div className="flex flex-col items-start space-y-6 px-4">
+                                        <RBGlassCard className="w-full">
+                                            <RBAnimatedText animation="scaleIn" delay={300}>
+                                                <div className="relative w-[180px] h-[70px] mb-6">
+                                                    <Image src={item.logo} alt={`Logo de ${item.name}`} fill className="object-contain" sizes="180px" />
+                                                </div>
+                                            </RBAnimatedText>
+                                            <RBAnimatedText animation="fadeInUp" delay={400}>
+                                                <h4 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-800 to-slate-700 bg-clip-text text-transparent">
+                                                    {item.name}
+                                                </h4>
+                                            </RBAnimatedText>
+                                            <RBAnimatedText animation="fadeInLeft" delay={500}>
+                                                <p className="text-slate-600 text-lg leading-relaxed">{item.description}</p>
+                                            </RBAnimatedText>
+                                        </RBGlassCard>
+                                        
+                                        <RBAnimatedText animation="scaleIn" delay={600} className="w-full md:w-auto self-start">
+                                            <Link href="/products" className="inline-block">
+                                                <ACHoverBorderGradient
+                                                    containerClassName="rounded-lg"
+                                                    className="px-8 py-3 shadow-lg hover:shadow-xl font-semibold text-blue-800 whitespace-nowrap"
+                                                >
+                                                    Ver Más Detalles →
+                                                </ACHoverBorderGradient>
+                                            </Link>
+                                        </RBAnimatedText>
+                                    </div>
+                                </div>
+                            </div>
+                         ))}
+                    </div>
+
+                    {/* Controles de Navegación mejorados */}
+                    <button 
+                        onClick={handlePrev} 
+                        className="absolute top-1/2 -translate-y-1/2 left-0 md:-left-6 bg-white hover:bg-blue-800 text-blue-800 hover:text-white rounded-full p-4 shadow-2xl transition-all duration-300 hover:scale-110 border-2 border-blue-100  ml-4"
+                        aria-label="Anterior"
+                    >
+                        <ChevronLeftIcon />
+                    </button>
+                    <button 
+                        onClick={handleNext} 
+                        className="absolute top-1/2 -translate-y-1/2 right-0 md:-right-6 bg-white hover:bg-blue-800 text-blue-800 hover:text-white rounded-full p-4 shadow-2xl transition-all duration-300 hover:scale-110 border-2 border-blue-100  mr-4"
+                        aria-label="Siguiente"
+                    >
+                        <ChevronRightIcon />
+                    </button>
+                    
+                    {/* Indicadores de página */}
+                    <div className="flex justify-center space-x-2 mt-8">
+                        {items.map((_, idx) => (
+                            <button
+                                key={idx}
+                                onClick={() => setCurrentIndex(idx)}
+                                className={`h-2 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-8 bg-blue-800' : 'w-2 bg-slate-300 hover:bg-slate-400'}`}
+                                aria-label={`Ir a slide ${idx + 1}`}
+                            />
+                        ))}
+                    </div>
+                </div>
+            </RBCard>
+        </div>
+    );
+};
+
+
+// --- Componente principal de la aplicación ---
+export default function App() {
+  // Datos de testimonios para el carrusel infinito
+  const testimonials = [
+    {
+      quote: "Herramaq ha sido nuestro proveedor de confianza por más de 5 años. Su calidad y servicio son excepcionales.",
+      name: "Carlos Méndez",
+      title: "Jefe de Producción, BOSCH México"
+    },
+    {
+      quote: "La precisión de sus herramientas CNC ha mejorado significativamente nuestra eficiencia en producción.",
+      name: "Ana Rodríguez",
+      title: "Gerente de Manufactura, TREMEC"
+    },
+    {
+      quote: "Excelente asesoría técnica y soporte post-venta. Altamente recomendados para la industria aeroespacial.",
+      name: "Miguel Ángel Santos",
+      title: "Ingeniero de Procesos, SAFRAN"
+    },
+    {
+      quote: "Sus soluciones de maquinado han reducido nuestros tiempos de ciclo en un 30%. Increíble calidad.",
+      name: "Laura Fernández",
+      title: "Directora de Operaciones, VALEO"
+    },
+    {
+      quote: "La mejor inversión que hemos hecho. Maquinaria confiable y herramientas de primera calidad.",
+      name: "Roberto Gómez",
+      title: "Supervisor de Mantenimiento, SIEMENS"
+    }
+  ];
+
+  const brandData: BrandItem[] = [
+    { 
+      name: 'INDUMAC', 
+      logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=INDUMAC', 
+      description: 'Líderes en la fabricación de maquinaria CNC de alta precisión. Sus tornos y fresadoras son reconocidos por su robustez y fiabilidad en entornos de producción exigentes.',
+      images: [
+        'https://placehold.co/600x400/1e3a8a/ffffff?text=Torno+CNC',
+        'https://placehold.co/600x400/334155/ffffff?text=Centro+de+Maquinado',
+        'https://placehold.co/600x400/94a3b8/ffffff?text=Detalle+de+Husillo',
+        'https://placehold.co/600x400/64748b/ffffff?text=Panel+de+Control',
+      ]
+    },
+    { 
+      name: 'PRECITOOLS', 
+      logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=PRECITOOLS', 
+      description: 'Especialistas en herramientas de corte de carburo y recubrimientos PVD. Ofrecen soluciones innovadoras para optimizar la velocidad y la vida útil de la herramienta.',
+      images: [
+        'https://placehold.co/600x400/1e3a8a/ffffff?text=Fresa+de+Carburo',
+        'https://placehold.co/600x400/334155/ffffff?text=Insertos+de+Corte',
+        'https://placehold.co/600x400/94a3b8/ffffff?text=Brocas+de+Alto+Rendimiento',
+        'https://placehold.co/600x400/64748b/ffffff?text=Herramientas+Especiales',
+      ]
+    },
+    { 
+      name: 'FERROTEC', 
+      logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=FERROTEC', 
+      description: 'Proveedores de accesorios y sistemas de sujeción industrial. Sus prensas, chucks y portaherramientas garantizan una fijación segura y precisa en cualquier operación.',
+      images: [
+        'https://placehold.co/600x400/1e3a8a/ffffff?text=Prensa+de+Sujeción',
+        'https://placehold.co/600x400/334155/ffffff?text=Chuck+Hidráulico',
+        'https://placehold.co/600x400/94a3b8/ffffff?text=Torre+Portaherramientas',
+        'https://placehold.co/600x400/64748b/ffffff?text=Boquillas+ER',
+      ]
+    },
+  ];
+
+  const clientData: BrandItem[] = [
+    { 
+      name: 'AEROSPACE INC', 
+      logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=AEROSPACE+INC', 
+      description: 'Gigante del sector aeroespacial para quien proveemos herramientas de corte especializadas para el maquinado de aleaciones de titanio y superaleaciones.',
+      images: [
+        'https://placehold.co/600x400/1e3a8a/ffffff?text=Planta+Aeroespacial',
+        'https://placehold.co/600x400/334155/ffffff?text=Turbina+de+Avión',
+        'https://placehold.co/600x400/94a3b8/ffffff?text=Línea+de+Ensamblaje',
+        'https://placehold.co/600x400/64748b/ffffff?text=Control+de+Calidad',
+      ]
+    },
+    { 
+      name: 'AUTO PARTS MEX', 
+      logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=AUTO+PARTS+MEX', 
+      description: 'Líder en la manufactura de componentes automotrices. Les suministramos soluciones completas de maquinado para sus líneas de producción de monoblocks y transmisiones.',
+      images: [
+        'https://placehold.co/600x400/1e3a8a/ffffff?text=Brazo+Robótico',
+        'https://placehold.co/600x400/334155/ffffff?text=Motor+de+Automóvil',
+        'https://placehold.co/600x400/94a3b8/ffffff?text=Línea+de+Producción',
+        'https://placehold.co/600x400/64748b/ffffff?text=Almacén+Automatizado',
+      ]
+    },
+  ];
+
+  // Datos para los logos en carrusel
+  const brandLogos = [
+    { name: 'INDUMAC', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=INDUMAC' },
+    { name: 'PRECITOOLS', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=PRECITOOLS' },
+    { name: 'FERROTEC', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=FERROTEC' },
+    { name: 'SANDVIK', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=SANDVIK' },
+    { name: 'MITUTOYO', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=MITUTOYO' },
+    { name: 'NORTON', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=NORTON' },
+  ];
+
+  const clientLogos = [
+    { name: 'BOSCH', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=BOSCH' },
+    { name: 'TREMEC', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=TREMEC' },
+    { name: 'SAFRAN', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=SAFRAN' },
+    { name: 'VALEO', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=VALEO' },
+    { name: 'SIEMENS', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=SIEMENS' },
+    { name: 'BROSE', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=BROSE' },
+  ];
+
+  return (
+    <div className="bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50 text-slate-800 w-full min-h-screen relative overflow-hidden">
+      {/* Spotlight Effect */}
+      <ACSpotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="rgba(0, 102, 230, 0.3)" />
+      
+      {/* Meteors Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <ACMeteors number={30} />
+      </div>
+
+      <div className="w-full px-4 md:px-8 relative z-10">
+
+        <Header activeTab="Inicio" />
+
+        <main className="space-y-24 max-w-none py-8" role="main" aria-label="Contenido principal">
+          {/* Hero mejorado con Aceternity */}
+          <section aria-labelledby="hero-heading">
+            <h1 id="hero-heading" className="sr-only">Herramaq - Soluciones Industriales de Precisión en Querétaro</h1>
+            <ACHero
+              title={"Soluciones Industriales, Precisión en cada Herramienta."}
+              subtitle={"En Herramaq somos líderes en San Juan del Río, Querétaro. Ofrecemos maquinaria, herramientas y servicios de maquinado con calidad industrial y soporte experto."}
+              cta={{ label: 'Ver Nuestro Catálogo', href: '/products' }}
+            />
+          </section>
+
+          {/* Sección de Estadísticas con RBStatCard */}
+          <section className="relative py-12 overflow-hidden" aria-labelledby="stats-heading">
+            <h2 id="stats-heading" className="sr-only">Estadísticas de Herramaq</h2>
+            {/* Background Beams Effect */}
+            <div className="absolute inset-0 overflow-hidden">
+              <ACBackgroundBeams />
+            </div>
+            
+            {/* Fondo decorativo */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-transparent to-blue-600/5 rounded-3xl"></div>
+            
+            <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8 px-2 md:px-6 z-10">
+              <RBStatCard 
+                icon={<IconExperience />} 
+                value="15+" 
+                label="Años de Experiencia"
+                trend={{ value: "+2 años este 2025", isPositive: true }}
+                gradient="from-blue-500 to-blue-700"
+              />
+              <RBStatCard 
+                icon={<IconBrands />} 
+                value="50+" 
+                label="Marcas de Prestigio"
+                trend={{ value: "+10 nuevas marcas", isPositive: true }}
+                gradient="from-blue-600 to-indigo-700"
+              />
+              <RBStatCard 
+                icon={<IconClients />} 
+                value="200+" 
+                label="Clientes Satisfechos"
+                trend={{ value: "98% satisfacción", isPositive: true }}
+                gradient="from-indigo-600 to-blue-700"
+              />
+            </div>
+          </section>
+
+          {/* Sección de BentoGrid - Características Visuales */}
+          <section className="relative" aria-labelledby="capabilities-heading">
+            <RBAnimatedText animation="fadeInUp" className="text-center mb-12">
+              <RBBadge variant="primary" className="mb-4">Nuestras Capacidades</RBBadge>
+              <h2 id="capabilities-heading" className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-800 to-slate-700 bg-clip-text text-transparent mb-4">
+                Todo lo que Necesitas en un Solo Lugar
+              </h2>
+            </RBAnimatedText>
+            
+            <ACBentoGrid className="px-2 md:px-6">
+              <ACBentoGridItem
+                title="Maquinaria CNC de Última Generación"
+                description="Tornos y fresadoras con tecnología de punta para fabricación de alta precisión"
+                header={
+                  <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 relative overflow-hidden" />
+                }
+                className="md:col-span-2"
+              />
+              <ACBentoGridItem
+                title="Herramientas de Corte Especializadas"
+                description="Fresas, insertos y brocas de carburo con recubrimientos PVD"
+                header={
+                  <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-slate-100 to-slate-200"></div>
+                }
+              />
+              <ACBentoGridItem
+                title="Sistemas de Medición Precisos"
+                description="Calibradores digitales, micrómetros y equipos CMM certificados"
+                header={
+                  <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-indigo-100 to-indigo-200"></div>
+                }
+              />
+              <ACBentoGridItem
+                title="Accesorios de Sujeción"
+                description="Prensas, chucks hidráulicos y portaherramientas de alta fuerza"
+                header={
+                  <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-blue-50 to-blue-150"></div>
+                }
+                className="md:col-span-2"
+              />
+              <ACBentoGridItem
+                title="Asistencia en Maquinado"
+                description="Optimización de procesos y selección de herramientas"
+                header={
+                  <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-blue-100 to-blue-200 relative overflow-hidden" />
+                }
+                className="md:col-span-2"
+              />
+              <ACBentoGridItem
+                title="Servicio Técnico 24/7"
+                description="Soporte especializado y mantenimiento preventivo incluido"
+                header={
+                  <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-slate-50 to-slate-150"></div>
+                }
+              />
+            </ACBentoGrid>
+          </section>
+
+          {/* Testimonios con Carrusel Infinito */}
+          <section className="relative py-12" aria-labelledby="testimonials-heading">
+            <RBAnimatedText animation="fadeInUp" className="text-center mb-12">
+              <RBBadge variant="success" className="mb-4">Testimonios</RBBadge>
+              <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-800 to-slate-700 bg-clip-text text-transparent mb-4">
+                Lo que Dicen Nuestros Clientes
+              </h2>
+              <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+                Empresas líderes confían en nosotros día a día
+              </p>
+            </RBAnimatedText>
+            
+            <div className="relative flex justify-center items-center">
+              <ACInfiniteMovingCards
+                items={testimonials}
+                direction="right"
+                speed="slow"
+                className="mx-auto"
+              />
+            </div>
+          </section>
+
+          {/* Sección de Features mejorada */}
+          <section className="relative" aria-labelledby="features-heading">
+            <RBAnimatedText animation="fadeInUp" className="text-center mb-12">
+              <RBBadge variant="info" className="mb-4">¿Por qué elegirnos?</RBBadge>
+              <h2 id="features-heading" className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-800 to-slate-700 bg-clip-text text-transparent mb-4">
+                Compromiso con la Excelencia
+              </h2>
+              <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+                Nuestra trayectoria nos respalda como el socio ideal para tus necesidades industriales
+              </p>
+            </RBAnimatedText>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-2 md:px-6">
+              <ACFeature 
+                icon={<IconExperience />} 
+                title="Experiencia Consolidada" 
+                description="Más de 15 años en el sector con soporte técnico especializado y garantía en todos nuestros productos y servicios." 
+              />
+              <ACFeature 
+                icon={<IconBrands />} 
+                title="Marcas Reconocidas" 
+                description="Alianzas estratégicas con más de 50 marcas líderes para ofrecer lo mejor en maquinaria y herramientas industriales." 
+              />
+              <ACFeature 
+                icon={<IconClients />} 
+                title="Confianza Comprobada" 
+                description="Red de más de 200 clientes satisfechos en sectores automotriz, aeroespacial, manufactura y más." 
+              />
+            </div>
+          </section>
+
+          {/* Llamado a la acción con animación */}
+          <section className="relative overflow-hidden rounded-3xl" aria-labelledby="cta-heading">
+            <h2 id="cta-heading" className="sr-only">Llamado a la acción</h2>
+            {/* Meteors dentro del CTA */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <ACMeteors number={15} className="bg-white" />
+            </div>
+            
+            <RBGlassCard className="bg-gradient-to-br from-blue-600 to-blue-800 text-white border-none shadow-2xl">
+              <RBAnimatedText animation="fadeInUp" className="relative z-10 text-center py-12 px-6">
+                <h2 className="text-4xl md:text-5xl font-bold mb-4 animate-gradient-x bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
+                  ¿Listo para impulsar tu producción?
+                </h2>
+                <p className="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
+                  Descubre cómo nuestras soluciones pueden optimizar tus procesos industriales con tecnología de vanguardia
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link href="/products">
+                    <ACHoverBorderGradient
+                      containerClassName="rounded-lg"
+                      className="bg-white text-blue-800 hover:bg-blue-50 px-8 py-4 text-lg shadow-xl font-semibold"
+                    >
+                      Explorar Productos ✨
+                    </ACHoverBorderGradient>
+                  </Link>
+                  <Link href="/contact">
+                    <RBButton variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-4 text-lg">
+                      Contactar Ahora
+                    </RBButton>
+                  </Link>
+                </div>
+              </RBAnimatedText>
+              
+              {/* Partículas de fondo */}
+              <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20">
+                <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute bottom-10 right-10 w-40 h-40 bg-yellow-400 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+              </div>
+            </RBGlassCard>
+          </section>
+
+          {/* Sliders de Logos - Sección Mejorada con Aceternity */}
+          <section className="relative py-16 overflow-hidden" aria-labelledby="partners-heading">
+            {/* Fondo decorativo con gradiente */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-slate-50 rounded-3xl"></div>
+            
+            {/* Spotlight efecto */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl"></div>
+            
+            <div className="relative z-10 space-y-16">
+              {/* Header de la sección */}
+              <RBAnimatedText animation="fadeInUp" className="text-center">
+                <RBBadge variant="primary" className="mb-6 animate-float">Nuestros Socios</RBBadge>
+                <h2 id="partners-heading" className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-800 via-blue-600 to-indigo-700 bg-clip-text text-transparent mb-4">
+                  Trabajamos con las Mejores Marcas
+                </h2>
+                <p className="text-slate-600 text-lg max-w-3xl mx-auto">
+                  Alianzas estratégicas con líderes de la industria para ofrecerte soluciones de clase mundial
+                </p>
+              </RBAnimatedText>
+
+              {/* Marcas - Carrusel infinito */}
+              <div className="space-y-6">
+                <RBAnimatedText animation="fadeInLeft" delay={200}>
+                  <div className="flex items-center gap-4 mb-4 px-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center shadow-lg">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 8v5c0 .512.195 1.024.586 1.414l7 7a2 2 0 002.828 0l7-7a2 2 0 000-2.828l-7-7A2 2 0 0012 3H7z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-slate-800">Marcas de Prestigio</h3>
+                      <p className="text-slate-600">Proveedores de maquinaria y herramientas industriales</p>
+                    </div>
+                  </div>
+                </RBAnimatedText>
+                <ACInfiniteLogoScroll items={brandLogos} direction="left" speed="slow" />
+              </div>
+
+              {/* Clientes - Carrusel infinito en dirección opuesta */}
+              <div className="space-y-6">
+                <RBAnimatedText animation="fadeInRight" delay={300}>
+                  <div className="flex items-center gap-4 mb-4 px-4 justify-end">
+                    <div>
+                      <h3 className="text-2xl font-bold text-slate-800 text-right">Clientes que Confían en Nosotros</h3>
+                      <p className="text-slate-600 text-right">Empresas líderes en manufactura e industria</p>
+                    </div>
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-600 to-indigo-800 flex items-center justify-center shadow-lg">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm-2 5a2 2 0 11-4 0 2 2 0 014 0z" />
+                      </svg>
+                    </div>
+                  </div>
+                </RBAnimatedText>
+                <ACInfiniteLogoScroll items={clientLogos} direction="right" speed="slow" />
+              </div>
+
+              {/* CTA para ver más */}
+              <RBAnimatedText animation="scaleIn" delay={400} className="flex justify-center pt-12">
+                <Link href="/products">
+                  <ACHoverBorderGradient
+                    containerClassName="rounded-xl shadow-xl hover:shadow-2xl transition-shadow"
+                    className="px-12 py-5 text-xl font-bold text-white bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 transition-all"
+                  >
+                    <span className="flex items-center gap-2">
+                      Ver Nuestro Catálogo
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </span>
+                  </ACHoverBorderGradient>
+                </Link>
+              </RBAnimatedText>
+            </div>
+          </section>
+
+        </main>
+        
+        <Footer />
+      </div>
+    </div>
+  );
+}
+
