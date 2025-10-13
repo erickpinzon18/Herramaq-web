@@ -5,44 +5,44 @@ import Link from 'next/link';
 import { RBButton } from '../reactbits/Button';
 
 export const ACHero = ({ title, subtitle, cta }: { title: string; subtitle: string; cta?: { label: string; href: string } }) => (
-  <section className="relative w-full overflow-hidden py-20 md:py-28">
+  <section className="relative w-full overflow-hidden py-12 md:py-20 lg:py-28">
     {/* Animated background */}
     <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-slate-50"></div>
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_rgba(59,130,246,0.1),transparent_50%)]"></div>
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,_rgba(148,163,184,0.1),transparent_50%)]"></div>
     
-    <div className="relative container mx-auto px-4 max-w-none">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ml-4">
+    <div className="relative container mx-auto px-2 md:px-4 max-w-none">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
         {/* Content */}
-        <div className="space-y-8 animate-fade-in-left">
+        <div className="space-y-6 md:space-y-8 animate-fade-in-left px-2 md:px-0">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 border border-blue-200 text-blue-800 text-sm font-semibold">
+          <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-blue-100 border border-blue-200 text-blue-800 text-xs md:text-sm font-semibold">
             <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
             Líder en Soluciones Industriales
           </div>
           
           {/* Title */}
-          <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold leading-tight">
             <span className="bg-gradient-to-r from-blue-800 via-blue-600 to-slate-700 bg-clip-text text-transparent">
               {title}
             </span>
           </h1>
           
           {/* Subtitle */}
-          <p className="text-xl text-slate-600 leading-relaxed max-w-2xl">
+          <p className="text-base md:text-xl text-slate-600 leading-relaxed max-w-2xl">
             {subtitle}
           </p>
           
           {/* CTA Buttons */}
           {cta && (
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href={cta.href}>
-                <RBButton variant="primary" className="px-8 py-4 text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+              <Link href={cta.href} className="w-full sm:w-auto">
+                <RBButton variant="primary" className="px-6 md:px-8 py-3 md:py-4 text-base md:text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 w-full sm:w-auto">
                   {cta.label} →
                 </RBButton>
               </Link>
-              <Link href="/contact">
-                <RBButton variant="outline" className="px-8 py-4 text-lg hover:scale-105 transition-all duration-300">
+              <Link href="/contact" className="w-full sm:w-auto">
+                <RBButton variant="outline" className="px-6 md:px-8 py-3 md:py-4 text-base md:text-lg hover:scale-105 transition-all duration-300 w-full sm:w-auto">
                   Contactar Ventas
                 </RBButton>
               </Link>
@@ -82,7 +82,7 @@ export const ACHero = ({ title, subtitle, cta }: { title: string; subtitle: stri
             
             {/* Logo central */}
             <div className="relative z-10 h-full flex items-center justify-center p-8">
-              <div className="text-center bg-white/10 backdrop-blur-md rounded-3xl border border-white/20 p-12">
+              <div className="text-center bg-white/10 backdrop-blur-md rounded-3xl border border-white/20 p-12 py-14">
                 <div className="text-8xl font-bold text-white mb-4 drop-shadow-2xl">HERRAMAQ</div>
                 <div className="text-2xl text-blue-100 font-medium">Precisión Industrial</div>
               </div>

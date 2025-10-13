@@ -110,9 +110,9 @@ export default function App() {
 
         <Header activeTab="Inicio" />
 
-        <main className="space-y-24 max-w-none py-8" role="main" aria-label="Contenido principal">
+        <main className="space-y-16 md:space-y-24 max-w-none py-4 md:py-8" role="main" aria-label="Contenido principal">
           {/* Hero mejorado con Aceternity */}
-          <section aria-labelledby="hero-heading">
+          <section aria-labelledby="hero-heading" className="px-2">
             <h1 id="hero-heading" className="sr-only">Herramaq - Soluciones Industriales de Precisión en Querétaro</h1>
             <ACHero
               title={"Soluciones Industriales, Precisión en cada Herramienta."}
@@ -122,7 +122,7 @@ export default function App() {
           </section>
 
           {/* Sección de Estadísticas con RBStatCard */}
-          <section className="relative py-12 overflow-hidden" aria-labelledby="stats-heading">
+          <section className="relative py-8 md:py-12 overflow-hidden" aria-labelledby="stats-heading">
             <h2 id="stats-heading" className="sr-only">Estadísticas de Herramaq</h2>
             {/* Background Beams Effect */}
             <div className="absolute inset-0 overflow-hidden">
@@ -132,7 +132,7 @@ export default function App() {
             {/* Fondo decorativo */}
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-transparent to-blue-600/5 rounded-3xl"></div>
             
-            <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8 px-2 md:px-6 z-10">
+            <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 px-2 md:px-6 z-10">
               <RBStatCard 
                 icon={<IconExperience />} 
                 value="15+" 
@@ -158,10 +158,10 @@ export default function App() {
           </section>
 
           {/* Sección de BentoGrid - Características Visuales */}
-          <section className="relative" aria-labelledby="capabilities-heading">
-            <RBAnimatedText animation="fadeInUp" className="text-center mb-12">
+          <section className="relative px-2" aria-labelledby="capabilities-heading">
+            <RBAnimatedText animation="fadeInUp" className="text-center mb-8 md:mb-12">
               <RBBadge variant="primary" className="mb-4">Nuestras Capacidades</RBBadge>
-              <h2 id="capabilities-heading" className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-800 to-slate-700 bg-clip-text text-transparent mb-4">
+              <h2 id="capabilities-heading" className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-800 to-slate-700 bg-clip-text text-transparent mb-4 px-4">
                 Todo lo que Necesitas en un Solo Lugar
               </h2>
             </RBAnimatedText>
@@ -216,13 +216,13 @@ export default function App() {
           </section>
 
           {/* Testimonios con Carrusel Infinito */}
-          <section className="relative py-12" aria-labelledby="testimonials-heading">
-            <RBAnimatedText animation="fadeInUp" className="text-center mb-12">
+          <section className="relative py-8 md:py-12 px-2" aria-labelledby="testimonials-heading">
+            <RBAnimatedText animation="fadeInUp" className="text-center mb-8 md:mb-12">
               <RBBadge variant="success" className="mb-4">Testimonios</RBBadge>
-              <h2 id="testimonials-heading" className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-800 to-slate-700 bg-clip-text text-transparent mb-4">
+              <h2 id="testimonials-heading" className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-800 to-slate-700 bg-clip-text text-transparent mb-4 px-4">
                 Lo que Dicen Nuestros Clientes
               </h2>
-              <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+              <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto px-4">
                 Empresas líderes confían en nosotros día a día
               </p>
             </RBAnimatedText>
@@ -238,18 +238,18 @@ export default function App() {
           </section>
 
           {/* Sección de Features mejorada */}
-          <section className="relative" aria-labelledby="features-heading">
-            <RBAnimatedText animation="fadeInUp" className="text-center mb-12">
+          <section className="relative px-2" aria-labelledby="features-heading">
+            <RBAnimatedText animation="fadeInUp" className="text-center mb-8 md:mb-12">
               <RBBadge variant="info" className="mb-4">¿Por qué elegirnos?</RBBadge>
-              <h2 id="features-heading" className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-800 to-slate-700 bg-clip-text text-transparent mb-4">
+              <h2 id="features-heading" className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-800 to-slate-700 bg-clip-text text-transparent mb-4 px-4">
                 Compromiso con la Excelencia
               </h2>
-              <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+              <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto px-4">
                 Nuestra trayectoria nos respalda como el socio ideal para tus necesidades industriales
               </p>
             </RBAnimatedText>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-2 md:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 px-2 md:px-6">
               <ACFeature 
                 icon={<IconExperience />} 
                 title="Experiencia Consolidada" 
@@ -269,7 +269,7 @@ export default function App() {
           </section>
 
           {/* Llamado a la acción con animación */}
-          <section className="relative overflow-hidden rounded-3xl" aria-labelledby="cta-heading">
+          <section className="relative overflow-hidden rounded-2xl md:rounded-3xl mx-2" aria-labelledby="cta-heading">
             <h2 id="cta-heading" className="sr-only">Llamado a la acción</h2>
             {/* Meteors dentro del CTA */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -277,24 +277,24 @@ export default function App() {
             </div>
             
             <RBGlassCard className="bg-gradient-to-br from-blue-600 to-blue-800 text-white border-none shadow-2xl">
-              <RBAnimatedText animation="fadeInUp" className="relative z-10 text-center py-12 px-6">
-                <h2 className="text-4xl md:text-5xl font-bold mb-4 animate-gradient-x bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
+              <RBAnimatedText animation="fadeInUp" className="relative z-10 text-center py-8 md:py-12 px-4 md:px-6">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 animate-gradient-x bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
                   ¿Listo para impulsar tu producción?
                 </h2>
-                <p className="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
+                <p className="text-blue-100 text-base md:text-lg mb-6 md:mb-8 max-w-2xl mx-auto">
                   Descubre cómo nuestras soluciones pueden optimizar tus procesos industriales con tecnología de vanguardia
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
                   <Link href="/products">
                     <ACHoverBorderGradient
-                      containerClassName="rounded-lg"
-                      className="bg-white text-blue-800 hover:bg-blue-50 px-8 py-4 text-lg shadow-xl font-semibold"
+                      containerClassName="rounded-lg w-full sm:w-auto"
+                      className="bg-white text-blue-800 hover:bg-blue-50 px-6 md:px-8 py-3 md:py-4 text-base md:text-lg shadow-xl font-semibold w-full sm:w-auto"
                     >
                       Explorar Productos ✨
                     </ACHoverBorderGradient>
                   </Link>
-                  <Link href="/contact">
-                    <RBButton variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-4 text-lg">
+                  <Link href="/contact" className="w-full sm:w-auto">
+                    <RBButton variant="outline" className="border-white text-white hover:bg-white/10 px-6 md:px-8 py-3 md:py-4 text-base md:text-lg w-full">
                       Contactar Ahora
                     </RBButton>
                   </Link>
@@ -310,38 +310,38 @@ export default function App() {
           </section>
 
           {/* Sliders de Logos - Sección Mejorada con Aceternity */}
-          <section className="relative py-16 overflow-hidden" aria-labelledby="partners-heading">
+          <section className="relative py-12 md:py-16 overflow-hidden px-2" aria-labelledby="partners-heading">
             {/* Fondo decorativo con gradiente */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-slate-50 rounded-3xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-slate-50 rounded-2xl md:rounded-3xl"></div>
             
             {/* Spotlight efecto */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 md:w-96 md:h-96 bg-blue-400/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 md:w-96 md:h-96 bg-indigo-400/10 rounded-full blur-3xl"></div>
             
-            <div className="relative z-10 space-y-16">
+            <div className="relative z-10 space-y-12 md:space-y-16">
               {/* Header de la sección */}
               <RBAnimatedText animation="fadeInUp" className="text-center">
-                <RBBadge variant="primary" className="mb-6 animate-float">Nuestros Socios</RBBadge>
-                <h2 id="partners-heading" className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-800 via-blue-600 to-indigo-700 bg-clip-text text-transparent mb-4">
+                <RBBadge variant="primary" className="mb-4 md:mb-6 animate-float">Nuestros Socios</RBBadge>
+                <h2 id="partners-heading" className="text-3xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-blue-800 via-blue-600 to-indigo-700 bg-clip-text text-transparent mb-4 px-4">
                   Trabajamos con las Mejores Marcas
                 </h2>
-                <p className="text-slate-600 text-lg max-w-3xl mx-auto">
+                <p className="text-slate-600 text-base md:text-lg max-w-3xl mx-auto px-4">
                   Alianzas estratégicas con líderes de la industria para ofrecerte soluciones de clase mundial
                 </p>
               </RBAnimatedText>
 
               {/* Marcas - Carrusel infinito */}
-              <div className="space-y-6">
+              <div className="space-y-4 md:space-y-6">
                 <RBAnimatedText animation="fadeInLeft" delay={200}>
-                  <div className="flex items-center gap-4 mb-4 px-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center shadow-lg">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <div className="flex items-center gap-3 md:gap-4 mb-4 px-2 md:px-4">
+                    <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center shadow-lg">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 8v5c0 .512.195 1.024.586 1.414l7 7a2 2 0 002.828 0l7-7a2 2 0 000-2.828l-7-7A2 2 0 0012 3H7z" />
                       </svg>
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-slate-800">Marcas de Prestigio</h3>
-                      <p className="text-slate-600">Proveedores de maquinaria y herramientas industriales</p>
+                      <h3 className="text-xl md:text-2xl font-bold text-slate-800">Marcas de Prestigio</h3>
+                      <p className="text-sm md:text-base text-slate-600">Proveedores de maquinaria y herramientas industriales</p>
                     </div>
                   </div>
                 </RBAnimatedText>
@@ -349,15 +349,15 @@ export default function App() {
               </div>
 
               {/* Clientes - Carrusel infinito en dirección opuesta */}
-              <div className="space-y-6">
+              <div className="space-y-4 md:space-y-6">
                 <RBAnimatedText animation="fadeInRight" delay={300}>
-                  <div className="flex items-center gap-4 mb-4 px-4 justify-end">
-                    <div>
-                      <h3 className="text-2xl font-bold text-slate-800 text-right">Clientes que Confían en Nosotros</h3>
-                      <p className="text-slate-600 text-right">Empresas líderes en manufactura e industria</p>
+                  <div className="flex items-center gap-3 md:gap-4 mb-4 px-2 md:px-4 justify-start md:justify-end flex-row-reverse md:flex-row">
+                    <div className="text-left md:text-right">
+                      <h3 className="text-xl md:text-2xl font-bold text-slate-800">Clientes que Confían en Nosotros</h3>
+                      <p className="text-sm md:text-base text-slate-600">Empresas líderes en manufactura e industria</p>
                     </div>
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-600 to-indigo-800 flex items-center justify-center shadow-lg">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-indigo-600 to-indigo-800 flex items-center justify-center shadow-lg">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm-2 5a2 2 0 11-4 0 2 2 0 014 0z" />
                       </svg>
                     </div>
@@ -367,15 +367,15 @@ export default function App() {
               </div>
 
               {/* CTA para ver más */}
-              <RBAnimatedText animation="scaleIn" delay={400} className="flex justify-center pt-12">
-                <Link href="/products">
+              <RBAnimatedText animation="scaleIn" delay={400} className="flex justify-center pt-8 md:pt-12 px-2">
+                <Link href="/products" className="w-full sm:w-auto">
                   <ACHoverBorderGradient
-                    containerClassName="rounded-xl shadow-xl hover:shadow-2xl transition-shadow"
-                    className="px-12 py-5 text-xl font-bold text-white bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 transition-all"
+                    containerClassName="rounded-xl shadow-xl hover:shadow-2xl transition-shadow w-full sm:w-auto"
+                    className="px-8 md:px-12 py-4 md:py-5 text-lg md:text-xl font-bold text-white bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 transition-all w-full sm:w-auto"
                   >
-                    <span className="flex items-center gap-2">
+                    <span className="flex items-center justify-center gap-2">
                       Ver Nuestro Catálogo
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>
                     </span>
