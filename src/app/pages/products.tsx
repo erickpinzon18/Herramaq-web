@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Header, Footer, RBBadge, RBAnimatedText, RBButton } from '../components';
+import { Header, Footer, RBBadge, RBButton } from '../components';
 import { ACSpotlight } from '../components/aceternity/Spotlight';
 import { ACMeteors } from '../components/aceternity/Meteors';
 import { ACHoverBorderGradient } from '../components/aceternity/HoverBorderGradient';

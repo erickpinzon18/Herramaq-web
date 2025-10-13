@@ -47,6 +47,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
       carouselRef.current.scrollLeft = initialScroll;
       checkScrollability();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialScroll]);
 
   const checkScrollability = () => {
@@ -163,7 +164,7 @@ export const Card = ({
 }) => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { onCardClose, currentIndex } = useContext(CarouselContext);
+  const { onCardClose } = useContext(CarouselContext);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -180,6 +181,7 @@ export const Card = ({
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   useOutsideClick(containerRef as React.RefObject<HTMLDivElement>, () => handleClose());

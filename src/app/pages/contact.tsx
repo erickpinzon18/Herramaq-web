@@ -5,7 +5,6 @@ import { Header, Footer } from '../components';
 import { ACSpotlight } from '../components/aceternity/Spotlight';
 import { ACMeteors } from '../components/aceternity/Meteors';
 import { ACBackgroundBeams } from '../components/aceternity/BackgroundBeams';
-import { WobbleCard } from '@/components/ui/wobble-card';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
