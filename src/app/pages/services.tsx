@@ -338,13 +338,13 @@ export default function ServicesPage() {
             </section>
 
             {/* Apple Cards Carousel - Servicios Principales */}
-            <section className="w-full py-20 bg-white">
+            <section className="w-full py-12 md:py-20 bg-white">
                 <div className="max-w-7xl mx-auto px-4 md:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+                    <div className="text-center mb-10 md:mb-16">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4">
                             Nuestros Servicios
                         </h2>
-                        <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+                        <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
                             Descubre nuestra gama completa de soluciones de maquinado y manufactura especializada
                         </p>
                     </div>
@@ -353,71 +353,71 @@ export default function ServicesPage() {
             </section>
 
             {/* Wobble Cards - Beneficios Clave */}
-            <section className="w-full py-20 bg-slate-100">
+            <section className="w-full py-12 md:py-16 lg:py-20 bg-slate-50">
                 <div className="max-w-7xl mx-auto px-4 md:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+                    <div className="text-center mb-10 md:mb-16">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4">
                             ¿Por Qué Elegir Herramaq?
                         </h2>
+                        <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
+                            Más de 15 años de experiencia en manufactura de precisión
+                        </p>
                     </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <WobbleCard containerClassName="col-span-1 lg:col-span-2 h-full bg-blue-800 min-h-[500px] lg:min-h-[300px]">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                        <WobbleCard
+                            containerClassName="col-span-1 bg-blue-900 h-auto md:h-[300px] lg:h-[320px]"
+                            className=""
+                        >
                             <div className="max-w-sm">
-                                <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-                                    Certificaciones de Clase Mundial
+                                <h2 className="text-left text-balance text-xl md:text-2xl lg:text-3xl font-semibold tracking-[-0.015em] text-white mb-3 md:mb-4">
+                                    Certificación ISO 9001:2015
                                 </h2>
-                                <p className="mt-4 text-left text-base/6 text-blue-200">
-                                    ISO 9001:2015 y AS9100 Rev D certificadas. Cumplimos con los estándares más exigentes 
-                                    de las industrias automotriz y aeroespacial.
+                                <p className="mt-2 md:mt-4 text-left text-sm md:text-base text-white/90">
+                                    Garantizamos procesos estandarizados y control de calidad riguroso en cada proyecto, 
+                                    cumpliendo con los más altos estándares internacionales.
                                 </p>
                             </div>
-                            <Image
-                                src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=500"
-                                width={500}
-                                height={500}
-                                alt="Certificaciones"
-                                className="absolute -right-4 lg:-right-[10%] -bottom-10 object-contain rounded-2xl"
-                            />
                         </WobbleCard>
-                        <WobbleCard containerClassName="col-span-1 min-h-[300px] bg-gradient-to-br from-yellow-500 to-orange-600">
-                            <h2 className="max-w-80 text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-                                Entrega en 48 Horas*
-                            </h2>
-                            <p className="mt-4 max-w-[26rem] text-left text-base/6 text-yellow-100">
-                                Servicio express disponible para piezas urgentes. 
-                                *Aplica restricciones según complejidad.
-                            </p>
-                        </WobbleCard>
-                        <WobbleCard containerClassName="col-span-1 lg:col-span-3 bg-gradient-to-br from-green-600 to-teal-700 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
+                        <WobbleCard
+                            containerClassName="col-span-1 bg-slate-800 h-auto md:h-[300px] lg:h-[320px]"
+                            className=""
+                        >
                             <div className="max-w-sm">
-                                <h2 className="max-w-sm md:max-w-lg text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-                                    Ingeniería de Valor Incluida
+                                <h2 className="text-left text-balance text-xl md:text-2xl lg:text-3xl font-semibold tracking-[-0.015em] text-white mb-3 md:mb-4">
+                                    Tecnología CNC de Última Generación
                                 </h2>
-                                <p className="mt-4 max-w-[26rem] text-left text-base/6 text-green-100">
-                                    Nuestros ingenieros te asesorarán sin costo para optimizar tus diseños, 
-                                    reducir tiempos de ciclo y minimizar desperdicios. Ahorra hasta 30% en costos de manufactura.
+                                <p className="mt-2 md:mt-4 text-left text-sm md:text-base text-white/90">
+                                    Equipamiento de precisión con capacidad multieje para proyectos complejos, 
+                                    garantizando tolerancias mínimas y acabados superiores.
                                 </p>
                             </div>
-                            <Image
-                                src="https://images.unsplash.com/photo-1581092583537-20d51b4b4f1b?w=500"
-                                width={500}
-                                height={500}
-                                alt="Ingeniería"
-                                className="absolute -right-10 md:-right-[20%] lg:-right-[5%] -bottom-10 object-contain rounded-2xl"
-                            />
+                        </WobbleCard>
+                        <WobbleCard
+                            containerClassName="col-span-1 md:col-span-2 lg:col-span-1 bg-blue-800 h-auto md:h-[300px] lg:h-[320px]"
+                            className=""
+                        >
+                            <div className="max-w-sm">
+                                <h2 className="text-left text-balance text-xl md:text-2xl lg:text-3xl font-semibold tracking-[-0.015em] text-white mb-3 md:mb-4">
+                                    Confianza de Líderes Industriales
+                                </h2>
+                                <p className="mt-2 md:mt-4 text-left text-sm md:text-base text-white/90">
+                                    Socios estratégicos de empresas como Volkswagen, General Motors, Mabe y otras 
+                                    corporaciones que confían en nuestra capacidad de manufactura.
+                                </p>
+                            </div>
                         </WobbleCard>
                     </div>
                 </div>
             </section>
 
             {/* Bento Grid - Capacidades Técnicas */}
-            <section className="w-full py-20 bg-white">
+            <section className="w-full py-12 md:py-20 bg-white">
                 <div className="max-w-7xl mx-auto px-4 md:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+                    <div className="text-center mb-10 md:mb-16">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4">
                             Capacidades Técnicas
                         </h2>
-                        <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+                        <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
                             Equipamiento y experiencia para los proyectos más exigentes
                         </p>
                     </div>
@@ -451,13 +451,13 @@ export default function ServicesPage() {
             </section>
 
             {/* Animated Testimonials */}
-            <section className="w-full py-20 bg-white">
+            <section className="w-full py-12 md:py-20 bg-white">
                 <div className="max-w-7xl mx-auto px-4 md:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+                    <div className="text-center mb-10 md:mb-16">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4">
                             Lo Que Dicen Nuestros Clientes
                         </h2>
-                        <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+                        <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
                             La confianza de líderes industriales nos respalda
                         </p>
                     </div>
@@ -466,24 +466,24 @@ export default function ServicesPage() {
             </section>
 
             {/* CTA Final con Background Beams */}
-            <section className="relative w-full py-20 bg-gradient-to-br from-slate-900 to-blue-900 overflow-hidden">
+            <section className="relative w-full py-16 md:py-20 bg-gradient-to-br from-slate-900 to-blue-900 overflow-hidden">
                 <ACBackgroundBeams className="opacity-30" />
                 
                 <div className="relative z-10 w-full px-4 md:px-8 text-center">
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6">
                         ¿Listo para Llevar tu Proyecto al Siguiente Nivel?
                     </h2>
-                    <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                    <p className="text-base md:text-lg lg:text-xl text-blue-100 mb-6 md:mb-8 max-w-2xl mx-auto">
                         Contáctanos hoy y descubre cómo podemos ayudarte a fabricar componentes 
                         de la más alta calidad con los tiempos de entrega más competitivos.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <ACHoverBorderGradient>
-                            <RBButton variant="primary" className="bg-blue-600 text-white hover:bg-blue-50 px-8 py-4 text-lg font-bold">
+                            <RBButton variant="primary" className="bg-blue-600 text-white hover:bg-blue-50 px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-bold">
                                 Solicitar Cotización Ahora
                             </RBButton>
                         </ACHoverBorderGradient>
-                        <RBButton variant="outline" className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-4 text-lg font-bold">
+                        <RBButton variant="outline" className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-bold">
                             Agendar Visita a Planta
                         </RBButton>
                     </div>
