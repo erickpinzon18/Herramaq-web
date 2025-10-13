@@ -408,4 +408,4 @@ npm run lint
 
 ## 📄 Licencia
 
-© 2024 Herramaq. Todos los derechos reservados.
+© 2025 Herramaq. Todos los derechos reservados.
