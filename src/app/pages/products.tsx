@@ -327,7 +327,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
     if (!isOpen || !product) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-start md:items-center justify-center p-4 overflow-y-auto pt-16 md:pt-4">
             <div
                 ref={backdropRef}
                 className="absolute inset-0 bg-black/60 backdrop-blur-sm"
@@ -335,19 +335,19 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
             />
             <div
                 ref={modalRef}
-                className="relative z-10 w-full max-w-6xl max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden"
+                className="relative z-10 w-full max-w-6xl my-4 md:my-8 bg-white rounded-2xl shadow-2xl overflow-hidden"
             >
                 <button
                     onClick={handleClose}
-                    className="absolute top-4 right-4 z-20 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+                    className="sticky top-4 left-full -ml-12 z-20 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-300 hover:scale-110"
                     aria-label="Cerrar modal"
                 >
                     <CloseIcon />
                 </button>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 h-full overflow-y-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                     {/* Galería de Imágenes */}
-                    <div className="relative bg-slate-50 p-8">
+                    <div className="relative bg-slate-50 p-4 md:p-8">
                         <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-white shadow-inner">
                             <Image
                                 src={product.images[currentImageIndex]}
@@ -362,19 +362,19 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
                             <>
                                 <button
                                     onClick={prevImage}
-                                    className="absolute left-10 top-1/2 -translate-y-1/2 p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+                                    className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-300 hover:scale-110"
                                     aria-label="Imagen anterior"
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                                     </svg>
                                 </button>
                                 <button
                                     onClick={nextImage}
-                                    className="absolute right-10 top-1/2 -translate-y-1/2 p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+                                    className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-300 hover:scale-110"
                                     aria-label="Imagen siguiente"
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                                     </svg>
                                 </button>
@@ -406,7 +406,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
                     </div>
 
                     {/* Información del Producto */}
-                    <div className="p-8 lg:p-12 flex flex-col justify-between">
+                    <div className="p-4 md:p-8 lg:p-12 flex flex-col justify-between min-h-[400px]">
                         <div>
                             <div className="flex items-center gap-3 mb-4">
                                 <RBBadge variant="primary">
@@ -422,15 +422,15 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
                                 )}
                             </div>
 
-                            <h2 className="text-4xl font-bold text-slate-900 mb-2">{product.name}</h2>
-                            <p className="text-blue-600 font-semibold text-lg mb-6">{product.brand}</p>
-                            <p className="text-slate-600 text-lg mb-8 leading-relaxed">{product.description}</p>
+                            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-2">{product.name}</h2>
+                            <p className="text-blue-600 font-semibold text-base md:text-lg mb-4 md:mb-6">{product.brand}</p>
+                            <p className="text-slate-600 text-sm md:text-base lg:text-lg mb-6 md:mb-8 leading-relaxed">{product.description}</p>
 
                             {/* Especificaciones */}
                             {product.specs && Object.keys(product.specs).length > 0 && (
-                                <div className="mb-8">
-                                    <h3 className="text-xl font-bold text-slate-900 mb-4">Especificaciones</h3>
-                                    <div className="grid grid-cols-2 gap-4">
+                                <div className="mb-6 md:mb-8">
+                                    <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-3 md:mb-4">Especificaciones</h3>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                                         {Object.entries(product.specs).map(([key, value]) => (
                                             <div key={key} className="bg-slate-50 rounded-lg p-3 border border-slate-200">
                                                 <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">
@@ -447,15 +447,15 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
                             )}
 
                             {product.price && (
-                                <div className="mb-8">
-                                    <p className="text-3xl font-bold text-blue-600">{product.price}</p>
-                                    <p className="text-sm text-slate-500 mt-1">Precio sujeto a disponibilidad</p>
+                                <div className="mb-6 md:mb-8">
+                                    <p className="text-2xl md:text-3xl font-bold text-blue-600">{product.price}</p>
+                                    <p className="text-xs md:text-sm text-slate-500 mt-1">Precio sujeto a disponibilidad</p>
                                 </div>
                             )}
                         </div>
 
                         {/* Acciones */}
-                        <div className="flex flex-col sm:flex-row gap-3">
+                        <div className="flex flex-col sm:flex-row gap-3 mt-6">
                             <RBButton
                                 variant="primary"
                                 className="flex-1 flex items-center justify-center gap-2"
@@ -464,9 +464,9 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
                                 <ShoppingCartIcon />
                                 Solicitar Cotización
                             </RBButton>
-                            <button className="p-4 border-2 border-blue-600 text-blue-600 rounded-xl hover:bg-blue-50 transition-all duration-300 hover:scale-105">
+                            {/* <button className="p-3 md:p-4 border-2 border-blue-600 text-blue-600 rounded-xl hover:bg-blue-50 transition-all duration-300 hover:scale-105">
                                 <HeartIcon />
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                 </div>
@@ -548,11 +548,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onViewDetails }) => 
                         </span>
                     </div>
                 )}
-                <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {/* <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <button className="p-2 bg-white rounded-full shadow-lg hover:bg-blue-50 transition-colors duration-300">
                         <HeartIcon />
                     </button>
-                </div>
+                </div> */}
             </div>
 
             <div className="p-6">

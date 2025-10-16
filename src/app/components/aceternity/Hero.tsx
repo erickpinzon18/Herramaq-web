@@ -81,10 +81,10 @@ export const ACHero = ({ title, subtitle, cta }: { title: string; subtitle: stri
             </div>
             
             {/* Logo central */}
-            <div className="relative z-10 h-full flex items-center justify-center p-8">
-              <div className="text-center bg-white/10 backdrop-blur-md rounded-3xl border border-white/20 p-12 py-14">
-                <div className="text-8xl font-bold text-white mb-4 drop-shadow-2xl">HERRAMAQ</div>
-                <div className="text-2xl text-blue-100 font-medium">Precisión Industrial</div>
+            <div className="relative z-10 h-full flex items-center justify-center p-4 md:p-8">
+              <div className="text-center bg-white/10 backdrop-blur-md rounded-2xl md:rounded-3xl border border-white/20 p-6 py-8 md:p-12 md:py-14">
+                <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-2 md:mb-4 drop-shadow-2xl">HERRAMAQ</div>
+                <div className="text-sm sm:text-base md:text-xl lg:text-2xl text-blue-100 font-medium">Precisión Industrial</div>
               </div>
             </div>
             
