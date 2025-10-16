@@ -146,3 +146,6 @@ export const Footer = () => (
         <p>Diseñado para la Industria en San Juan del Río, Querétaro.</p>
     </footer>
 );
+
+// Exportar ChatWidget
+export { ChatWidget } from './ChatWidget';
