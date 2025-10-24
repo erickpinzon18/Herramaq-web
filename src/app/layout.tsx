@@ -104,7 +104,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* Favicon y app icons */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/LogoIcon.jpeg" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         
         {/* Schema.org structured data para Google */}

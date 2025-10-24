@@ -46,7 +46,7 @@ export const Header = ({ activeTab }: HeaderProps) => {
         {/* Logo */}
         <Link href="/" className="relative w-[180px] h-12 flex items-center">
           <Image 
-            src="https://irp.cdn-website.com/e09cfb20/DESKTOP/png/235.png" 
+            src="/LogoFull.jpeg" 
             alt="Logo de Herramaq" 
             fill
             className="object-contain"
@@ -90,7 +90,7 @@ export const Header = ({ activeTab }: HeaderProps) => {
           {/* Logo Mobile */}
           <Link href="/" className="relative w-[150px] h-10 flex items-center">
             <Image 
-              src="https://irp.cdn-website.com/e09cfb20/DESKTOP/png/235.png" 
+              src="/LogoIcon.jpeg" 
               alt="Logo de Herramaq" 
               fill
               className="object-contain"
