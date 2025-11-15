@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     "calibradores digitales MITUTOYO",
     "micrómetros de precisión",
     "prensas de sujeción CNC",
-    "chuck hidráulico CAT40",
+    "chuck hidráulico CAT40", 
     "brocas de cobalto HSS",
     "discos de desbaste NORTON",
     "ruedas flap abrasivas",
