@@ -9,12 +9,26 @@ import { ACHoverBorderGradient } from '../components/aceternity/HoverBorderGradi
 import { ACBackgroundBeams } from '../components/aceternity/BackgroundBeams';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { db } from '@/lib/firebase';
+import { collection, query, orderBy, limit, getDocs, startAfter, QueryDocumentSnapshot, getCountFromServer, Query, DocumentData } from 'firebase/firestore';
 
 gsap.registerPlugin(ScrollTrigger);
 
 // --- Tipos ---
+interface FirebaseProduct {
+    id: string;
+    atributos?: string[];
+    createdAt?: { seconds: number; nanoseconds: number } | null;
+    marca?: string;
+    medidas?: string[];
+    modelo?: string;
+    original?: string;
+    tipo?: string;
+    updatedAt?: { seconds: number; nanoseconds: number } | null;
+}
+
 interface Product {
-    id: number;
+    id: string;
     name: string;
     description: string;
     category: string;
@@ -22,13 +36,12 @@ interface Product {
     imageUrl: string;
     images: string[];
     specs: {
-        material?: string;
-        size?: string;
-        coating?: string;
-        precision?: string;
+        atributos?: string[];
+        medidas?: string[];
+        tipo?: string;
     };
-    price?: string;
     inStock: boolean;
+    modelo?: string;
 }
 
 interface ProductCardProps {
@@ -67,220 +80,39 @@ const ShoppingCartIcon = () => (
     </svg>
 );
 
-const HeartIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-    </svg>
-);
+// Convertir producto de Firebase al formato de la UI
+const convertFirebaseProduct = (doc: QueryDocumentSnapshot): Product => {
+    const data = doc.data() as FirebaseProduct;
+    const brand = data.marca || 'Sin marca';
+    const tipo = data.tipo || 'Herramienta';
+    
+    return {
+        id: doc.id,
+        name: data.original || 'Producto sin nombre',
+        description: `${tipo}${data.modelo ? ` - Modelo: ${data.modelo}` : ''}`,
+        category: tipo,
+        brand: brand,
+        imageUrl: `https://placehold.co/600x600/1e3a8a/ffffff?text=${encodeURIComponent(tipo)}`,
+        images: [
+            `https://placehold.co/600x600/1e3a8a/ffffff?text=${encodeURIComponent(tipo)}`,
+        ],
+        specs: {
+            atributos: data.atributos,
+            medidas: data.medidas,
+            tipo: tipo,
+        },
+        inStock: true,
+        modelo: data.modelo,
+    };
+};
 
-// --- Datos expandidos de productos ---
-const mockProductData: Product[] = [
-    { 
-        id: 1, 
-        name: 'Fresa de Carburo 4 Filos', 
-        description: 'Alta velocidad para acabados finos en acero y aluminio.', 
-        category: 'Herramientas de Corte', 
-        brand: 'PRECITOOLS', 
-        imageUrl: 'https://placehold.co/600x600/1e3a8a/ffffff?text=Fresa+Principal',
-        images: [
-            'https://placehold.co/600x600/1e3a8a/ffffff?text=Fresa+Principal',
-            'https://placehold.co/600x600/334155/ffffff?text=Detalle+1',
-            'https://placehold.co/600x600/64748b/ffffff?text=Detalle+2',
-            'https://placehold.co/600x600/94a3b8/ffffff?text=Aplicación'
-        ],
-        specs: {
-            material: 'Carburo de Tungsteno',
-            size: '6mm - 20mm',
-            coating: 'TiAlN',
-            precision: '±0.005mm'
-        },
-        price: '$1,250 MXN',
-        inStock: true
-    },
-    { 
-        id: 2, 
-        name: 'Inserto de Torneado CNMG', 
-        description: 'Recubrimiento PVD para una mayor vida útil en torneado de aceros inoxidables.', 
-        category: 'Herramientas de Corte', 
-        brand: 'SANDVIK', 
-        imageUrl: 'https://placehold.co/600x600/1e3a8a/ffffff?text=Inserto',
-        images: [
-            'https://placehold.co/600x600/1e3a8a/ffffff?text=Inserto',
-            'https://placehold.co/600x600/334155/ffffff?text=Vista+Lateral',
-            'https://placehold.co/600x600/64748b/ffffff?text=Geometría'
-        ],
-        specs: {
-            material: 'Carburo Cementado',
-            coating: 'PVD Multicapa',
-            precision: 'ISO Clase M'
-        },
-        price: '$850 MXN',
-        inStock: true
-    },
-    { 
-        id: 3, 
-        name: 'Prensa de Sujeción 6"', 
-        description: 'Prensa de alta precisión para centros de maquinado CNC.', 
-        category: 'Sujeción y Fijación', 
-        brand: 'FERROTEC', 
-        imageUrl: 'https://placehold.co/600x600/1e3a8a/ffffff?text=Prensa',
-        images: [
-            'https://placehold.co/600x600/1e3a8a/ffffff?text=Prensa',
-            'https://placehold.co/600x600/334155/ffffff?text=Mecanismo',
-            'https://placehold.co/600x600/64748b/ffffff?text=En+Uso'
-        ],
-        specs: {
-            size: '6 pulgadas',
-            material: 'Acero Templado',
-            precision: '±0.01mm'
-        },
-        price: '$3,500 MXN',
-        inStock: true
-    },
-    { 
-        id: 4, 
-        name: 'Calibrador Vernier Digital', 
-        description: 'Rango de 0-150mm con precisión de 0.01mm. Salida de datos USB.', 
-        category: 'Medición', 
-        brand: 'MITUTOYO', 
-        imageUrl: 'https://placehold.co/600x600/1e3a8a/ffffff?text=Calibrador',
-        images: [
-            'https://placehold.co/600x600/1e3a8a/ffffff?text=Calibrador',
-            'https://placehold.co/600x600/334155/ffffff?text=Pantalla+Digital',
-            'https://placehold.co/600x600/64748b/ffffff?text=Midiendo'
-        ],
-        specs: {
-            size: '0-150mm',
-            precision: '±0.01mm',
-            material: 'Acero Inoxidable'
-        },
-        price: '$2,800 MXN',
-        inStock: true
-    },
-    { 
-        id: 5, 
-        name: 'Disco de Desbaste 4 1/2"', 
-        description: 'Disco abrasivo para desbaste de metal, soldadura y acero.', 
-        category: 'Abrasivos', 
-        brand: 'NORTON', 
-        imageUrl: 'https://placehold.co/600x600/1e3a8a/ffffff?text=Disco',
-        images: [
-            'https://placehold.co/600x600/1e3a8a/ffffff?text=Disco',
-            'https://placehold.co/600x600/334155/ffffff?text=Aplicación'
-        ],
-        specs: {
-            size: '4.5 pulgadas',
-            material: 'Óxido de Aluminio'
-        },
-        price: '$85 MXN',
-        inStock: true
-    },
-    { 
-        id: 6, 
-        name: 'Broca de Cobalto 1/2"', 
-        description: 'Para perforación en materiales duros como acero inoxidable y titanio.', 
-        category: 'Herramientas de Corte', 
-        brand: 'PRECITOOLS', 
-        imageUrl: 'https://placehold.co/600x600/1e3a8a/ffffff?text=Broca',
-        images: [
-            'https://placehold.co/600x600/1e3a8a/ffffff?text=Broca',
-            'https://placehold.co/600x600/334155/ffffff?text=Punta',
-            'https://placehold.co/600x600/64748b/ffffff?text=Perforando'
-        ],
-        specs: {
-            size: '1/2 pulgada',
-            material: 'HSS-Co 5%',
-            coating: 'TiN'
-        },
-        price: '$450 MXN',
-        inStock: true
-    },
-    { 
-        id: 7, 
-        name: 'Chuck Hidráulico CAT40', 
-        description: 'Sujeción de alta fuerza y precisión para fresado de alto rendimiento.', 
-        category: 'Sujeción y Fijación', 
-        brand: 'FERROTEC', 
-        imageUrl: 'https://placehold.co/600x600/1e3a8a/ffffff?text=Chuck',
-        images: [
-            'https://placehold.co/600x600/1e3a8a/ffffff?text=Chuck',
-            'https://placehold.co/600x600/334155/ffffff?text=Sistema+Hidráulico'
-        ],
-        specs: {
-            size: 'CAT40',
-            material: 'Acero Aleado',
-            precision: '±0.003mm'
-        },
-        price: '$8,500 MXN',
-        inStock: false
-    },
-    { 
-        id: 8, 
-        name: 'Micrómetro de Exteriores', 
-        description: 'Rango 0-1" con resolución de 0.0001". Ideal para control de calidad.', 
-        category: 'Medición', 
-        brand: 'MITUTOYO', 
-        imageUrl: 'https://placehold.co/600x600/1e3a8a/ffffff?text=Micrómetro',
-        images: [
-            'https://placehold.co/600x600/1e3a8a/ffffff?text=Micrómetro',
-            'https://placehold.co/600x600/334155/ffffff?text=Escala'
-        ],
-        specs: {
-            size: '0-25mm (0-1")',
-            precision: '±0.001mm',
-            material: 'Acero Inoxidable'
-        },
-        price: '$4,200 MXN',
-        inStock: true
-    },
-    { 
-        id: 9, 
-        name: 'Rueda de Lija Flap', 
-        description: 'Para lijado, pulido y acabado de superficies metálicas irregulares.', 
-        category: 'Abrasivos', 
-        brand: 'NORTON', 
-        imageUrl: 'https://placehold.co/600x600/1e3a8a/ffffff?text=Rueda+Flap',
-        images: [
-            'https://placehold.co/600x600/1e3a8a/ffffff?text=Rueda+Flap',
-            'https://placehold.co/600x600/334155/ffffff?text=Uso'
-        ],
-        specs: {
-            size: '4.5 x 7/8 pulgadas',
-            material: 'Óxido de Aluminio'
-        },
-        price: '$120 MXN',
-        inStock: true
-    },
-    { 
-        id: 10, 
-        name: 'Machuelo de Corte M8x1.25', 
-        description: 'Machuelo de acero de alta velocidad (HSS) para roscado preciso.', 
-        category: 'Herramientas de Corte', 
-        brand: 'SANDVIK', 
-        imageUrl: 'https://placehold.co/600x600/1e3a8a/ffffff?text=Machuelo',
-        images: [
-            'https://placehold.co/600x600/1e3a8a/ffffff?text=Machuelo',
-            'https://placehold.co/600x600/334155/ffffff?text=Rosca'
-        ],
-        specs: {
-            size: 'M8 x 1.25',
-            material: 'HSS',
-            coating: 'TiN'
-        },
-        price: '$280 MXN',
-        inStock: true
-    },
-];
-
-// --- Modal de Producto con Galería ---
+// --- Modal de Producto ---
 const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose }) => {
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const modalRef = useRef<HTMLDivElement>(null);
     const backdropRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (isOpen && modalRef.current && backdropRef.current) {
-            // Animación de entrada con GSAP
             gsap.fromTo(
                 backdropRef.current,
                 { opacity: 0 },
@@ -314,16 +146,6 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
         }
     };
 
-    const nextImage = () => {
-        if (!product) return;
-        setCurrentImageIndex((prev) => (prev + 1) % product.images.length);
-    };
-
-    const prevImage = () => {
-        if (!product) return;
-        setCurrentImageIndex((prev) => (prev - 1 + product.images.length) % product.images.length);
-    };
-
     if (!isOpen || !product) return null;
 
     return (
@@ -346,62 +168,15 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
                 </button>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                    {/* Galería de Imágenes */}
+                    {/* Imagen del Producto */}
                     <div className="relative bg-slate-50 p-4 md:p-8">
                         <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-white shadow-inner">
                             <Image
-                                src={product.images[currentImageIndex]}
-                                alt={`${product.name} - Imagen ${currentImageIndex + 1}`}
+                                src={product.images[0]}
+                                alt={product.name}
                                 fill
                                 className="object-contain"
                             />
-                        </div>
-
-                        {/* Controles de Galería */}
-                        {product.images.length > 1 && (
-                            <>
-                                <button
-                                    onClick={prevImage}
-                                    className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-300 hover:scale-110"
-                                    aria-label="Imagen anterior"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                                    </svg>
-                                </button>
-                                <button
-                                    onClick={nextImage}
-                                    className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-300 hover:scale-110"
-                                    aria-label="Imagen siguiente"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 md:h-6 md:w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </button>
-                            </>
-                        )}
-
-                        {/* Miniaturas */}
-                        <div className="flex gap-2 mt-4 overflow-x-auto pb-2">
-                            {product.images.map((img, idx) => (
-                                <button
-                                    key={idx}
-                                    onClick={() => setCurrentImageIndex(idx)}
-                                    className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
-                                        idx === currentImageIndex
-                                            ? 'border-blue-600 scale-110'
-                                            : 'border-slate-200 opacity-60 hover:opacity-100'
-                                    }`}
-                                >
-                                    <Image
-                                        src={img}
-                                        alt={`Miniatura ${idx + 1}`}
-                                        width={64}
-                                        height={64}
-                                        className="object-cover w-full h-full"
-                                    />
-                                </button>
-                            ))}
                         </div>
                     </div>
 
@@ -412,46 +187,53 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
                                 <RBBadge variant="primary">
                                     {product.category}
                                 </RBBadge>
-                                {product.inStock ? (
+                                {product.inStock && (
                                     <span className="flex items-center gap-1 text-green-600 text-sm font-medium">
                                         <CheckIcon />
-                                        En Stock
+                                        Disponible
                                     </span>
-                                ) : (
-                                    <span className="text-red-500 text-sm font-medium">Agotado</span>
                                 )}
                             </div>
 
                             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-2">{product.name}</h2>
                             <p className="text-blue-600 font-semibold text-base md:text-lg mb-4 md:mb-6">{product.brand}</p>
+                            {product.modelo && (
+                                <p className="text-slate-600 text-sm mb-2">
+                                    <span className="font-semibold">Modelo:</span> {product.modelo}
+                                </p>
+                            )}
                             <p className="text-slate-600 text-sm md:text-base lg:text-lg mb-6 md:mb-8 leading-relaxed">{product.description}</p>
 
                             {/* Especificaciones */}
-                            {product.specs && Object.keys(product.specs).length > 0 && (
-                                <div className="mb-6 md:mb-8">
-                                    <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-3 md:mb-4">Especificaciones</h3>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
-                                        {Object.entries(product.specs).map(([key, value]) => (
-                                            <div key={key} className="bg-slate-50 rounded-lg p-3 border border-slate-200">
-                                                <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">
-                                                    {key === 'material' && 'Material'}
-                                                    {key === 'size' && 'Tamaño'}
-                                                    {key === 'coating' && 'Recubrimiento'}
-                                                    {key === 'precision' && 'Precisión'}
-                                                </p>
-                                                <p className="text-sm font-semibold text-slate-900">{value}</p>
-                                            </div>
-                                        ))}
+                            <div className="mb-6 md:mb-8">
+                                <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-3 md:mb-4">Especificaciones</h3>
+                                
+                                {product.specs.atributos && product.specs.atributos.length > 0 && (
+                                    <div className="mb-4">
+                                        <p className="text-xs text-slate-500 uppercase tracking-wide mb-2">Atributos</p>
+                                        <div className="flex flex-wrap gap-2">
+                                            {product.specs.atributos.map((attr, idx) => (
+                                                <span key={idx} className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
+                                                    {attr}
+                                                </span>
+                                            ))}
+                                        </div>
                                     </div>
-                                </div>
-                            )}
+                                )}
 
-                            {product.price && (
-                                <div className="mb-6 md:mb-8">
-                                    <p className="text-2xl md:text-3xl font-bold text-blue-600">{product.price}</p>
-                                    <p className="text-xs md:text-sm text-slate-500 mt-1">Precio sujeto a disponibilidad</p>
-                                </div>
-                            )}
+                                {product.specs.medidas && product.specs.medidas.length > 0 && (
+                                    <div className="mb-4">
+                                        <p className="text-xs text-slate-500 uppercase tracking-wide mb-2">Medidas</p>
+                                        <div className="flex flex-wrap gap-2">
+                                            {product.specs.medidas.map((medida, idx) => (
+                                                <span key={idx} className="bg-slate-100 text-slate-700 px-3 py-1 rounded-lg text-sm font-medium">
+                                                    {medida}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                         </div>
 
                         {/* Acciones */}
@@ -459,14 +241,10 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
                             <RBButton
                                 variant="primary"
                                 className="flex-1 flex items-center justify-center gap-2"
-                                disabled={!product.inStock}
                             >
                                 <ShoppingCartIcon />
                                 Solicitar Cotización
                             </RBButton>
-                            {/* <button className="p-3 md:p-4 border-2 border-blue-600 text-blue-600 rounded-xl hover:bg-blue-50 transition-all duration-300 hover:scale-105">
-                                <HeartIcon />
-                            </button> */}
                         </div>
                     </div>
                 </div>
@@ -475,7 +253,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
     );
 };
 
-// --- Tarjeta de Producto Mejorada ---
+// --- Tarjeta de Producto ---
 const ProductCard: React.FC<ProductCardProps> = ({ product, onViewDetails }) => {
     const cardRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLDivElement>(null);
@@ -484,7 +262,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onViewDetails }) => 
         if (cardRef.current) {
             const card = cardRef.current;
 
-            // Hover effect con GSAP
             const onMouseEnter = () => {
                 gsap.to(card, {
                     y: -8,
@@ -541,18 +318,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onViewDetails }) => 
                         className="object-contain p-4"
                     />
                 </div>
-                {!product.inStock && (
-                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                        <span className="bg-red-500 text-white px-6 py-2 rounded-full font-bold text-lg">
-                            Agotado
-                        </span>
-                    </div>
-                )}
-                {/* <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button className="p-2 bg-white rounded-full shadow-lg hover:bg-blue-50 transition-colors duration-300">
-                        <HeartIcon />
-                    </button>
-                </div> */}
             </div>
 
             <div className="p-6">
@@ -569,14 +334,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onViewDetails }) => 
                 </div>
 
                 <p className="text-blue-600 font-semibold text-sm mb-1">{product.brand}</p>
-                <h3 className="text-xl font-bold text-slate-900 mb-2 line-clamp-1">{product.name}</h3>
-                <p className="text-slate-600 text-sm mb-4 line-clamp-2">{product.description}</p>
-
-                {product.price && (
-                    <p className="text-2xl font-bold text-blue-600 mb-4">{product.price}</p>
+                <h3 className="text-xl font-bold text-slate-900 mb-2 line-clamp-2">{product.name}</h3>
+                {product.modelo && (
+                    <p className="text-slate-500 text-xs mb-2">Modelo: {product.modelo}</p>
                 )}
 
-                <div className="flex gap-2">
+                <div className="flex gap-2 mt-4">
                     <RBButton
                         variant="primary"
                         className="flex-1"
@@ -596,22 +359,333 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onViewDetails }) => 
     );
 };
 
-// --- Página Principal ---
 export default function ProductsPage() {
     const [searchTerm, setSearchTerm] = useState('');
+    const [activeSearchTerm, setActiveSearchTerm] = useState(''); // Para saber qué está buscando actualmente
     const [selectedCategory, setSelectedCategory] = useState('Todos');
     const [selectedBrand, setSelectedBrand] = useState('Todas');
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [lastDoc, setLastDoc] = useState<QueryDocumentSnapshot | null>(null);
+    const [hasMore, setHasMore] = useState(true);
+    const [loadingMore, setLoadingMore] = useState(false);
+    const [allCategories, setAllCategories] = useState<string[]>(['Todos']);
+    const [allBrands, setAllBrands] = useState<string[]>(['Todas']);
+    const [totalProducts, setTotalProducts] = useState<number>(0);
+    
+    // Cache de búsqueda: guarda los 1000 filtrados
+    const [searchCache, setSearchCache] = useState<Product[]>([]);
+    const [searchCacheIndex, setSearchCacheIndex] = useState(0); // Cuántos hemos mostrado del cache
 
     const heroRef = useRef<HTMLDivElement>(null);
     const statsRef = useRef<HTMLDivElement>(null);
     const productsGridRef = useRef<HTMLDivElement>(null);
 
-    // Animaciones GSAP al cargar la página
+    // Cargar productos iniciales
+    useEffect(() => {
+        loadInitialProducts();
+        loadTotalCount();
+    }, []);
+
+    const loadTotalCount = async () => {
+        try {
+            const productsRef = collection(db, 'products');
+            const snapshot = await getCountFromServer(productsRef);
+            setTotalProducts(snapshot.data().count);
+            console.log('📊 Total productos en BD:', snapshot.data().count);
+        } catch (error) {
+            console.error('Error obteniendo total de productos:', error);
+        }
+    };
+
+    const loadInitialProducts = async () => {
+        setLoading(true);
+        console.log('🔄 Iniciando carga de productos...');
+        setActiveSearchTerm(''); // Limpiar búsqueda activa
+        setSearchCache([]); // Limpiar cache
+        setSearchCacheIndex(0);
+        
+        try {
+            console.log('📦 Obteniendo referencia a colección productos...');
+            const productsRef = collection(db, 'products');
+            const q = query(
+                productsRef,
+                orderBy('createdAt', 'asc'), // Más viejo primero (tienen más atributos)
+                limit(100)
+            );
+
+            console.log('🔍 Ejecutando query...');
+            const snapshot = await getDocs(q);
+            console.log(`✅ Query ejecutada. Documentos obtenidos: ${snapshot.docs.length}`);
+            
+            const productsData = snapshot.docs.map(doc => {
+                const product = convertFirebaseProduct(doc);
+                console.log('📄 Producto:', product.name);
+                return product;
+            });
+            
+            console.log('📊 Total productos convertidos:', productsData.length);
+            setProducts(productsData);
+            setLastDoc(snapshot.docs[snapshot.docs.length - 1] || null);
+            setHasMore(snapshot.docs.length === 100);
+
+            // Extraer categorías y marcas únicas
+            const categories = new Set<string>(['Todos']);
+            const brands = new Set<string>(['Todas']);
+            
+            productsData.forEach(product => {
+                if (product.category) categories.add(product.category);
+                if (product.brand && product.brand !== 'GENÉRICA') brands.add(product.brand);
+            });
+
+            console.log('🏷️ Categorías encontradas:', Array.from(categories));
+            console.log('🏢 Marcas encontradas:', Array.from(brands));
+
+            setAllCategories(Array.from(categories));
+            setAllBrands(Array.from(brands));
+        } catch (error) {
+            console.error('❌ Error cargando productos:', error);
+        } finally {
+            setLoading(false);
+            console.log('✅ Carga finalizada');
+        }
+    };
+
+    // Cargar más productos
+    const loadMoreProducts = async () => {
+        if (!lastDoc || loadingMore) return;
+
+        setLoadingMore(true);
+        try {
+            const productsRef = collection(db, 'products');
+            
+            // Si hay búsqueda activa
+            if (activeSearchTerm) {
+                // ¿Tenemos más en el cache?
+                if (searchCacheIndex < searchCache.length) {
+                    console.log(`📦 Cargando desde cache: ${searchCacheIndex} a ${searchCacheIndex + 100}`);
+                    const nextBatch = searchCache.slice(searchCacheIndex, searchCacheIndex + 100);
+                    
+                    const previousLength = products.length;
+                    setProducts(prev => [...prev, ...nextBatch]);
+                    setSearchCacheIndex(prev => prev + 100);
+                    
+                    // Si llegamos al final del cache, intentar cargar más de Firebase
+                    if (searchCacheIndex + 100 >= searchCache.length) {
+                        console.log('📦 Cache agotado, intentando cargar más de Firebase...');
+                        // Cargar siguientes 1000
+                        const q = query(
+                            productsRef,
+                            orderBy('createdAt', 'asc'),
+                            startAfter(lastDoc),
+                            limit(1000)
+                        );
+
+                        const snapshot = await getDocs(q);
+                        if (snapshot.docs.length > 0) {
+                            const allProducts = snapshot.docs.map(doc => convertFirebaseProduct(doc));
+                            
+                            // Filtrar por búsqueda
+                            const filtered = allProducts.filter(product => 
+                                product.name.toLowerCase().includes(activeSearchTerm.toLowerCase()) ||
+                                product.brand.toLowerCase().includes(activeSearchTerm.toLowerCase()) ||
+                                product.category.toLowerCase().includes(activeSearchTerm.toLowerCase()) ||
+                                (product.modelo && product.modelo.toLowerCase().includes(activeSearchTerm.toLowerCase()))
+                            );
+
+                            console.log(`✅ Nuevos productos filtrados: ${filtered.length}`);
+                            
+                            // Agregar al cache
+                            setSearchCache(prev => [...prev, ...filtered]);
+                            setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
+                            setHasMore(snapshot.docs.length === 1000 || filtered.length > 0);
+                        } else {
+                            setHasMore(false);
+                        }
+                    }
+
+                    // Animar nuevos productos
+                    setTimeout(() => {
+                        const newCards = document.querySelectorAll('.product-card');
+                        const newCardsArray = Array.from(newCards).slice(previousLength);
+                        
+                        gsap.fromTo(newCardsArray,
+                            { opacity: 0, y: 50 },
+                            {
+                                opacity: 1,
+                                y: 0,
+                                stagger: 0.05,
+                                duration: 0.6,
+                                ease: 'power3.out',
+                            }
+                        );
+                    }, 100);
+                } else {
+                    setHasMore(false);
+                }
+            } else {
+                // Sin búsqueda, cargar normal
+                const q = query(
+                    productsRef,
+                    orderBy('createdAt', 'asc'),
+                    startAfter(lastDoc),
+                    limit(100)
+                );
+
+                const snapshot = await getDocs(q);
+                const newProducts = snapshot.docs.map(doc => convertFirebaseProduct(doc));
+                
+                const previousLength = products.length;
+                setProducts(prev => [...prev, ...newProducts]);
+                setLastDoc(snapshot.docs[snapshot.docs.length - 1] || null);
+                setHasMore(snapshot.docs.length === 100);
+
+                // Actualizar categorías y marcas
+                const categories = new Set(allCategories);
+                const brands = new Set(allBrands);
+                
+                newProducts.forEach(product => {
+                    if (product.category) categories.add(product.category);
+                    if (product.brand && product.brand !== 'GENÉRICA') brands.add(product.brand);
+                });
+
+                setAllCategories(Array.from(categories));
+                setAllBrands(Array.from(brands));
+
+                // Animar solo los nuevos productos
+                setTimeout(() => {
+                    const newCards = document.querySelectorAll('.product-card');
+                    const newCardsArray = Array.from(newCards).slice(previousLength);
+                    
+                    gsap.fromTo(newCardsArray,
+                        { opacity: 0, y: 50 },
+                        {
+                            opacity: 1,
+                            y: 0,
+                            stagger: 0.05,
+                            duration: 0.6,
+                            ease: 'power3.out',
+                        }
+                    );
+                }, 100);
+            }
+        } catch (error) {
+            console.error('Error cargando más productos:', error);
+        } finally {
+            setLoadingMore(false);
+        }
+    };
+
+    // Buscar en toda la base de datos
+    const handleSearch = async (term: string) => {
+        if (term.trim() === '') {
+            console.log('🔍 Búsqueda vacía, restaurando productos iniciales');
+            setActiveSearchTerm('');
+            setSearchCache([]);
+            setSearchCacheIndex(0);
+            loadInitialProducts();
+            return;
+        }
+
+        console.log('🔍 Buscando:', term);
+        setLoading(true);
+        setActiveSearchTerm(term);
+        
+        try {
+            const productsRef = collection(db, 'products');
+            let allFiltered: Product[] = [];
+            let currentLastDoc: QueryDocumentSnapshot | null = null;
+            let hasMoreToSearch = true;
+            let searchBatch = 0;
+
+            // Buscar en lotes de 1000 hasta encontrar resultados o llegar al final
+            while (hasMoreToSearch && allFiltered.length === 0) {
+                searchBatch++;
+                console.log(`📦 Buscando en lote ${searchBatch}...`);
+
+                const q: Query<DocumentData> = currentLastDoc
+                    ? query(
+                        productsRef,
+                        orderBy('createdAt', 'asc'),
+                        startAfter(currentLastDoc),
+                        limit(1000)
+                    )
+                    : query(
+                        productsRef,
+                        orderBy('createdAt', 'asc'),
+                        limit(1000)
+                    );
+                
+                const snapshot = await getDocs(q);
+                console.log(`📦 Lote ${searchBatch}: ${snapshot.docs.length} documentos`);
+                
+                if (snapshot.docs.length === 0) {
+                    hasMoreToSearch = false;
+                    break;
+                }
+
+                const allProducts: Product[] = snapshot.docs.map((doc: QueryDocumentSnapshot) => convertFirebaseProduct(doc));
+                
+                // Filtrar en el cliente
+                const filtered: Product[] = allProducts.filter((product: Product) => 
+                    product.name.toLowerCase().includes(term.toLowerCase()) ||
+                    product.brand.toLowerCase().includes(term.toLowerCase()) ||
+                    product.category.toLowerCase().includes(term.toLowerCase()) ||
+                    (product.modelo && product.modelo.toLowerCase().includes(term.toLowerCase()))
+                );
+
+                allFiltered = filtered;
+                currentLastDoc = snapshot.docs[snapshot.docs.length - 1];
+                
+                // Si encontramos resultados o llegamos al final
+                if (filtered.length > 0 || snapshot.docs.length < 1000) {
+                    hasMoreToSearch = false;
+                }
+            }
+
+            console.log(`✅ Productos filtrados totales: ${allFiltered.length}`);
+            
+            if (allFiltered.length > 0) {
+                // Guardar en cache
+                setSearchCache(allFiltered);
+                setSearchCacheIndex(100); // Ya mostramos los primeros 100
+                
+                // Tomar solo los primeros 100
+                const firstBatch = allFiltered.slice(0, 100);
+                setProducts(firstBatch);
+                
+                // Guardar lastDoc para cargar más si es necesario
+                setLastDoc(currentLastDoc);
+                setHasMore(allFiltered.length > 100);
+            } else {
+                // No se encontraron resultados
+                setProducts([]);
+                setSearchCache([]);
+                setSearchCacheIndex(0);
+                setLastDoc(null);
+                setHasMore(false);
+            }
+
+            // Scroll a los productos
+            setTimeout(() => {
+                productsGridRef.current?.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }, 100);
+
+        } catch (error) {
+            console.error('❌ Error buscando productos:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Animaciones GSAP
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Hero animation
             if (heroRef.current) {
                 gsap.from('.hero-title', {
                     opacity: 0,
@@ -635,7 +709,6 @@ export default function ProductsPage() {
                 });
             }
 
-            // Stats animation con ScrollTrigger
             if (statsRef.current) {
                 gsap.from('.stat-item', {
                     scrollTrigger: {
@@ -650,57 +723,36 @@ export default function ProductsPage() {
                     ease: 'power3.out',
                 });
             }
-
-            // Products grid con ScrollTrigger
-            if (productsGridRef.current) {
-                gsap.from('.product-card', {
-                    scrollTrigger: {
-                        trigger: productsGridRef.current,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none',
-                    },
-                    opacity: 0,
-                    y: 50,
-                    stagger: 0.1,
-                    duration: 0.6,
-                    ease: 'power3.out',
-                });
-            }
         });
 
         return () => ctx.revert();
     }, []);
 
-    // Re-animar productos cuando cambian los filtros
     useEffect(() => {
-        if (productsGridRef.current) {
-            gsap.fromTo(
-                '.product-card',
-                { opacity: 0, y: 30 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    stagger: 0.05,
-                    duration: 0.4,
-                    ease: 'power2.out',
-                }
-            );
+        if (productsGridRef.current && products.length > 0 && products.length <= 30) {
+            // Solo animar la primera carga
+            gsap.from('.product-card', {
+                scrollTrigger: {
+                    trigger: productsGridRef.current,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none',
+                },
+                opacity: 0,
+                y: 50,
+                stagger: 0.05,
+                duration: 0.6,
+                ease: 'power3.out',
+            });
         }
-    }, [selectedCategory, selectedBrand, searchTerm]);
-
-    const allCategories = ['Todos', ...Array.from(new Set(mockProductData.map((p) => p.category)))];
-    const allBrands = ['Todas', ...Array.from(new Set(mockProductData.map((p) => p.brand)))];
+    }, [products.length <= 30]);
 
     const filteredProducts = useMemo(() => {
-        return mockProductData.filter((product) => {
-            const matchesSearch =
-                product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                product.description.toLowerCase().includes(searchTerm.toLowerCase());
+        return products.filter((product) => {
             const matchesCategory = selectedCategory === 'Todos' || product.category === selectedCategory;
             const matchesBrand = selectedBrand === 'Todas' || product.brand === selectedBrand;
-            return matchesSearch && matchesCategory && matchesBrand;
+            return matchesCategory && matchesBrand;
         });
-    }, [searchTerm, selectedCategory, selectedBrand]);
+    }, [products, selectedCategory, selectedBrand]);
 
     const handleViewDetails = (product: Product) => {
         setSelectedProduct(product);
@@ -712,15 +764,11 @@ export default function ProductsPage() {
         setTimeout(() => setSelectedProduct(null), 300);
     };
 
-    const totalProducts = mockProductData.length;
-    const totalCategories = allCategories.length - 1;
-    const inStockCount = mockProductData.filter((p) => p.inStock).length;
-
     return (
         <div className="min-h-screen bg-slate-50">
             <Header activeTab="Productos" />
 
-            {/* Hero Section con Aceternity */}
+            {/* Hero Section */}
             <section ref={heroRef} className="relative w-full py-20 md:py-32 overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900">
                 <ACSpotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="#60a5fa" />
                 <ACMeteors number={30} />
@@ -742,34 +790,45 @@ export default function ProductsPage() {
                                 </div>
                                 <input
                                     type="text"
-                                    placeholder="Buscar productos por nombre o descripción..."
+                                    placeholder="Buscar en todos los productos..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                            handleSearch(searchTerm);
+                                        }
+                                    }}
                                     className="w-full pl-12 pr-4 py-4 text-lg bg-white/95 backdrop-blur-sm border-2 border-white/20 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-300 focus:border-white transition-all duration-300 shadow-xl"
                                 />
+                                <button
+                                    onClick={() => handleSearch(searchTerm)}
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-colors duration-300"
+                                >
+                                    Buscar
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Stats con Background Beams */}
+            {/* Stats */}
             <section ref={statsRef} className="relative w-full py-16 bg-gradient-to-b from-slate-900 to-slate-800 overflow-hidden">
                 <ACBackgroundBeams className="opacity-30" />
                 
                 <div className="relative z-10 w-full px-4 md:px-8">
                     <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div className="stat-item text-center">
-                            <div className="text-5xl md:text-6xl font-bold text-yellow-400 mb-2">{totalProducts}+</div>
-                            <p className="text-xl text-slate-300">Productos</p>
+                            <div className="text-5xl md:text-6xl font-bold text-yellow-400 mb-2">{products.length}</div>
+                            <p className="text-xl text-slate-300">Productos Cargados</p>
                         </div>
                         <div className="stat-item text-center">
-                            <div className="text-5xl md:text-6xl font-bold text-yellow-400 mb-2">{totalCategories}</div>
+                            <div className="text-5xl md:text-6xl font-bold text-yellow-400 mb-2">{allCategories.length - 1}</div>
                             <p className="text-xl text-slate-300">Categorías</p>
                         </div>
                         <div className="stat-item text-center">
-                            <div className="text-5xl md:text-6xl font-bold text-yellow-400 mb-2">{inStockCount}</div>
-                            <p className="text-xl text-slate-300">En Stock</p>
+                            <div className="text-5xl md:text-6xl font-bold text-yellow-400 mb-2">{allBrands.length - 1}</div>
+                            <p className="text-xl text-slate-300">Marcas</p>
                         </div>
                     </div>
                 </div>
@@ -787,10 +846,10 @@ export default function ProductsPage() {
                                 <h3 className="text-lg font-semibold text-slate-700 mb-3">Categoría</h3>
                                 <div className="flex flex-wrap gap-3">
                                     {allCategories.map((category) => (
-                                        <button
+                                        <div
                                             key={category}
                                             onClick={() => setSelectedCategory(category)}
-                                            className="category-btn"
+                                            className="category-btn cursor-pointer"
                                         >
                                             <ACHoverBorderGradient
                                                 containerClassName="h-full"
@@ -802,7 +861,7 @@ export default function ProductsPage() {
                                             >
                                                 {category}
                                             </ACHoverBorderGradient>
-                                        </button>
+                                        </div>
                                     ))}
                                 </div>
                             </div>
@@ -812,10 +871,10 @@ export default function ProductsPage() {
                                 <h3 className="text-lg font-semibold text-slate-700 mb-3">Marca</h3>
                                 <div className="flex flex-wrap gap-3">
                                     {allBrands.map((brand) => (
-                                        <button
+                                        <div
                                             key={brand}
                                             onClick={() => setSelectedBrand(brand)}
-                                            className="brand-btn"
+                                            className="brand-btn cursor-pointer"
                                         >
                                             <ACHoverBorderGradient
                                                 containerClassName="h-full"
@@ -827,17 +886,15 @@ export default function ProductsPage() {
                                             >
                                                 {brand}
                                             </ACHoverBorderGradient>
-                                        </button>
+                                        </div>
                                     ))}
                                 </div>
                             </div>
                         </div>
 
-                        {/* Resultados */}
                         <div className="mt-8 pt-6 border-t border-slate-200">
                             <p className="text-slate-600">
-                                Mostrando <span className="font-bold text-blue-600">{filteredProducts.length}</span> de{' '}
-                                <span className="font-bold">{totalProducts}</span> productos
+                                Mostrando <span className="font-bold text-blue-600">{filteredProducts.length}</span> de <span className="font-bold">{totalProducts}</span> productos
                             </p>
                         </div>
                     </div>
@@ -847,18 +904,48 @@ export default function ProductsPage() {
             {/* Grid de Productos */}
             <section ref={productsGridRef} className="w-full py-16 px-4 md:px-8 lg:px-16">
                 <div className="max-w-7xl mx-auto">
-                    {filteredProducts.length === 0 ? (
+                    {loading ? (
+                        <div className="text-center py-20">
+                            <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-600"></div>
+                            <p className="mt-4 text-slate-600">Cargando productos...</p>
+                        </div>
+                    ) : filteredProducts.length === 0 ? (
                         <div className="text-center py-20">
                             <div className="text-6xl mb-4">🔍</div>
                             <h3 className="text-2xl font-bold text-slate-900 mb-2">No se encontraron productos</h3>
                             <p className="text-slate-600">Intenta ajustar los filtros o la búsqueda</p>
                         </div>
                     ) : (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                            {filteredProducts.map((product) => (
-                                <ProductCard key={product.id} product={product} onViewDetails={handleViewDetails} />
-                            ))}
-                        </div>
+                        <>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                {filteredProducts.map((product) => (
+                                    <ProductCard key={product.id} product={product} onViewDetails={handleViewDetails} />
+                                ))}
+                            </div>
+
+                            {/* Botón Cargar Más */}
+                            {hasMore ? (
+                                <div className="text-center mt-12">
+                                    <button
+                                        onClick={loadMoreProducts}
+                                        disabled={loadingMore}
+                                        className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {loadingMore ? 'Cargando...' : 'Cargar Más Productos'}
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className="text-center mt-12 py-8 border-t-2 border-slate-200">
+                                    <div className="text-5xl mb-4">✅</div>
+                                    <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                                        ¡Has visto todos los productos!
+                                    </h3>
+                                    <p className="text-slate-600">
+                                        Mostrando {filteredProducts.length} productos{activeSearchTerm && ` para "${activeSearchTerm}"`}
+                                    </p>
+                                </div>
+                            )}
+                        </>
                     )}
                 </div>
             </section>
@@ -874,15 +961,14 @@ export default function ProductsPage() {
                     <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
                         Contáctanos y te ayudaremos a encontrar la herramienta perfecta para tu proyecto
                     </p>
-                    <ACHoverBorderGradient>
-                        <RBButton variant="primary" className="bg-blue-600 text-white hover:bg-blue-50 px-8 py-4 text-lg font-bold">
+                    <ACHoverBorderGradient className="inline-block">
+                        <span className="inline-flex items-center justify-center font-semibold bg-blue-600 text-white hover:bg-blue-50 hover:text-blue-600 px-8 py-4 text-lg rounded-lg transition-colors duration-300">
                             Contactar Ahora
-                        </RBButton>
+                        </span>
                     </ACHoverBorderGradient>
                 </div>
             </section>
 
-            {/* Modal */}
             <ProductModal product={selectedProduct} isOpen={isModalOpen} onClose={handleCloseModal} />
 
             <Footer />
