@@ -72,6 +72,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ className = '' }) => {
     // Auto-scroll al final cuando hay nuevos mensajes
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [messages]);
 
     // Focus en input cuando se abre el chat
@@ -169,7 +170,6 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ className = '' }) => {
         
         const parts: React.ReactNode[] = [];
         let lastIndex = 0;
-        let match;
         
         // Primero procesamos links con formato Markdown
         const markdownMatches = Array.from(content.matchAll(markdownLinkRegex));
@@ -249,7 +249,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ className = '' }) => {
                             buttonText = 'Consultar con equipo técnico';
                         }
                     }
-                } catch (e) {
+                } catch (_e) {
                     // Si hay error parseando la URL, usar texto por defecto
                     buttonText = 'Contactar por WhatsApp';
                 }

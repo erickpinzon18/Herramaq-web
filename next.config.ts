@@ -5,19 +5,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'placehold.co',
+        hostname: '**',
       },
       {
-        protocol: 'https',
-        hostname: 'irp.cdn-website.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'assets.aceternity.com',
+        protocol: 'http',
+        hostname: '**',
       },
     ],
     dangerouslyAllowSVG: true,

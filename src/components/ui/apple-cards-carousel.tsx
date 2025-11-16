@@ -47,7 +47,6 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
       carouselRef.current.scrollLeft = initialScroll;
       checkScrollability();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialScroll]);
 
   const checkScrollability = () => {
