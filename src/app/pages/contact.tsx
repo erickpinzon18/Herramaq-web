@@ -108,18 +108,25 @@ export default function ContactPage() {
         setErrorMessage('');
 
         try {
-            const response = await fetch('/api/contact', {
+            // Enviar a n8n para WhatsApp
+            const n8nResponse = await fetch('https://appn8n-n8n.nhpowe.easypanel.host/webhook/03b47efa-823b-4f87-8605-4e145c09bd44', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({
+                    nombre: formData.name,
+                    email: formData.email,
+                    telefono: formData.phone,
+                    empresa: formData.company,
+                    mensaje: formData.message,
+                    fecha: new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' }),
+                    origen: 'Página Web Herramaq'
+                }),
             });
 
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.error || 'Error al enviar el mensaje');
+            if (!n8nResponse.ok) {
+                throw new Error('Error al enviar el mensaje');
             }
 
             setStatus('success');
@@ -321,10 +328,7 @@ export default function ContactPage() {
                                                         </>
                                                     ) : (
                                                         <>
-                                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                                                            </svg>
-                                                            <span>Enviar Proyecto</span>
+                                                            <span>Enviar</span>
                                                         </>
                                                     )}
                                                 </button>
@@ -355,8 +359,7 @@ export default function ContactPage() {
                                             <div>
                                                 <h4 className="font-semibold mb-1 text-sm">Dirección</h4>
                                                 <p className="text-blue-100 text-sm">
-                                                    San Juan del Río<br />
-                                                    Querétaro, México
+                                                    Verano #11, Betania, <br/> 76807 San Juan del Río, Qro.
                                                 </p>
                                             </div>
                                         </div>
@@ -372,7 +375,7 @@ export default function ContactPage() {
                                             </div>
                                             <div>
                                                 <h4 className="font-semibold mb-1 text-sm">Teléfono</h4>
-                                                <p className="text-blue-100 text-sm">(427) 123 4567</p>
+                                                <p className="text-blue-100 text-sm">(427) 272 5663</p>
                                             </div>
                                         </div>
 
@@ -411,7 +414,7 @@ export default function ContactPage() {
                                     </div>
 
                                     {/* Redes Sociales */}
-                                    <div className="mt-6 pt-6 border-t border-white/20">
+                                    {/* <div className="mt-6 pt-6 border-t border-white/20">
                                         <h4 className="font-semibold mb-3 text-sm">Síguenos</h4>
                                         <div className="flex gap-2">
                                             <a href="#" className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-all hover:scale-110">
@@ -430,7 +433,7 @@ export default function ContactPage() {
                                                 </svg>
                                             </a>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
@@ -452,7 +455,7 @@ export default function ContactPage() {
                         <div className="rounded-2xl overflow-hidden shadow-lg border border-slate-200">
                             <div className="h-[500px] w-full">
                                 <iframe 
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59943.91081510254!2d-100.03816552089843!3d20.384299800000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d30a4699555555%3A0x42cf5353595c207a!2sSan%20Juan%20del%20R%C3%ADo%2C%20Qro.!5e0!3m2!1ses-419!2smx!4v1665523456789!5m2!1ses-419!2smx" 
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1905.213145063437!2d-99.98694583022461!3d20.384367128714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d30b7bf7c87763%3A0x409c9c2ea34ba536!2sHERRAMAQ!5e0!3m2!1ses-419!2smx!4v1764702058107!5m2!1ses-419!2smx" 
                                     width="100%" 
                                     height="100%" 
                                     style={{ border:0 }} 

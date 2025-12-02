@@ -202,6 +202,61 @@ export default function App() {
             </ACBentoGrid>
           </section>
 
+          {/* Sección de Distribuidor Autorizado */}
+          <section className="relative py-8 md:py-12 px-2" aria-labelledby="distributor-heading">
+            <RBAnimatedText animation="fadeInUp" className="text-center mb-8 md:mb-12">
+              <RBBadge variant="warning" className="mb-4">Distribuidor Autorizado</RBBadge>
+              <h2 id="distributor-heading" className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-800 to-slate-700 bg-clip-text text-transparent mb-4 px-4">
+                Representantes Oficiales de Marcas Líderes
+              </h2>
+              <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto px-4">
+                Contamos con la certificación y respaldo directo de las mejores marcas del mercado
+              </p>
+            </RBAnimatedText>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 px-2 md:px-6 max-w-4xl mx-auto">
+              {/* Royco */}
+              <div className="group relative bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-100 hover:border-blue-200 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="flex items-center justify-center mb-4">
+                    <div className="w-32 h-20 md:w-40 md:h-24 rounded-xl flex items-center justify-center">
+                      <img src="https://omic.us/wp-content/uploads/logo-osg.png" alt="Royco Logo" className="max-w-full max-h-full object-contain p-2" />
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold mb-3">
+                      <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                      Distribuidor Oficial
+                    </span>
+                    <h3 className="text-xl md:text-2xl font-bold text-slate-800 mb-2">ROYCO</h3>
+                    <p className="text-slate-600 text-sm md:text-base">Herramientas de corte y accesorios industriales de alta calidad</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Austromex */}
+              <div className="group relative bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-100 hover:border-blue-200 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="flex items-center justify-center mb-4">
+                    <div className="w-32 h-20 md:w-40 md:h-24 rounded-xl flex items-center justify-center">
+                      <img src="https://lh3.googleusercontent.com/proxy/kOOhl8HKPOuuCmJf9ydKOUiKXlyGL7BQh6CVAFgIlx81vhG-fV1b6wYHrEPPNyLrwzEezfW_fPDvsx1HzTt9Frk4gotAnM6d5dXPdJo2GSvgy7iDxjc1KwpC8Z_kZ7cT" alt="Austromex Logo" className="max-w-full max-h-full object-contain p-2" />
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold mb-3">
+                      <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                      Distribuidor Oficial
+                    </span>
+                    <h3 className="text-xl md:text-2xl font-bold text-slate-800 mb-2">AUSTROMEX</h3>
+                    <p className="text-slate-600 text-sm md:text-base">Soluciones integrales en soldadura y abrasivos industriales</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Testimonios con Carrusel Infinito */}
           <section className="relative py-8 md:py-12 px-2" aria-labelledby="testimonials-heading">
             <RBAnimatedText animation="fadeInUp" className="text-center mb-8 md:mb-12">
@@ -245,7 +300,7 @@ export default function App() {
               <ACFeature 
                 icon={<IconBrands />} 
                 title="Marcas Reconocidas" 
-                description="Alianzas estratégicas con más de 50 marcas líderes para ofrecer lo mejor en maquinaria y herramientas industriales." 
+                description="Alianzas estratégicas con más de 200 marcas líderes para ofrecer lo mejor en maquinaria y herramientas industriales." 
               />
               <ACFeature 
                 icon={<IconClients />} 
