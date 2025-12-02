@@ -103,7 +103,7 @@ export default function App() {
             <h1 id="hero-heading" className="sr-only">Herramaq - Soluciones Industriales de Precisión en Querétaro</h1>
             <ACHero
               title={"Soluciones Industriales, Precisión en cada Herramienta."}
-              subtitle={"En Herramaq somos líderes en San Juan del Río, Querétaro. Ofrecemos maquinaria, herramientas y servicios de maquinado con calidad industrial y soporte experto."}
+              subtitle={"En Herramaq somos líderes en San Juan del Río, Querétaro. Ofrecemos maquinaria, herramientas y accesorios industriales para la industrial metal-mecánica."}
               cta={{ label: 'Ver Nuestro Catálogo', href: '/products' }}
             />
           </section>
@@ -122,7 +122,7 @@ export default function App() {
             <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 px-2 md:px-6 z-10">
               <RBStatCard 
                 icon={<IconExperience />} 
-                value="15+" 
+                value="27+" 
                 label="Años de Experiencia"
                 trend={{ value: "+2 años este 2025", isPositive: true }}
                 gradient="from-blue-500 to-blue-700"
@@ -240,7 +240,7 @@ export default function App() {
               <ACFeature 
                 icon={<IconExperience />} 
                 title="Experiencia Consolidada" 
-                description="Más de 15 años en el sector con soporte técnico especializado y garantía en todos nuestros productos y servicios." 
+                description="Más de 27 años en el sector con soporte técnico especializado y garantía en todos nuestros productos y servicios." 
               />
               <ACFeature 
                 icon={<IconBrands />} 
