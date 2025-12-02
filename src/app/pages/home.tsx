@@ -124,12 +124,12 @@ export default function App() {
                 icon={<IconExperience />} 
                 value="27+" 
                 label="Años de Experiencia"
-                trend={{ value: "+2 años este 2025", isPositive: true }}
+                trend={{ value: "+20 nuevos clientes", isPositive: true }}
                 gradient="from-blue-500 to-blue-700"
               />
               <RBStatCard 
                 icon={<IconBrands />} 
-                value="50+" 
+                value="200+" 
                 label="Marcas de Prestigio"
                 trend={{ value: "+10 nuevas marcas", isPositive: true }}
                 gradient="from-blue-600 to-indigo-700"

@@ -52,11 +52,11 @@ export const ACHero = ({ title, subtitle, cta }: { title: string; subtitle: stri
           {/* Stats mini */}
           <div className="flex flex-wrap gap-6 pt-4">
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-800">15+</div>
+              <div className="text-3xl font-bold text-blue-800">27+</div>
               <div className="text-sm text-slate-600">Años</div>
             </div>
             <div className="text-center border-l-2 border-slate-200 pl-6">
-              <div className="text-3xl font-bold text-blue-800">50+</div>
+              <div className="text-3xl font-bold text-blue-800">200+</div>
               <div className="text-sm text-slate-600">Marcas</div>
             </div>
             <div className="text-center border-l-2 border-slate-200 pl-6">
@@ -82,9 +82,21 @@ export const ACHero = ({ title, subtitle, cta }: { title: string; subtitle: stri
             
             {/* Logo central */}
             <div className="relative z-10 h-full flex items-center justify-center p-4 md:p-8">
-              <div className="text-center bg-white/10 backdrop-blur-md rounded-2xl md:rounded-3xl border border-white/20 p-6 py-8 md:p-12 md:py-14">
-                <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-2 md:mb-4 drop-shadow-2xl">HERRAMAQ</div>
-                <div className="text-sm sm:text-base md:text-xl lg:text-2xl text-blue-100 font-medium">Precisión Industrial</div>
+              <div className="bg-white rounded-2xl md:rounded-3xl shadow-2xl p-6 md:p-8 transform hover:scale-105 transition-transform duration-300">
+                <div className="flex items-center gap-4 md:gap-6">
+                  {/* Icono */}
+                  <img src="/logo4k.jpeg" alt="Herramaq Icon" className="w-20 h-20 md:w-28 md:h-28 object-contain" />
+                  
+                  {/* Texto */}
+                  <div className="text-left">
+                    <h2 className="text-2xl text-center md:text-4xl font-black text-blue-900 tracking-wide">
+                      HERRAMAQ
+                    </h2>
+                    <p className="text-xs md:text-sm text-slate-600 font-medium mt-1">
+                      Máquinas, Herramientas, Accesorios Industriales
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
             

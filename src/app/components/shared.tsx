@@ -44,15 +44,16 @@ export const Header = ({ activeTab }: HeaderProps) => {
       {/* Desktop Navigation */}
       <NavBody className="bg-white/95 backdrop-blur-md border-b border-slate-200">
         {/* Logo */}
-        <Link href="/" className="relative w-[180px] h-12 flex items-center">
+        <Link href="/" className="flex items-center gap-2">
           <Image 
-            src="/LogoFull.jpeg" 
+            src="/logo4k.jpeg" 
             alt="Logo de Herramaq" 
-            fill
+            width={40}
+            height={40}
             className="object-contain"
-            sizes="180px"
             priority
           />
+          <span className="text-xl font-black text-blue-900 tracking-wide">HERRAMAQ</span>
         </Link>
 
         {/* Nav Items Desktop */}
