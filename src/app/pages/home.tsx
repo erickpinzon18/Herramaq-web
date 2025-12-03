@@ -228,7 +228,7 @@ export default function App() {
                 <div className="relative z-10">
                   <div className="flex items-center justify-center mb-4">
                     <div className="w-32 h-20 md:w-40 md:h-24 rounded-xl flex items-center justify-center">
-                      <img src="/logos/ROYCO.webp" alt="Royco Logo" className="max-w-full max-h-full object-contain p-2" />
+                      <img src="https://omic.us/wp-content/uploads/logo-osg.png" alt="Royco Logo" className="max-w-full max-h-full object-contain p-2" />
                     </div>
                   </div>
                   <div className="text-center">
@@ -248,7 +248,7 @@ export default function App() {
                 <div className="relative z-10">
                   <div className="flex items-center justify-center mb-4">
                     <div className="w-32 h-20 md:w-40 md:h-24 rounded-xl flex items-center justify-center">
-                      <img src="/logos/AUSTROMEX.webp" alt="Austromex Logo" className="max-w-full max-h-full object-contain p-2" />
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS6CI1UpcfF04j5ZsKcdn8Bv7pLolZhifQpw&s" alt="Austromex Logo" className="max-w-full max-h-full object-contain p-2" />
                     </div>
                   </div>
                   <div className="text-center">
@@ -268,7 +268,7 @@ export default function App() {
                 <div className="relative z-10">
                   <div className="flex items-center justify-center mb-4">
                     <div className="w-32 h-20 md:w-40 md:h-24 rounded-xl flex items-center justify-center">
-                      <img src="/logos/FANDHER.webp" alt="Fandher Logo" className="max-w-full max-h-full object-contain p-2" />
+                      <img src="https://store.tannerherramientas.com/website/image/product.brand/111/logo" alt="Fandher Logo" className="max-w-full max-h-full object-contain p-2" />
                     </div>
                   </div>
                   <div className="text-center">
