@@ -360,10 +360,12 @@ export default function ServicesPage() {
                             ¿Por Qué Elegir Herramaq?
                         </h2>
                         <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
-                            Más de 15 años de experiencia en manufactura de precisión
+                            Más de 27 años de experiencia en comercialización de herramienta industrial
                         </p>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+
+                        {/* TODO: CAMBIAR POR  pagina antigua */}
                         <WobbleCard
                             containerClassName="col-span-1 bg-blue-900 h-auto md:h-[300px] lg:h-[320px]"
                             className=""
@@ -411,7 +413,7 @@ export default function ServicesPage() {
             </section>
 
             {/* Bento Grid - Capacidades Técnicas */}
-            <section className="w-full py-12 md:py-20 bg-white">
+            {/* <section className="w-full py-12 md:py-20 bg-white">
                 <div className="max-w-7xl mx-auto px-4 md:px-8">
                     <div className="text-center mb-10 md:mb-16">
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4">
@@ -433,7 +435,7 @@ export default function ServicesPage() {
                         ))}
                     </BentoGrid>
                 </div>
-            </section>
+            </section> */}
 
             {/* Timeline - Historia de la Empresa */}
             <section className="w-full py-20 bg-slate-50">
@@ -451,6 +453,7 @@ export default function ServicesPage() {
             </section>
 
             {/* Animated Testimonials */}
+            {/* sacar de google */}
             <section className="w-full py-12 md:py-20 bg-white">
                 <div className="max-w-7xl mx-auto px-4 md:px-8">
                     <div className="text-center mb-10 md:mb-16">

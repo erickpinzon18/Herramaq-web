@@ -36,6 +36,7 @@ const IconClients = () => (
 // --- Componente principal de la aplicación ---
 export default function App() {
   // Datos de testimonios para el carrusel infinito
+  // tomar de google
   const testimonials = [
     {
       quote: "Herramaq ha sido nuestro proveedor de confianza por más de 5 años. Su calidad y servicio son excepcionales.",
@@ -66,12 +67,16 @@ export default function App() {
 
   // Datos para los logos en carrusel
   const brandLogos = [
-    { name: 'INDUMAC', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=INDUMAC' },
-    { name: 'PRECITOOLS', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=PRECITOOLS' },
-    { name: 'FERROTEC', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=FERROTEC' },
-    { name: 'SANDVIK', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=SANDVIK' },
-    { name: 'MITUTOYO', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=MITUTOYO' },
-    { name: 'NORTON', logo: 'https://placehold.co/150x60/e2e8f0/1e3a8a?text=NORTON' },
+    { name: 'Cleveland', logo: '/logos/CLEVELAND.webp' },
+    { name: 'Bison', logo: '/logos/BISON.webp' },
+    { name: 'Royco', logo: '/logos/ROYCO.webp' },
+    { name: 'Mitutoyo', logo: '/logos/MITUTOYO.webp' },
+    { name: 'Austromex', logo: '/logos/AUSTROMEX.webp' },
+    { name: 'OSG', logo: '/logos/OSG.webp' },
+    { name: 'Lenox', logo: '/logos/LENOX.webp' },
+    { name: 'Vertex', logo: '/logos/VERTEX.webp' },
+    { name: 'Bondhus', logo: '/logos/BONDHUS.webp' },
+    { name: 'Boehlerit', logo: '/logos/BOEHLERIT.webp' },
   ];
 
   const clientLogos = [
@@ -102,8 +107,8 @@ export default function App() {
           <section aria-labelledby="hero-heading" className="px-2">
             <h1 id="hero-heading" className="sr-only">Herramaq - Soluciones Industriales de Precisión en Querétaro</h1>
             <ACHero
-              title={"Soluciones Industriales, Precisión en cada Herramienta."}
-              subtitle={"En Herramaq somos líderes en San Juan del Río, Querétaro. Ofrecemos maquinaria, herramientas y accesorios industriales para la industrial metal-mecánica."}
+              title={"Venta de Máquinas, Herramientas y Accesorios Industriales."}
+              subtitle={"Más de 20 años de experiencia en el ramo. Ofrecemos equipos, herramientas y accesorios industriales de la más alta calidad y marcas reconocidas para optimizar tus operaciones."}
               cta={{ label: 'Ver Nuestro Catálogo', href: '/products' }}
             />
           </section>
@@ -122,23 +127,23 @@ export default function App() {
             <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 px-2 md:px-6 z-10">
               <RBStatCard 
                 icon={<IconExperience />} 
-                value="27+" 
+                value="20+" 
                 label="Años de Experiencia"
-                trend={{ value: "+20 nuevos clientes", isPositive: true }}
+                trend={{ value: "Desde 2004", isPositive: true }}
                 gradient="from-blue-500 to-blue-700"
               />
               <RBStatCard 
                 icon={<IconBrands />} 
-                value="200+" 
+                value="50+" 
                 label="Marcas de Prestigio"
-                trend={{ value: "+10 nuevas marcas", isPositive: true }}
+                trend={{ value: "Cleveland, Mitutoyo, OSG...", isPositive: true }}
                 gradient="from-blue-600 to-indigo-700"
               />
               <RBStatCard 
                 icon={<IconClients />} 
-                value="200+" 
+                value="100+" 
                 label="Clientes Satisfechos"
-                trend={{ value: "98% satisfacción", isPositive: true }}
+                trend={{ value: "Industria metal-mecánica", isPositive: true }}
                 gradient="from-indigo-600 to-blue-700"
               />
             </div>
@@ -164,27 +169,29 @@ export default function App() {
               />
               <ACBentoGridItem
                 title="Herramientas de Corte Especializadas"
-                description="Fresas, insertos y brocas de carburo con recubrimientos PVD"
+                description="Fresas, insertos y herramientas de carburo"
                 header={
                   <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-slate-100 to-slate-200"></div>
                 }
               />
+              {/* agregar logo de mitutoyo */}
+              {/* https://www.google.com/imgres?q=mitutoyo%20logo&imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Fc%2Fc2%2FMitutoyo_company_logo.svg%2F1200px-Mitutoyo_company_logo.svg.png&imgrefurl=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AMitutoyo_company_logo.svg&docid=5Yj_XNnOfjy8JM&tbnid=wemIzdReD9qToM&vet=12ahUKEwjomv_OkaCRAxXgle4BHa0mDSMQM3oECBgQAA..i&w=1200&h=329&hcb=2&ved=2ahUKEwjomv_OkaCRAxXgle4BHa0mDSMQM3oECBgQAA */}
               <ACBentoGridItem
-                title="Sistemas de Medición Precisos"
-                description="Calibradores digitales, micrómetros y equipos CMM certificados"
+                title="Sistemas de Medición Precisos" 
+                description="Calibradores digitales, micrómetros y equipos certificados"
                 header={
                   <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-indigo-100 to-indigo-200"></div>
                 }
               />
               <ACBentoGridItem
                 title="Accesorios de Sujeción"
-                description="Prensas, chucks hidráulicos y portaherramientas de alta fuerza"
+                description="Prensas, chucks hidráulicos y portaherramientas"
                 header={
                   <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-blue-50 to-blue-150"></div>
                 }
                 className="md:col-span-2"
               />
-              <ACBentoGridItem
+              {/* <ACBentoGridItem
                 title="Asistencia en Maquinado"
                 description="Optimización de procesos y selección de herramientas"
                 header={
@@ -198,7 +205,7 @@ export default function App() {
                 header={
                   <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-slate-50 to-slate-150"></div>
                 }
-              />
+              /> */}
             </ACBentoGrid>
           </section>
 
@@ -214,14 +221,14 @@ export default function App() {
               </p>
             </RBAnimatedText>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 px-2 md:px-6 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 px-2 md:px-6 max-w-6xl mx-auto">
               {/* Royco */}
               <div className="group relative bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-100 hover:border-blue-200 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="relative z-10">
                   <div className="flex items-center justify-center mb-4">
                     <div className="w-32 h-20 md:w-40 md:h-24 rounded-xl flex items-center justify-center">
-                      <img src="https://omic.us/wp-content/uploads/logo-osg.png" alt="Royco Logo" className="max-w-full max-h-full object-contain p-2" />
+                      <img src="/logos/ROYCO.webp" alt="Royco Logo" className="max-w-full max-h-full object-contain p-2" />
                     </div>
                   </div>
                   <div className="text-center">
@@ -241,7 +248,27 @@ export default function App() {
                 <div className="relative z-10">
                   <div className="flex items-center justify-center mb-4">
                     <div className="w-32 h-20 md:w-40 md:h-24 rounded-xl flex items-center justify-center">
-                      <img src="https://lh3.googleusercontent.com/proxy/kOOhl8HKPOuuCmJf9ydKOUiKXlyGL7BQh6CVAFgIlx81vhG-fV1b6wYHrEPPNyLrwzEezfW_fPDvsx1HzTt9Frk4gotAnM6d5dXPdJo2GSvgy7iDxjc1KwpC8Z_kZ7cT" alt="Austromex Logo" className="max-w-full max-h-full object-contain p-2" />
+                      <img src="/logos/AUSTROMEX.webp" alt="Austromex Logo" className="max-w-full max-h-full object-contain p-2" />
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold mb-3">
+                      <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                      Sub - Distribuidor Oficial
+                    </span>
+                    <h3 className="text-xl md:text-2xl font-bold text-slate-800 mb-2">AUSTROMEX</h3>
+                    <p className="text-slate-600 text-sm md:text-base">Soluciones integrales en soldadura y abrasivos industriales</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Fandher */}
+              <div className="group relative bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-100 hover:border-blue-200 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative z-10">
+                  <div className="flex items-center justify-center mb-4">
+                    <div className="w-32 h-20 md:w-40 md:h-24 rounded-xl flex items-center justify-center">
+                      <img src="/logos/FANDHER.webp" alt="Fandher Logo" className="max-w-full max-h-full object-contain p-2" />
                     </div>
                   </div>
                   <div className="text-center">
@@ -249,8 +276,8 @@ export default function App() {
                       <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                       Distribuidor Oficial
                     </span>
-                    <h3 className="text-xl md:text-2xl font-bold text-slate-800 mb-2">AUSTROMEX</h3>
-                    <p className="text-slate-600 text-sm md:text-base">Soluciones integrales en soldadura y abrasivos industriales</p>
+                    <h3 className="text-xl md:text-2xl font-bold text-slate-800 mb-2">FANDHER</h3>
+                    <p className="text-slate-600 text-sm md:text-base">Herramientas de sujeción y portaherramientas de precisión</p>
                   </div>
                 </div>
               </div>
@@ -294,18 +321,18 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 px-2 md:px-6">
               <ACFeature 
                 icon={<IconExperience />} 
-                title="Experiencia Consolidada" 
-                description="Más de 27 años en el sector con soporte técnico especializado y garantía en todos nuestros productos y servicios." 
+                title="Excelentes Tiempos de Entrega" 
+                description="Nos distinguimos por trabajar con tiempos de entrega rápidos, precios accesibles y alta disponibilidad de productos." 
               />
               <ACFeature 
                 icon={<IconBrands />} 
-                title="Marcas Reconocidas" 
-                description="Alianzas estratégicas con más de 200 marcas líderes para ofrecer lo mejor en maquinaria y herramientas industriales." 
+                title="Marcas de Prestigio" 
+                description="Cleveland, Bison, Royco, Mitutoyo, Austromex, OSG, Pinacho, Boehlerit y muchas más marcas reconocidas." 
               />
               <ACFeature 
                 icon={<IconClients />} 
-                title="Confianza Comprobada" 
-                description="Red de más de 200 clientes satisfechos en sectores automotriz, aeroespacial, manufactura y más." 
+                title="Atención Inmediata" 
+                description="Más de 20 años de experiencia nos han convertido en los mejores en venta de máquinas y herramientas industriales." 
               />
             </div>
           </section>
@@ -391,7 +418,7 @@ export default function App() {
               </div>
 
               {/* Clientes - Carrusel infinito en dirección opuesta */}
-              <div className="space-y-4 md:space-y-6">
+              {/* <div className="space-y-4 md:space-y-6">
                 <RBAnimatedText animation="fadeInRight" delay={300}>
                   <div className="flex items-center gap-3 md:gap-4 mb-4 px-2 md:px-4 justify-start md:justify-end flex-row-reverse md:flex-row">
                     <div className="text-left md:text-right">
@@ -406,7 +433,7 @@ export default function App() {
                   </div>
                 </RBAnimatedText>
                 <ACInfiniteLogoScroll items={clientLogos} direction="right" speed="slow" />
-              </div>
+              </div> */}
 
               {/* CTA para ver más */}
               <RBAnimatedText animation="scaleIn" delay={400} className="flex justify-center pt-8 md:pt-12 px-2">
