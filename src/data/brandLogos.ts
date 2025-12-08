@@ -414,7 +414,7 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'OSG': {
         name: 'OSG',
-        logoUrl: '',
+        logoUrl: 'https://www.osg.co.jp/brand/common/imgs/osg_logo.png',
         website: ''
         // 10 productos
     },
