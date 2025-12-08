@@ -100,7 +100,7 @@ export const ACInfiniteLogoScroll = ({
             key={idx}
             className="relative w-[180px] h-[80px] mb-10 flex items-center justify-center bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-110 border border-blue-100 p-4 group"
           >
-            <div className="relative w-full h-full grayscale hover:grayscale-0 transition-all duration-300">
+            <div className="relative w-full h-full transition-all duration-300">
               <Image
                 src={item.logo}
                 alt={item.name}

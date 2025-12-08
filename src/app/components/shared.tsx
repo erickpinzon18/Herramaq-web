@@ -64,8 +64,8 @@ export const Header = ({ activeTab }: HeaderProps) => {
               href={item.link}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                 activeTab === item.name
-                  ? 'text-blue-600 bg-blue-50'
-                  : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'
+                  ? 'text-slate-800 bg-slate-100'
+                  : 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
               {item.name}
@@ -78,7 +78,7 @@ export const Header = ({ activeTab }: HeaderProps) => {
           <NavbarButton 
             href="/contact"
             variant="primary" 
-            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold"
+            className="bg-gradient-to-r from-slate-700 to-slate-900 hover:from-slate-800 hover:to-blue-950 text-white font-semibold"
           >
             Cotiza Ahora
           </NavbarButton>
@@ -116,8 +116,8 @@ export const Header = ({ activeTab }: HeaderProps) => {
               onClick={() => setIsMobileMenuOpen(false)}
               className={`block py-3 px-4 rounded-lg text-base font-medium transition-all duration-300 ${
                 activeTab === item.name
-                  ? 'text-blue-600 bg-blue-50'
-                  : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'
+                  ? 'text-slate-800 bg-slate-100'
+                  : 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
               }`}
             >
               {item.name}
@@ -130,7 +130,7 @@ export const Header = ({ activeTab }: HeaderProps) => {
               href="/contact"
               onClick={() => setIsMobileMenuOpen(false)}
               variant="primary"
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold"
+              className="w-full bg-gradient-to-r from-slate-700 to-slate-900 hover:from-slate-800 hover:to-blue-950 text-white font-semibold"
             >
               Cotiza Ahora
             </NavbarButton>

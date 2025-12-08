@@ -54,7 +54,7 @@ const BrandCard: React.FC<{ brand: BrandInfo; onClick: () => void; isSelected: b
             ref={cardRef}
             onClick={onClick}
             className={`brand-card cursor-pointer group relative bg-white rounded-2xl overflow-hidden border-2 shadow-lg transition-all duration-300 hover:shadow-2xl ${
-                isSelected ? 'border-blue-600 ring-4 ring-blue-200' : 'border-slate-200'
+                isSelected ? 'border-slate-700 ring-4 ring-slate-200' : 'border-slate-200'
             }`}
         >
             <div className="relative h-40 bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-6">
@@ -75,11 +75,11 @@ const BrandCard: React.FC<{ brand: BrandInfo; onClick: () => void; isSelected: b
             <div className="p-4 bg-white">
                 <h3 className="text-lg font-bold text-slate-900 mb-1 truncate">{brand.name}</h3>
                 <p className="text-sm text-slate-500">
-                    <span className="font-semibold text-blue-600">{brand.count}</span> productos
+                    <span className="font-semibold text-slate-700">{brand.count}</span> productos
                 </p>
             </div>
             {isSelected && (
-                <div className="absolute top-3 right-3 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                <div className="absolute top-3 right-3 w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center">
                     <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -385,8 +385,8 @@ export default function ProductsPage() {
             <Header activeTab="Productos" />
 
             {/* Hero Section */}
-            <section ref={heroRef} className="relative w-full py-20 md:py-32 overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900">
-                <ACSpotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="#60a5fa" />
+            <section ref={heroRef} className="relative w-full py-20 md:py-32 overflow-hidden bg-gradient-to-br from-slate-800 via-slate-900 to-blue-950">
+                <ACSpotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="#94a3b8" />
                 <ACMeteors number={30} />
 
                 <div className="relative z-10 w-full px-4 md:px-8 lg:px-16">
@@ -394,7 +394,7 @@ export default function ProductsPage() {
                         <h1 className="hero-title text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
                             Catálogo por Marcas
                         </h1>
-                        <p className="hero-subtitle text-xl md:text-2xl text-blue-100 mb-12 leading-relaxed max-w-3xl mx-auto">
+                        <p className="hero-subtitle text-xl md:text-2xl text-slate-300 mb-12 leading-relaxed max-w-3xl mx-auto">
                             Explora nuestras {brands.length} marcas de herramientas y maquinaria industrial
                         </p>
 
@@ -425,13 +425,13 @@ export default function ProductsPage() {
                                 <button
                                     onClick={handleSearch}
                                     disabled={isSearchingProducts}
-                                    className="absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-colors duration-300 disabled:opacity-50"
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl transition-colors duration-300 disabled:opacity-50"
                                 >
                                     {isSearchingProducts ? 'Buscando...' : 'Buscar'}
                                 </button>
                             </div>
                             {!hasSearched && (
-                                <p className="mt-3 text-blue-200 text-sm">
+                                <p className="mt-3 text-slate-400 text-sm">
                                     💡 Las marcas se filtran automáticamente. Para buscar productos, presiona <strong>Buscar</strong> o <strong>Enter</strong>.
                                 </p>
                             )}
@@ -501,7 +501,7 @@ export default function ProductsPage() {
 
                     {loadingBrands || isSearchingProducts ? (
                         <div className="text-center py-20">
-                            <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-600"></div>
+                            <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-slate-700"></div>
                             <p className="mt-4 text-slate-600">
                                 {isSearchingProducts ? 'Buscando productos...' : 'Cargando marcas...'}
                             </p>
@@ -516,7 +516,7 @@ export default function ProductsPage() {
                                     <p className="text-slate-600 mb-4">No hay productos que coincidan con &quot;{searchTerm}&quot;</p>
                                     {filteredBrands.length > 0 && (
                                         <div className="mt-8">
-                                            <p className="text-slate-600 mb-4">Pero encontramos <span className="font-bold text-blue-600">{filteredBrands.length}</span> marcas similares:</p>
+                                            <p className="text-slate-600 mb-4">Pero encontramos <span className="font-bold text-slate-700">{filteredBrands.length}</span> marcas similares:</p>
                                             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
                                                 {filteredBrands.slice(0, 6).map((brand) => (
                                                     <BrandCard
@@ -536,7 +536,7 @@ export default function ProductsPage() {
                             ) : (
                                 <>
                                     <p className="text-slate-600 mb-6">
-                                        Mostrando <span className="font-bold text-blue-600">{searchResults.length}</span> productos encontrados
+                                        Mostrando <span className="font-bold text-slate-700">{searchResults.length}</span> productos encontrados
                                     </p>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                                         {searchResults.map((product) => (
@@ -558,7 +558,7 @@ export default function ProductsPage() {
                             ) : (
                                 <>
                                     <p className="text-slate-600 mb-6">
-                                        Mostrando <span className="font-bold text-blue-600">{filteredBrands.length}</span> marcas
+                                        Mostrando <span className="font-bold text-slate-700">{filteredBrands.length}</span> marcas
                                     </p>
                                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
                                         {filteredBrands.map((brand) => (
@@ -578,7 +578,7 @@ export default function ProductsPage() {
                         <div ref={productsGridRef}>
                             {loadingProducts ? (
                                 <div className="text-center py-20">
-                                    <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-600"></div>
+                                    <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-slate-700"></div>
                                     <p className="mt-4 text-slate-600">Cargando productos de {selectedBrand}...</p>
                                 </div>
                             ) : brandProducts.length === 0 ? (
@@ -590,7 +590,7 @@ export default function ProductsPage() {
                             ) : (
                                 <>
                                     <p className="text-slate-600 mb-6">
-                                        Mostrando <span className="font-bold text-blue-600">{brandProducts.length}</span> productos de <span className="font-bold">{selectedBrand}</span>
+                                        Mostrando <span className="font-bold text-slate-700">{brandProducts.length}</span> productos de <span className="font-bold">{selectedBrand}</span>
                                     </p>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                                         {brandProducts.map((product) => (
@@ -604,7 +604,7 @@ export default function ProductsPage() {
                                             <button
                                                 onClick={loadMoreBrandProducts}
                                                 disabled={loadingMoreProducts}
-                                                className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                                className="px-8 py-4 bg-slate-800 hover:bg-slate-900 text-white rounded-xl font-semibold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                                             >
                                                 {loadingMoreProducts ? 'Cargando...' : 'Cargar Más Productos'}
                                             </button>
@@ -628,18 +628,18 @@ export default function ProductsPage() {
             </section>
 
             {/* CTA Section */}
-            <section className="relative w-full py-20 bg-gradient-to-r from-blue-600 to-blue-800 overflow-hidden">
-                <ACSpotlight className="-top-40 right-0" fill="#60a5fa" />
+            <section className="relative w-full py-20 bg-gradient-to-r from-slate-800 to-slate-900 overflow-hidden">
+                <ACSpotlight className="-top-40 right-0" fill="#94a3b8" />
                 
                 <div className="relative z-10 w-full px-4 md:px-8 text-center">
                     <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
                         ¿No encuentras lo que buscas?
                     </h2>
-                    <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                    <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
                         Contáctanos y te ayudaremos a encontrar la herramienta perfecta para tu proyecto
                     </p>
                     <ACHoverBorderGradient className="inline-block">
-                        <span className="inline-flex items-center justify-center font-semibold bg-blue-600 text-white hover:bg-blue-50 hover:text-blue-600 px-8 py-4 text-lg rounded-lg transition-colors duration-300">
+                        <span className="inline-flex items-center justify-center font-semibold bg-slate-700 text-white hover:bg-white hover:text-slate-900 px-8 py-4 text-lg rounded-lg transition-colors duration-300">
                             Contactar Ahora
                         </span>
                     </ACHoverBorderGradient>

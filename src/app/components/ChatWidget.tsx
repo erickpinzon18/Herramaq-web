@@ -290,7 +290,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ className = '' }) => {
             {/* Botón flotante */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`fixed bottom-4 md:bottom-6 right-4 md:right-6 z-50 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-full p-3 md:p-4 shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-110 ${className}`}
+                className={`fixed bottom-4 md:bottom-6 right-4 md:right-6 z-50 bg-gradient-to-r from-slate-700 to-slate-900 hover:from-slate-800 hover:to-blue-950 text-white rounded-full p-3 md:p-4 shadow-2xl hover:shadow-slate-500/50 transition-all duration-300 hover:scale-110 ${className}`}
                 aria-label="Abrir chat"
             >
                 {isOpen ? <CloseIcon /> : <ChatIcon />}
@@ -307,7 +307,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ className = '' }) => {
             {isOpen && (
                 <div className="fixed bottom-4 md:bottom-24 right-4 md:right-6 left-4 md:left-auto z-40 w-auto md:w-full md:max-w-md bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden animate-slide-up">
                     {/* Header */}
-                    <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-3 md:p-4 flex items-center justify-between">
+                    <div className="bg-gradient-to-r from-slate-700 to-slate-900 p-3 md:p-4 flex items-center justify-between">
                         <div className="flex items-center gap-2 md:gap-3">
                             <div className="relative w-8 h-8 md:w-10 md:h-10 bg-white rounded-full flex items-center justify-center">
                                 <Image
@@ -319,7 +319,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ className = '' }) => {
                             </div>
                             <div>
                                 <h3 className="text-white font-bold text-xs md:text-sm">Asistente Herramaq</h3>
-                                <p className="text-blue-100 text-[10px] md:text-xs flex items-center gap-1">
+                                <p className="text-slate-300 text-[10px] md:text-xs flex items-center gap-1">
                                     <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
                                     En línea
                                 </p>
@@ -347,8 +347,8 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ className = '' }) => {
                                 <div
                                     className={`flex-shrink-0 w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center ${
                                         message.role === 'user'
-                                            ? 'bg-blue-600 text-white'
-                                            : 'bg-white border-2 border-blue-600 text-blue-600'
+                                            ? 'bg-slate-800 text-white'
+                                            : 'bg-white border-2 border-slate-700 text-slate-700'
                                     }`}
                                 >
                                     {message.role === 'user' ? <UserIcon /> : <BotIcon />}
@@ -363,7 +363,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ className = '' }) => {
                                     <div
                                         className={`px-3 py-2 md:px-4 md:py-2 rounded-2xl ${
                                             message.role === 'user'
-                                                ? 'bg-blue-600 text-white rounded-tr-none'
+                                                ? 'bg-slate-800 text-white rounded-tr-none'
                                                 : 'bg-white text-slate-800 border border-slate-200 rounded-tl-none'
                                         }`}
                                     >
@@ -381,7 +381,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ className = '' }) => {
                         {/* Indicador de escritura */}
                         {isLoading && (
                             <div className="flex gap-3">
-                                <div className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8 rounded-full bg-white border-2 border-blue-600 text-blue-600 flex items-center justify-center">
+                                <div className="flex-shrink-0 w-7 h-7 md:w-8 md:h-8 rounded-full bg-white border-2 border-slate-700 text-slate-700 flex items-center justify-center">
                                     <BotIcon />
                                 </div>
                                 <div className="bg-white border border-slate-200 px-3 py-2 md:px-4 md:py-3 rounded-2xl rounded-tl-none">
@@ -413,7 +413,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ className = '' }) => {
                             <button
                                 onClick={handleSendMessage}
                                 disabled={!inputValue.trim() || isLoading}
-                                className="bg-blue-600 hover:bg-blue-700 text-white p-2.5 md:p-3 rounded-xl transition-colors duration-300 disabled:bg-slate-300 disabled:cursor-not-allowed disabled:hover:bg-slate-300"
+                                className="bg-slate-800 hover:bg-slate-900 text-white p-2.5 md:p-3 rounded-xl transition-colors duration-300 disabled:bg-slate-300 disabled:cursor-not-allowed disabled:hover:bg-slate-300"
                                 aria-label="Enviar mensaje"
                             >
                                 <SendIcon />

@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Colores corporativos Herramaq */
-  --color-herramaq-blue-50: #e6f0ff;
-  --color-herramaq-blue-500: #0066e6;
-  --color-herramaq-blue-800: #00295c;
-  --color-herramaq-yellow-500: #ffd700;
+  /* Colores corporativos Herramaq - Azul Marino con Plata */
+  --color-herramaq-navy-50: #f8fafc;
+  --color-herramaq-navy-500: #334155;
+  --color-herramaq-navy-800: #1e293b;
+  --color-herramaq-navy-900: #0f172a;
+  --color-herramaq-silver-400: #94a3b8;
+  --color-herramaq-silver-500: #64748b;
   
   /* Variables de sistema */
   --color-background: 0 0% 100%;
@@ -15,8 +17,8 @@
   --color-popover: 0 0% 100%;
   --color-popover-foreground: 222.2 84% 4.9%;
   
-  /* Azul Herramaq como color primario */
-  --color-primary: 212 100% 45%;
+  /* Azul Marino Herramaq como color primario */
+  --color-primary: 215 28% 17%;
   --color-primary-foreground: 210 40% 98%;
   
   --color-secondary: 210 40% 96.1%;
@@ -45,7 +47,7 @@
   --card-foreground: 222.2 84% 4.9%;
   --popover: 0 0% 100%;
   --popover-foreground: 222.2 84% 4.9%;
-  --primary: 212 100% 45%; /* Azul Herramaq #0066e6 */
+  --primary: 215 28% 17%; /* Azul Marino Herramaq */
   --primary-foreground: 210 40% 98%;
   --secondary: 210 40% 96.1%;
   --secondary-foreground: 222.2 47.4% 11.2%;

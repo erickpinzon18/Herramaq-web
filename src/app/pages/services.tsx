@@ -21,7 +21,7 @@ const CheckCircleIcon = () => (
 );
 
 const CogIcon = () => (
-    <svg className="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <svg className="w-8 h-8 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
     </svg>
@@ -254,7 +254,7 @@ const timelineData = [
                 </p>
                 <div className="grid grid-cols-3 gap-4 mt-6">
                     <div className="bg-blue-50 p-4 rounded-lg text-center">
-                        <p className="text-3xl font-bold text-blue-600">45</p>
+                        <p className="text-3xl font-bold text-slate-700">45</p>
                         <p className="text-slate-600 text-sm">Colaboradores</p>
                     </div>
                     <div className="bg-green-50 p-4 rounded-lg text-center">
@@ -310,8 +310,8 @@ export default function ServicesPage() {
             <Header activeTab="Servicios" />
 
             {/* Hero Section con Spotlight y Meteors */}
-            <section className="relative w-full py-20 md:py-32 overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900">
-                <ACSpotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="#60a5fa" />
+            <section className="relative w-full py-20 md:py-32 overflow-hidden bg-gradient-to-br from-slate-800 via-slate-900 to-blue-950">
+                <ACSpotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="#94a3b8" />
                 <ACMeteors number={30} />
 
                 <div className="relative z-10 w-full px-4 md:px-8 lg:px-16">
@@ -319,13 +319,13 @@ export default function ServicesPage() {
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
                             Servicios de Maquinado de Precisión
                         </h1>
-                        <p className="text-xl md:text-2xl text-blue-100 mb-12 leading-relaxed max-w-3xl mx-auto">
+                        <p className="text-xl md:text-2xl text-slate-300 mb-12 leading-relaxed max-w-3xl mx-auto">
                             Transformamos metal en soluciones. Desde prototipos únicos hasta producción en serie, 
                             con tecnología CNC de última generación y más de 30 años de experiencia.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <ACHoverBorderGradient>
-                                <span className="inline-flex items-center justify-center font-semibold bg-blue-600 text-white hover:bg-blue-50 hover:text-blue-600 px-8 py-4 text-lg rounded-lg transition-colors duration-300">
+                                <span className="inline-flex items-center justify-center font-semibold bg-slate-800 text-white hover:bg-slate-100 hover:text-slate-900 px-8 py-4 text-lg rounded-lg transition-colors duration-300">
                                     Solicitar Cotización
                                 </span>
                             </ACHoverBorderGradient>
@@ -482,7 +482,7 @@ export default function ServicesPage() {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <ACHoverBorderGradient>
-                            <span className="inline-flex items-center justify-center font-semibold bg-blue-600 text-white hover:bg-blue-50 hover:text-blue-600 px-6 md:px-8 py-3 md:py-4 text-base md:text-lg rounded-lg transition-colors duration-300">
+                            <span className="inline-flex items-center justify-center font-semibold bg-slate-800 text-white hover:bg-slate-100 hover:text-slate-900 px-6 md:px-8 py-3 md:py-4 text-base md:text-lg rounded-lg transition-colors duration-300">
                                 Solicitar Cotización Ahora
                             </span>
                         </ACHoverBorderGradient>

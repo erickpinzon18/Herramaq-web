@@ -144,7 +144,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onC
                                             onClick={() => setCurrentImageIndex(idx)}
                                             className={`w-2 h-2 rounded-full transition-all duration-300 ${
                                                 idx === currentImageIndex
-                                                    ? 'bg-blue-600 w-8'
+                                                    ? 'bg-slate-700 w-8'
                                                     : 'bg-white/60 hover:bg-white'
                                             }`}
                                             aria-label={`Ir a imagen ${idx + 1}`}
@@ -178,7 +178,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onC
                             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-2">{product.name}</h2>
                             
                             {/* Nombre de marca (siempre mostrar) */}
-                            <p className="text-blue-600 font-semibold text-base md:text-lg mb-4 md:mb-6">{product.brand}</p>
+                            <p className="text-slate-700 font-semibold text-base md:text-lg mb-4 md:mb-6">{product.brand}</p>
 
                             {product.modelo && (
                                 <p className="text-slate-600 text-sm mb-2">
@@ -196,7 +196,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onC
                                         <p className="text-xs text-slate-500 uppercase tracking-wide mb-2">Atributos</p>
                                         <div className="flex flex-wrap gap-2">
                                             {product.specs.atributos.map((attr, idx) => (
-                                                <span key={idx} className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
+                                                <span key={idx} className="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-sm font-medium">
                                                     {attr}
                                                 </span>
                                             ))}

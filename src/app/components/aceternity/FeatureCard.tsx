@@ -27,7 +27,7 @@ export const ACFeature = ({ icon, title, description }: { icon?: React.ReactNode
       </p>
       
       {/* Animated underline */}
-      <div className="mt-6 h-1 w-0 group-hover:w-full bg-gradient-to-r from-blue-600 to-blue-400 rounded-full transition-all duration-500"></div>
+      <div className="mt-6 h-1 w-0 group-hover:w-full bg-gradient-to-r from-slate-700 to-slate-500 rounded-full transition-all duration-500"></div>
     </div>
   </div>
 );

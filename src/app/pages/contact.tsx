@@ -157,8 +157,8 @@ export default function ContactPage() {
             <Header activeTab="Contacto" />
 
             {/* Hero Section */}
-            <section className="relative w-full py-20 md:py-32 overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 mb-16">
-                <ACSpotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="#60a5fa" />
+            <section className="relative w-full py-20 md:py-32 overflow-hidden bg-gradient-to-br from-slate-800 via-slate-900 to-blue-950 mb-16">
+                <ACSpotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="#94a3b8" />
                 <ACMeteors number={30} />
 
                 <div className="relative z-10 w-full px-4 md:px-8 lg:px-16">
@@ -166,7 +166,7 @@ export default function ContactPage() {
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
                             Contáctanos
                         </h1>
-                        <p className="text-xl md:text-2xl text-blue-100 mb-12 leading-relaxed max-w-3xl mx-auto">
+                        <p className="text-xl md:text-2xl text-slate-300 mb-12 leading-relaxed max-w-3xl mx-auto">
                             Estamos aquí para transformar tu visión en realidad. Contacta con nuestro equipo de expertos.
                         </p>
                     </div>
@@ -316,7 +316,7 @@ export default function ContactPage() {
                                                 <button
                                                     type="submit"
                                                     disabled={status === 'submitting'}
-                                                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-4 px-8 rounded-lg text-base disabled:opacity-50 disabled:cursor-not-allowed hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+                                                    className="w-full bg-gradient-to-r from-slate-700 to-slate-900 text-white font-bold py-4 px-8 rounded-lg text-base disabled:opacity-50 disabled:cursor-not-allowed hover:from-slate-800 hover:to-blue-950 transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
                                                 >
                                                     {status === 'submitting' ? (
                                                         <>
@@ -340,7 +340,7 @@ export default function ContactPage() {
 
                             {/* Información de Contacto - BentoGrid */}
                             <div className="lg:col-span-1 space-y-6">
-                                <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl shadow-lg p-6 md:p-8 text-white">
+                                <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl shadow-lg p-6 md:p-8 text-white">
                                     <h3 className="text-xl font-bold mb-5">
                                         Información de Contacto
                                     </h3>
@@ -358,7 +358,7 @@ export default function ContactPage() {
                                             </div>
                                             <div>
                                                 <h4 className="font-semibold mb-1 text-sm">Dirección</h4>
-                                                <p className="text-blue-100 text-sm">
+                                                <p className="text-slate-300 text-sm">
                                                     Verano #11, Betania, <br/> 76807 San Juan del Río, Qro.
                                                 </p>
                                             </div>
@@ -375,7 +375,7 @@ export default function ContactPage() {
                                             </div>
                                             <div>
                                                 <h4 className="font-semibold mb-1 text-sm">Teléfono</h4>
-                                                <p className="text-blue-100 text-sm">(427) 272 5663</p>
+                                                <p className="text-slate-300 text-sm">(427) 272 5663</p>
                                             </div>
                                         </div>
 
@@ -390,7 +390,7 @@ export default function ContactPage() {
                                             </div>
                                             <div>
                                                 <h4 className="font-semibold mb-1 text-sm">Whatsapp</h4>
-                                                <p className="text-blue-100 text-sm">(427) 184 5182</p>
+                                                <p className="text-slate-300 text-sm">(427) 184 5182</p>
                                             </div>
                                         </div>
 
@@ -405,7 +405,7 @@ export default function ContactPage() {
                                             </div>
                                             <div>
                                                 <h4 className="font-semibold mb-1 text-sm">Email</h4>
-                                                <p className="text-blue-100 text-sm">ventas@herramaq.com</p>
+                                                <p className="text-slate-300 text-sm">ventas@herramaq.com</p>
                                             </div>
                                         </div>
 
@@ -420,7 +420,7 @@ export default function ContactPage() {
                                             </div>
                                             <div>
                                                 <h4 className="font-semibold mb-1 text-sm">Horario</h4>
-                                                <p className="text-blue-100 text-sm">
+                                                <p className="text-slate-300 text-sm">
                                                     Lunes a Viernes: 8:00 AM - 6:00 PM<br />
                                                     Sábados: 9:00 AM - 1:00 PM
                                                 </p>
@@ -485,17 +485,17 @@ export default function ContactPage() {
 
                 {/* CTA Final con Background Beams */}
                 <section className="mb-16 relative rounded-2xl overflow-hidden">
-                    <div className="relative bg-gradient-to-br from-blue-600 via-blue-800 to-blue-950 py-16 px-8">
+                    <div className="relative bg-gradient-to-br from-slate-800 via-slate-900 to-blue-950 py-16 px-8">
                         <ACBackgroundBeams />
                         <div className="relative z-10 text-center max-w-4xl mx-auto">
                             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
                                 ¿Listo para Empezar tu Proyecto?
                             </h2>
-                            <p className="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                            <p className="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
                                 Únete a cientos de empresas que confían en Herramaq
                             </p>
                             <div className="flex flex-wrap gap-4 justify-center">
-                                <button className="px-8 py-3 rounded-lg bg-white text-blue-900 font-bold text-base hover:bg-blue-50 transition-all duration-300 shadow-lg">
+                                <button className="px-8 py-3 rounded-lg bg-white text-slate-900 font-bold text-base hover:bg-slate-100 transition-all duration-300 shadow-lg">
                                     Solicitar Cotización
                                 </button>
                             </div>

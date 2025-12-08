@@ -103,7 +103,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onViewDetails
 
                 {/* Nombre de marca solo si no hay logo */}
                 {!getBrandLogo(product.brand) && (
-                    <p className="text-blue-600 font-semibold text-sm mb-1">{product.brand}</p>
+                    <p className="text-slate-700 font-semibold text-sm mb-1">{product.brand}</p>
                 )}
 
                 <h3 className="text-xl font-bold text-slate-900 mb-2 line-clamp-2">{product.name}</h3>
@@ -120,7 +120,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onViewDetails
                         Ver Detalles
                     </RBButton>
                     <button
-                        className="p-3 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-all duration-300"
+                        className="p-3 border-2 border-slate-700 text-slate-700 rounded-lg hover:bg-slate-50 transition-all duration-300"
                         onClick={() => onViewDetails(product)}
                     >
                         <ShoppingCartIcon />

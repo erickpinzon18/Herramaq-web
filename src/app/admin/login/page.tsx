@@ -32,7 +32,7 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 flex items-center justify-center p-4 relative overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-br from-slate-700 via-slate-800 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
             <ACSpotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="#60a5fa" />
             <ACMeteors number={30} />
 
@@ -87,14 +87,14 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full py-4 bg-slate-800 hover:bg-slate-900 text-white font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
                         </button>
                     </form>
 
                     <div className="mt-6 text-center">
-                        <Link href="/" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                        <Link href="/" className="text-slate-700 hover:text-slate-900 text-sm font-medium">
                             ← Volver al sitio
                         </Link>
                     </div>

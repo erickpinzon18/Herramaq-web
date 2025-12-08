@@ -325,7 +325,7 @@ export default function AdminDashboard() {
                     </div>
                     <button
                         onClick={() => setShowAddModal(true)}
-                        className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors whitespace-nowrap"
+                        className="px-6 py-3 bg-slate-800 hover:bg-slate-900 text-white rounded-lg font-semibold transition-colors whitespace-nowrap"
                     >
                         + Agregar Producto
                     </button>
@@ -335,7 +335,7 @@ export default function AdminDashboard() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <div className="bg-white rounded-lg shadow p-6">
                         <p className="text-slate-600 text-sm mb-1">Total en Base de Datos</p>
-                        <p className="text-3xl font-bold text-blue-600">{totalProducts}</p>
+                        <p className="text-3xl font-bold text-slate-700">{totalProducts}</p>
                     </div>
                     <div className="bg-white rounded-lg shadow p-6">
                         <p className="text-slate-600 text-sm mb-1">Productos Cargados</p>
@@ -402,7 +402,7 @@ export default function AdminDashboard() {
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center justify-center">
                                                     {hasLogo ? (
-                                                        <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                                        <svg className="w-5 h-5 text-slate-700" fill="currentColor" viewBox="0 0 20 20">
                                                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                                                         </svg>
                                                     ) : (
@@ -743,7 +743,7 @@ function EditProductModal({ product, onClose, onSave }: { product: FirebaseProdu
                                 disabled={uploadingImage}
                                 className="w-full px-4 py-2 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
-                            {uploadingImage && <p className="text-sm text-blue-600 mt-1">Subiendo...</p>}
+                            {uploadingImage && <p className="text-sm text-slate-700 mt-1">Subiendo...</p>}
                         </div>
 
                         {/* Agregar por URL */}
@@ -760,7 +760,7 @@ function EditProductModal({ product, onClose, onSave }: { product: FirebaseProdu
                                 <button
                                     type="button"
                                     onClick={() => addImageUrl(false)}
-                                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                                    className="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg transition-colors"
                                 >
                                     Agregar
                                 </button>
@@ -774,7 +774,7 @@ function EditProductModal({ product, onClose, onSave }: { product: FirebaseProdu
                                     💡 Copiar imágenes de productos similares
                                 </p>
                                 {loadingSimilar && (
-                                    <span className="text-xs text-blue-600">Buscando...</span>
+                                    <span className="text-xs text-slate-700">Buscando...</span>
                                 )}
                             </div>
                             
@@ -862,7 +862,7 @@ function EditProductModal({ product, onClose, onSave }: { product: FirebaseProdu
                                 disabled={uploadingLogo}
                                 className="w-full px-4 py-2 border-2 border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
-                            {uploadingLogo && <p className="text-sm text-blue-600 mt-1">Subiendo logo...</p>}
+                            {uploadingLogo && <p className="text-sm text-slate-700 mt-1">Subiendo logo...</p>}
                         </div>
 
                         {/* Agregar logo por URL */}
@@ -879,7 +879,7 @@ function EditProductModal({ product, onClose, onSave }: { product: FirebaseProdu
                                 <button
                                     type="button"
                                     onClick={() => addImageUrl(true)}
-                                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                                    className="px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg transition-colors"
                                 >
                                     Agregar
                                 </button>
@@ -894,7 +894,7 @@ function EditProductModal({ product, onClose, onSave }: { product: FirebaseProdu
                         <button
                             type="submit"
                             disabled={saving}
-                            className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors disabled:opacity-50"
+                            className="flex-1 py-3 bg-slate-800 hover:bg-slate-900 text-white rounded-lg font-semibold transition-colors disabled:opacity-50"
                         >
                             {saving ? 'Guardando...' : 'Guardar Cambios'}
                         </button>
@@ -1024,7 +1024,7 @@ function AddProductModal({ onClose, onAdd }: { onClose: () => void; onAdd: (prod
                         <button
                             type="submit"
                             disabled={saving}
-                            className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors disabled:opacity-50"
+                            className="flex-1 py-3 bg-slate-800 hover:bg-slate-900 text-white rounded-lg font-semibold transition-colors disabled:opacity-50"
                         >
                             {saving ? 'Guardando...' : 'Agregar Producto'}
                         </button>
