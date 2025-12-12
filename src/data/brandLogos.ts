@@ -348,7 +348,7 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'FELO': {
         name: 'FELO',
-        logoUrl: '',
+        logoUrl: 'https://i0.wp.com/www.felosofia.com/wp-content/uploads/2024/11/Felo-Logo_Yellow-1.jpg?fit=1179%2C528&ssl=1',
         website: ''
         // 17 productos
     },
@@ -372,37 +372,37 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'REGAL': {
         name: 'REGAL',
-        logoUrl: '',
+        logoUrl: 'https://images.squarespace-cdn.com/content/v1/5e8b4a50d1d00f419f600f8c/1600200523433-956L1LAZ3BNCO8UOJ3MW/REGAL.jpg',
         website: ''
         // 15 productos
     },
     'GUANGLU': {
         name: 'GUANGLU',
-        logoUrl: '',
+        logoUrl: 'https://proinmar.cl/administracion/_imagen11133/ftsymgns/photo_m_img/original/im11_66e4a0d616b843_83033233.png',
         website: ''
         // 15 productos
     },
     '3M': {
         name: '3M',
-        logoUrl: '',
+        logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/3M_wordmark.svg/640px-3M_wordmark.svg.png',
         website: ''
         // 13 productos
     },
     'WEILER': {
         name: 'WEILER',
-        logoUrl: '',
+        logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjC_O0vqPDLyv7_roKEAiLri5VLzR-xVgRzA&s',
         website: ''
         // 12 productos
     },
     'PALBIT': {
         name: 'PALBIT',
-        logoUrl: '',
+        logoUrl: 'https://img.directindustry.es/images_di/company/40532/photo-g/1384.jpg',
         website: ''
         // 11 productos
     },
     'CABEL': {
         name: 'CABEL',
-        logoUrl: '',
+        logoUrl: 'https://cabel.mx/wp-content/uploads/2023/01/LOGO-Cabel-completo.png',
         website: ''
         // 10 productos
     },
@@ -426,7 +426,7 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'KEO': {
         name: 'KEO',
-        logoUrl: '',
+        logoUrl: 'https://www.archcuttingtools.com/wp-content/uploads/2024/02/KEO.png',
         website: ''
         // 9 productos
     },
@@ -462,7 +462,7 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'STARRET': {
         name: 'STARRET',
-        logoUrl: '',
+        logoUrl: 'https://hecortindustrial.com/wp-content/uploads/2024/12/logo-starret.png',
         website: ''
         // 8 productos
     },
@@ -474,19 +474,19 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'TUNGALOY': {
         name: 'TUNGALOY',
-        logoUrl: '',
+        logoUrl: 'https://tungaloy.com/wpdata/wp-content/uploads/logo_tungaloy.jpg',
         website: ''
         // 8 productos
     },
     'VISE-GRIP': {
         name: 'VISE-GRIP',
-        logoUrl: '',
+        logoUrl: 'https://cdn.worldvectorlogo.com/logos/vise-grip.svg',
         website: ''
         // 8 productos
     },
     'TULMEX': {
         name: 'TULMEX',
-        logoUrl: '',
+        logoUrl: 'https://www.kleintools.com.mx/sites/default/files/content-assets/logotipo_tulmex_stack.jpg',
         website: ''
         // 8 productos
     },
@@ -498,7 +498,7 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'MASTER-CUT': {
         name: 'MASTER-CUT',
-        logoUrl: '',
+        logoUrl: 'https://mastercut.com.mx/wp-content/uploads/2023/11/Proveedores-de-herramientas-de-corte-para-aleaciones-de-alta-temperatura-Queretaro.png',
         website: ''
         // 7 productos
     },
@@ -510,85 +510,85 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'SHAVIV': {
         name: 'SHAVIV',
-        logoUrl: '',
+        logoUrl: 'https://cdn.shopify.com/s/files/1/0612/2920/3670/files/shaviv-logo-vector.png?v=1742482094',
         website: ''
         // 6 productos
     },
     'MARKAL': {
         name: 'MARKAL',
-        logoUrl: '',
+        logoUrl: 'https://www.hepsa.mx/image/cache/catalog/marcas/markal-logo-600x315..jpg',
         website: ''
         // 6 productos
     },
     'BOEHLERIT': {
         name: 'BOEHLERIT',
-        logoUrl: '',
+        logoUrl: 'https://www.boehlerit.com.mx/fileadmin/templates/assets/images/logo.jpg',
         website: ''
         // 6 productos
     },
     'GLG': {
         name: 'GLG',
-        logoUrl: '',
+        logoUrl: 'https://www.glg.org/wp-content/uploads/2018/08/LOGO-GLG.png',
         website: ''
         // 6 productos
     },
     'ALFRA': {
         name: 'ALFRA',
-        logoUrl: '',
+        logoUrl: 'https://www.alfra.com/images/logo-alfra.png',
         website: ''
         // 6 productos
     },
     'BESSEY': {
         name: 'BESSEY',
-        logoUrl: '',
+        logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTePL7SMioaleYsN6YFfRtlocl3FV_-ruM9jw&s',
         website: ''
         // 6 productos
     },
     'JYRSA': {
         name: 'JYRSA',
-        logoUrl: '',
+        logoUrl: 'https://jyrsa.com/wp-content/uploads/2024/10/Logo-JYRSA-negro-03.jpg',
         website: ''
         // 6 productos
     },
     'WINCO': {
         name: 'WINCO',
-        logoUrl: '',
+        logoUrl: 'https://surtiloza.mx/wp-content/uploads/2021/08/winco-logo-e1627947495580.jpg',
         website: ''
         // 6 productos
     },
     'DERMA-C': {
         name: 'DERMA-C',
-        logoUrl: '',
+        logoUrl: 'https://dermacare.mx/wp-content/uploads/2025/03/Logo-Dermacare.png',
         website: ''
         // 6 productos
     },
     'MILWAUKEE': {
         name: 'MILWAUKEE',
-        logoUrl: '',
+        logoUrl: 'https://1000marcas.net/wp-content/uploads/2020/10/Milwaukee-logo.jpg',
         website: ''
         // 6 productos
     },
     'FORZA': {
         name: 'FORZA',
-        logoUrl: '',
+        logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMuQvh8P-p5eU4Yd3lc_sb2RwT7OcTX7caUQ&s',
         website: ''
         // 5 productos
     },
     'REGIA': {
         name: 'REGIA',
-        logoUrl: '',
+        logoUrl: 'https://www.regia.mx/cdn/shop/files/LgRegiaNVO_png_1251X364_dc74271a-05fe-4191-9d0f-bee73f5d0ff2_390x.png?v=1674666297',
         website: ''
         // 5 productos
     },
     'TAP-MAGIC': {
         name: 'TAP-MAGIC',
-        logoUrl: '',
+        logoUrl: 'https://www.dhtools.com.mx/wp-content/uploads/2020/01/TAP-MAGIC-LOGO.jpg',
         website: ''
         // 5 productos
     },
     'TENFLEX': {
         name: 'TENFLEX',
-        logoUrl: '',
+        logoUrl: 'https://acdn-us.mitiendanube.com/stores/001/026/864/themes/common/logo-1276758361-1764589307-fbd98e66baec94e6d3f6933f9a7cda861764589307.png?0',
         website: ''
         // 5 productos
     },
@@ -600,13 +600,13 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'BORIDE': {
         name: 'BORIDE',
-        logoUrl: '',
+        logoUrl: 'https://i.ytimg.com/vi/hpm7PhKqGXM/mqdefault.jpg',
         website: ''
         // 5 productos
     },
     'VALLORBE': {
         name: 'VALLORBE',
-        logoUrl: '',
+        logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDOAmFmADGcD08Z2I78AnAOYxjEiubChNhgg&s',
         website: ''
         // 5 productos
     },
@@ -618,7 +618,7 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'STANLEY': {
         name: 'STANLEY',
-        logoUrl: '',
+        logoUrl: 'https://1000marcas.net/wp-content/uploads/2022/06/Stanley-Logo.jpg',
         website: ''
         // 4 productos
     },
@@ -630,7 +630,7 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'VICE-GRIP': {
         name: 'VICE-GRIP',
-        logoUrl: '',
+        logoUrl: 'https://cdn.worldvectorlogo.com/logos/vise-grip.svg',
         website: ''
         // 4 productos
     },
@@ -642,31 +642,37 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'SHOWA': {
         name: 'SHOWA',
-        logoUrl: '',
+        logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/SHOWA_Corporation_company_logo.svg/2560px-SHOWA_Corporation_company_logo.svg.png',
         website: ''
         // 4 productos
     },
     'CRAFTSMAN': {
         name: 'CRAFTSMAN',
-        logoUrl: '',
+        logoUrl: 'https://i.pinimg.com/736x/36/53/13/3653136cc13dc034ff3932841006a0c9.jpg',
         website: ''
         // 4 productos
     },
     'HANSON': {
         name: 'HANSON',
-        logoUrl: '',
+        logoUrl: 'https://m.media-amazon.com/images/I/51i94nH982L._AC_UF894,1000_QL80_.jpg',
         website: ''
         // 4 productos
     },
     'TOOLMEX': {
         name: 'TOOLMEX',
-        logoUrl: '',
+        logoUrl: 'https://sumicali.com/cdn/shop/collections/toolmex-sumicali.png?v=1716415407',
         website: ''
         // 4 productos
     },
     'TENEZIT': {
         name: 'TENEZIT',
-        logoUrl: '',
+        logoUrl: 'https://www.austromex.com.mx/austromex/marca/tenazit.png',
+        website: ''
+        // 4 productos
+    },
+    'TENAZIT ': {
+        name: 'TENAZIT',
+        logoUrl: 'https://www.austromex.com.mx/austromex/marca/tenazit.png',
         website: ''
         // 4 productos
     },
@@ -678,7 +684,7 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'BESDIA': {
         name: 'BESDIA',
-        logoUrl: '',
+        logoUrl: 'https://rodavigo.net/datos/logos-marcas-png/besdia.png',
         website: ''
         // 4 productos
     },
@@ -690,19 +696,19 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'GROZ': {
         name: 'GROZ',
-        logoUrl: '',
+        logoUrl: 'https://images.seeklogo.com/logo-png/34/1/groz-tools-logo-png_seeklogo-345145.png',
         website: ''
         // 4 productos
     },
     'MARAGA': {
         name: 'MARAGA',
-        logoUrl: '',
+        logoUrl: 'https://maraga.vtexassets.com/assets/vtex.file-manager-graphql/images/f82214e5-4fe0-4e08-99a8-0b59358269c0___fa8794e99c65c0279753a9491236bfaf.png',
         website: ''
         // 4 productos
     },
     'DERMA-CARE': {
         name: 'DERMA-CARE',
-        logoUrl: '',
+        logoUrl: 'https://dermacare.mx/wp-content/uploads/2025/03/Logo-Dermacare.png',
         website: ''
         // 3 productos
     },
@@ -714,37 +720,37 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'WIHA': {
         name: 'WIHA',
-        logoUrl: '',
+        logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7plpoC0i1lHtdAG1YpVsQRaa5-z569yiyLQ&s',
         website: ''
         // 3 productos
     },
     'CHICAGO-LATROBE': {
         name: 'CHICAGO-LATROBE',
-        logoUrl: '',
+        logoUrl: 'https://www.herramientaslugocastro.mx/esp/wp-content/uploads/2021/07/LATROBE.png',
         website: ''
         // 3 productos
     },
     'CINASA': {
         name: 'CINASA',
-        logoUrl: '',
+        logoUrl: 'https://lirp.cdn-website.com/c8477a5d/dms3rep/multi/opt/CINASA-640w.jpg',
         website: ''
         // 3 productos
     },
     'RADIANS': {
         name: 'RADIANS',
-        logoUrl: '',
+        logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYGvjoDMeqW2tVZZIHnQBhC3G-g1oN7ZdVYg&s',
         website: ''
         // 3 productos
     },
     'WURTH': {
         name: 'WURTH',
-        logoUrl: '',
+        logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6xW-nMg2s_Kf84RPV_W2dbJkCtnDqWSDPKA&s',
         website: ''
         // 3 productos
     },
     'SANDVIK': {
         name: 'SANDVIK',
-        logoUrl: '',
+        logoUrl: 'https://m.media-amazon.com/images/I/71K5o4Hr0SL._AC_UF894,1000_QL80_.jpg',
         website: ''
         // 3 productos
     },
@@ -768,43 +774,43 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'GEAR-WRENCH': {
         name: 'GEAR-WRENCH',
-        logoUrl: '',
+        logoUrl: 'https://www.dhtools.com.mx/wp-content/uploads/2020/01/GEW-LOGO-500x400.jpg',
         website: ''
         // 3 productos
     },
     'HENKEL': {
         name: 'HENKEL',
-        logoUrl: '',
+        logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReCSKcI6gO-imRU-oHKJn6844zi20MVukSsA&s',
         website: ''
         // 3 productos
     },
     'KORLOY': {
         name: 'KORLOY',
-        logoUrl: '',
+        logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9EbYZB1BBpY-62_SYeQhszvYXcM0X0WBO8g&s',
         website: ''
         // 3 productos
     },
     'DYKEM': {
         name: 'DYKEM',
-        logoUrl: '',
+        logoUrl: 'https://getvectorlogo.com/wp-content/uploads/2019/02/dykem-brand-vector-logo.png',
         website: ''
         // 3 productos
     },
     'GEARWRENCH': {
         name: 'GEARWRENCH',
-        logoUrl: '',
+        logoUrl: 'https://www.dhtools.com.mx/wp-content/uploads/2020/01/GEW-LOGO-500x400.jpg',
         website: ''
         // 3 productos
     },
     'IRWIN': {
         name: 'IRWIN',
-        logoUrl: '',
+        logoUrl: 'https://www.goldenstatelumber.com/wp-content/uploads/2020/10/irwin-tools-logo-color_500px.png',
         website: ''
         // 3 productos
     },
     'ACESA': {
         name: 'ACESA',
-        logoUrl: '',
+        logoUrl: 'https://cdn.worldvectorlogo.com/logos/acesa-51690.svg',
         website: ''
         // 2 productos
     },
@@ -876,7 +882,7 @@ export const brandLogos: Record<string, BrandLogo> = {
     },
     'AUSTRODIAM': {
         name: 'AUSTRODIAM',
-        logoUrl: '',
+        logoUrl: 'https://store.tannerherramientas.com/website/image/product.brand/117/logo',
         website: ''
         // 2 productos
     },
