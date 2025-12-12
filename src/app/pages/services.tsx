@@ -352,7 +352,7 @@ export default function ServicesPage() {
                 </div>
             </section>
 
-            {/* Wobble Cards - Beneficios Clave */}
+            Wobble Cards - Beneficios Clave
             <section className="w-full py-12 md:py-16 lg:py-20 bg-slate-50">
                 <div className="max-w-7xl mx-auto px-4 md:px-8">
                     <div className="text-center mb-10 md:mb-16">
