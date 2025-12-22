@@ -422,6 +422,18 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ className = '' }) => {
                         <p className="text-[10px] md:text-xs text-slate-400 mt-2 text-center">
                             Presiona Enter para enviar
                         </p>
+                        
+                        {/* Powered by Uphy.mx */}
+                        <div className="mt-2 text-center">
+                            <a 
+                                href="https://uphy.mx" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-[10px] md:text-xs text-slate-400 hover:text-slate-600 transition-colors duration-200 inline-flex items-center gap-1"
+                            >
+                                Powered by <span className="font-semibold">Uphy.mx</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             )}

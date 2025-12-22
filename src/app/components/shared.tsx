@@ -145,6 +145,16 @@ export const Footer = () => (
     <footer className="text-center mt-20 py-8 border-t border-slate-200 text-slate-500 text-sm">
         <p>&copy; 2025 Herramaq. Todos los derechos reservados.</p>
         <p>Diseñado para la Industria en San Juan del Río, Querétaro.</p>
+        <p className="mt-3">
+            <a 
+                href="https://uphy.mx" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-slate-400 hover:text-slate-600 transition-colors duration-200"
+            >
+                Powered by <span className="font-semibold">Uphy.mx</span>
+            </a>
+        </p>
     </footer>
 );
 

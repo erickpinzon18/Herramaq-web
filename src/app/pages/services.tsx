@@ -152,12 +152,11 @@ const testimonials = [
 // --- Datos para Timeline (Historia de la Empresa) ---
 const timelineData = [
     {
-        title: "1995",
+        title: "1999",
         content: (
             <div>
                 <p className="text-slate-700 text-base md:text-lg font-normal mb-4">
-                    Fundación de Herramaq en San Juan del Río, Querétaro. Iniciamos con un taller de 200m² y 2 tornos convencionales, 
-                    enfocados en la reparación de maquinaria agrícola.
+                    Fundación de Herramaq en San Juan del Río, Querétaro. Iniciamos con un local en el centro con pocas piezas y poco inventario.
                 </p>
                 <div className="grid grid-cols-2 gap-4">
                     <Image
@@ -183,12 +182,11 @@ const timelineData = [
         content: (
             <div>
                 <p className="text-slate-700 text-base md:text-lg font-normal mb-4">
-                    Adquisición del primer torno CNC HAAS ST-20. Este hito nos permitió incursionar en la industria automotriz 
-                    como proveedor Tier 2, fabricando componentes para transmisiones.
+                    Una de nuestras principales marcas OSG ROYCO nos certificó como distribuidores oficiales en México.
                 </p>
                 <div className="flex gap-2 flex-wrap mb-4">
-                    <RBBadge variant="success">Certificación ISO 9001</RBBadge>
-                    <RBBadge variant="info">Primer Cliente Automotriz</RBBadge>
+                    <RBBadge variant="success">Distribuidor Autorizado</RBBadge>
+                    <RBBadge variant="info">OSG ROYCO</RBBadge>
                 </div>
                 <Image
                     src="https://images.unsplash.com/photo-1565688534245-05d6b5be184a?w=600"
@@ -205,8 +203,7 @@ const timelineData = [
         content: (
             <div>
                 <p className="text-slate-700 text-base md:text-lg font-normal mb-4">
-                    Expansión de instalaciones a 2,000m² e incorporación de centros de maquinado vertical de 3 y 5 ejes. 
-                    Inicio de operaciones con clientes aeroespaciales certificados AS9100.
+                    Cambio de instalaciones al domicilio actual y expansión del inventario a más de 5,000 piezas.
                 </p>
                 <ul className="space-y-2 mb-4">
                     <li className="flex items-center gap-2 text-slate-700">
@@ -226,44 +223,25 @@ const timelineData = [
         ),
     },
     {
-        title: "2018",
-        content: (
-            <div>
-                <p className="text-slate-700 text-base md:text-lg font-normal mb-4">
-                    Implementación de manufactura digital con software CAD/CAM Mastercam y sistema ERP para trazabilidad completa. 
-                    Reconocimiento como Proveedor del Año por TREMEC.
-                </p>
-                <Image
-                    src="https://images.unsplash.com/photo-1581092583537-20d51b4b4f1b?w=600"
-                    alt="Manufactura Digital 2018"
-                    width={600}
-                    height={400}
-                    className="rounded-lg object-cover w-full shadow-lg"
-                />
-            </div>
-        ),
-    },
-    {
         title: "2025",
         content: (
             <div>
                 <p className="text-slate-700 text-base md:text-lg font-normal mb-4">
-                    Hoy contamos con 45 colaboradores, 18 máquinas CNC de última generación y servimos a más de 80 clientes 
-                    en los sectores automotriz, aeroespacial, médico y energético. Nuestra visión: ser el referente de calidad 
-                    en maquinado de precisión en el Bajío mexicano.
+                    Hoy contamos con mas de 200 clientes, 6,000 productos en inventario y somos distribuidores y subdistribuidores autorizados de marcas reconocidas de alta calidad  
+                    en toda la industria metal-mecánica.
                 </p>
                 <div className="grid grid-cols-3 gap-4 mt-6">
                     <div className="bg-blue-50 p-4 rounded-lg text-center">
-                        <p className="text-3xl font-bold text-slate-700">45</p>
-                        <p className="text-slate-600 text-sm">Colaboradores</p>
+                        <p className="text-3xl font-bold text-slate-700">200</p>
+                        <p className="text-slate-600 text-sm">Clientes</p>
                     </div>
                     <div className="bg-green-50 p-4 rounded-lg text-center">
-                        <p className="text-3xl font-bold text-green-600">18</p>
-                        <p className="text-slate-600 text-sm">Máquinas CNC</p>
+                        <p className="text-3xl font-bold text-green-600">6,000+</p>
+                        <p className="text-slate-600 text-sm">Productos en Inventario</p>
                     </div>
                     <div className="bg-purple-50 p-4 rounded-lg text-center">
-                        <p className="text-3xl font-bold text-purple-600">80+</p>
-                        <p className="text-slate-600 text-sm">Clientes</p>
+                        <p className="text-3xl font-bold text-purple-600">200+</p>
+                        <p className="text-slate-600 text-sm">Marcas</p>
                     </div>
                 </div>
             </div>
@@ -321,7 +299,7 @@ export default function ServicesPage() {
                         </h1>
                         <p className="text-xl md:text-2xl text-slate-300 mb-12 leading-relaxed max-w-3xl mx-auto">
                             Transformamos metal en soluciones. Desde prototipos únicos hasta producción en serie, 
-                            con tecnología CNC de última generación y más de 30 años de experiencia.
+                            con tecnología CNC de última generación y más de 25 años de experiencia.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <ACHoverBorderGradient>
@@ -352,65 +330,7 @@ export default function ServicesPage() {
                 </div>
             </section>
 
-            Wobble Cards - Beneficios Clave
-            <section className="w-full py-12 md:py-16 lg:py-20 bg-slate-50">
-                <div className="max-w-7xl mx-auto px-4 md:px-8">
-                    <div className="text-center mb-10 md:mb-16">
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4">
-                            ¿Por Qué Elegir Herramaq?
-                        </h2>
-                        <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
-                            Más de 27 años de experiencia en comercialización de herramienta industrial
-                        </p>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-
-                        {/* TODO: CAMBIAR POR  pagina antigua */}
-                        <WobbleCard
-                            containerClassName="col-span-1 bg-blue-900 h-auto md:h-[300px] lg:h-[320px]"
-                            className=""
-                        >
-                            <div className="max-w-sm">
-                                <h2 className="text-left text-balance text-xl md:text-2xl lg:text-3xl font-semibold tracking-[-0.015em] text-white mb-3 md:mb-4">
-                                    Certificación ISO 9001:2015
-                                </h2>
-                                <p className="mt-2 md:mt-4 text-left text-sm md:text-base text-white/90">
-                                    Garantizamos procesos estandarizados y control de calidad riguroso en cada proyecto, 
-                                    cumpliendo con los más altos estándares internacionales.
-                                </p>
-                            </div>
-                        </WobbleCard>
-                        <WobbleCard
-                            containerClassName="col-span-1 bg-slate-800 h-auto md:h-[300px] lg:h-[320px]"
-                            className=""
-                        >
-                            <div className="max-w-sm">
-                                <h2 className="text-left text-balance text-xl md:text-2xl lg:text-3xl font-semibold tracking-[-0.015em] text-white mb-3 md:mb-4">
-                                    Tecnología CNC de Última Generación
-                                </h2>
-                                <p className="mt-2 md:mt-4 text-left text-sm md:text-base text-white/90">
-                                    Equipamiento de precisión con capacidad multieje para proyectos complejos, 
-                                    garantizando tolerancias mínimas y acabados superiores.
-                                </p>
-                            </div>
-                        </WobbleCard>
-                        <WobbleCard
-                            containerClassName="col-span-1 md:col-span-2 lg:col-span-1 bg-blue-800 h-auto md:h-[300px] lg:h-[320px]"
-                            className=""
-                        >
-                            <div className="max-w-sm">
-                                <h2 className="text-left text-balance text-xl md:text-2xl lg:text-3xl font-semibold tracking-[-0.015em] text-white mb-3 md:mb-4">
-                                    Confianza de Líderes Industriales
-                                </h2>
-                                <p className="mt-2 md:mt-4 text-left text-sm md:text-base text-white/90">
-                                    Socios estratégicos de empresas como Volkswagen, General Motors, Mabe y otras 
-                                    corporaciones que confían en nuestra capacidad de manufactura.
-                                </p>
-                            </div>
-                        </WobbleCard>
-                    </div>
-                </div>
-            </section>
+            {/* Wobble Cards - Beneficios Clave */}
 
             {/* Bento Grid - Capacidades Técnicas */}
             {/* <section className="w-full py-12 md:py-20 bg-white">
@@ -445,7 +365,7 @@ export default function ServicesPage() {
                             Nuestra Historia
                         </h2>
                         <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-                            30 años de evolución, innovación y compromiso con la excelencia
+                            25 años de evolución, innovación y compromiso con la excelencia
                         </p>
                     </div>
                     <Timeline data={timelineData} />
