@@ -1,61 +1,63 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/firebase';
-import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
+import { NextRequest, NextResponse } from "next/server";
+import { db } from "@/lib/firebase";
+import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 
 // 🔥 CONFIGURA TU API KEY DE OPENAI AQUÍ
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY || 'TU_API_KEY_AQUI';
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "TU_API_KEY_AQUI";
 
 // Función para obtener productos y marcas reales de la base de datos
 async function getProductsContext() {
-    try {
-        const productsRef = collection(db, 'products');
-        // Obtener los 100 productos más antiguos (suelen tener más atributos completos)
-        const q = query(productsRef, orderBy('createdAt', 'asc'), limit(100));
-        const snapshot = await getDocs(q);
-        
-        const products = snapshot.docs.map(doc => {
-            const data = doc.data();
-            return {
-                nombre: data.nombre || data.name,
-                marca: data.marca || data.brand,
-                categoria: data.categoria || data.category,
-                modelo: data.modelo,
-                descripcion: data.descripcion || data.description
-            };
-        });
+  try {
+    const productsRef = collection(db, "products");
+    // Obtener los 100 productos más antiguos (suelen tener más atributos completos)
+    const q = query(productsRef, orderBy("createdAt", "asc"), limit(100));
+    const snapshot = await getDocs(q);
 
-        // Extraer marcas únicas
-        const brandsSet = new Set<string>();
-        const categoriesSet = new Set<string>();
-        
-        products.forEach(p => {
-            if (p.marca && p.marca !== 'GENÉRICA' && p.marca !== 'Sin marca') {
-                brandsSet.add(p.marca);
-            }
-            if (p.categoria) {
-                categoriesSet.add(p.categoria);
-            }
-        });
+    const products = snapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        nombre: data.nombre || data.name,
+        marca: data.marca || data.brand,
+        categoria: data.categoria || data.category,
+        modelo: data.modelo,
+        descripcion: data.descripcion || data.description,
+      };
+    });
 
-        return {
-            totalProducts: products.length,
-            brands: Array.from(brandsSet).sort(),
-            categories: Array.from(categoriesSet).sort(),
-            sampleProducts: products.slice(0, 30) // Primeros 30 productos como muestra
-        };
-    } catch (error) {
-        console.error('Error obteniendo contexto de productos:', error);
-        return {
-            totalProducts: 0,
-            brands: [],
-            categories: [],
-            sampleProducts: []
-        };
-    }
+    // Extraer marcas únicas
+    const brandsSet = new Set<string>();
+    const categoriesSet = new Set<string>();
+
+    products.forEach((p) => {
+      if (p.marca && p.marca !== "GENÉRICA" && p.marca !== "Sin marca") {
+        brandsSet.add(p.marca);
+      }
+      if (p.categoria) {
+        categoriesSet.add(p.categoria);
+      }
+    });
+
+    return {
+      totalProducts: products.length,
+      brands: Array.from(brandsSet).sort(),
+      categories: Array.from(categoriesSet).sort(),
+      sampleProducts: products.slice(0, 30), // Primeros 30 productos como muestra
+    };
+  } catch (error) {
+    console.error("Error obteniendo contexto de productos:", error);
+    return {
+      totalProducts: 0,
+      brands: [],
+      categories: [],
+      sampleProducts: [],
+    };
+  }
 }
 
 // 🎯 CONTEXTO BASE DEL SISTEMA
-const getSystemPrompt = (productsContext: any) => `Eres el asistente virtual oficial de Herramaq, una empresa industrial líder en México. Tu nombre es "HerramaqBot" y tu objetivo es ayudar a los visitantes del sitio web proporcionando información precisa, profesional y útil.
+const getSystemPrompt = (
+  productsContext: any
+) => `Eres el asistente virtual oficial de Herramaq, una empresa industrial líder en México. Tu nombre es "HerramaqBot" y tu objetivo es ayudar a los visitantes del sitio web proporcionando información precisa, profesional y útil.
 
 📍 INFORMACIÓN DE LA EMPRESA:
 Nombre: Herramaq
@@ -67,24 +69,42 @@ Inventario: Más de 6,000 productos disponibles
 
 📦 NUESTRO CATÁLOGO REAL:
 
-Total de productos en catálogo: ${productsContext.totalProducts > 0 ? '6,000+' : '6,000+'}
-Marcas principales disponibles: ${productsContext.brands.length > 0 ? productsContext.brands.slice(0, 15).join(', ') : 'OSG ROYCO, MITUTOYO, SANDVIK, KENNAMETAL, CERATIZIT, y más'}
+Total de productos en catálogo: ${
+  productsContext.totalProducts > 0 ? "6,000+" : "6,000+"
+}
+Marcas principales disponibles: ${
+  productsContext.brands.length > 0
+    ? productsContext.brands.slice(0, 15).join(", ")
+    : "OSG ROYCO, MITUTOYO, SANDVIK, KENNAMETAL, CERATIZIT, y más"
+}
 
 Categorías de productos:
-${productsContext.categories.length > 0 ? productsContext.categories.map((c: string) => `- ${c}`).join('\n') : `
+${
+  productsContext.categories.length > 0
+    ? productsContext.categories.map((c: string) => `- ${c}`).join("\n")
+    : `
 - Herramientas de Corte
 - Instrumentos de Medición
 - Sistemas de Sujeción
 - Abrasivos Industriales
 - Accesorios de Maquinado
-`}
+`
+}
 
 Ejemplos de productos en stock:
-${productsContext.sampleProducts.length > 0 ? 
-    productsContext.sampleProducts.slice(0, 20).map((p: any) => 
-        `- ${p.nombre}${p.marca ? ` (${p.marca})` : ''}${p.modelo ? ` - Modelo: ${p.modelo}` : ''}`
-    ).join('\n') 
-    : 'Consulta nuestro catálogo completo en la página de productos'}
+${
+  productsContext.sampleProducts.length > 0
+    ? productsContext.sampleProducts
+        .slice(0, 20)
+        .map(
+          (p: any) =>
+            `- ${p.nombre}${p.marca ? ` (${p.marca})` : ""}${
+              p.modelo ? ` - Modelo: ${p.modelo}` : ""
+            }`
+        )
+        .join("\n")
+    : "Consulta nuestro catálogo completo en la página de productos"
+}
 
 🔧 CATEGORÍAS PRINCIPALES:
 
@@ -135,7 +155,7 @@ ${productsContext.sampleProducts.length > 0 ?
 📞 INFORMACIÓN DE CONTACTO:
 Teléfono: (427) 274 1234
 WhatsApp: +52 427 184 5182 (CANAL PREFERIDO - respuesta rápida!)
-Email: ventas@herramaq.com
+Email: herramaq@prodigy.net.mx
 Horario: Lunes a Viernes 8:00 AM - 6:00 PM, Sábados 9:00 AM - 2:00 PM
 Ubicación: San Juan del Río, Querétaro, México
 
@@ -226,67 +246,68 @@ REGLA DE ORO:
 RECUERDA: Tu objetivo es ser útil, generar confianza y llevar al cliente a WhatsApp para que nuestro equipo cierre la venta. ¡Representa a Herramaq con profesionalismo y calidez!`;
 
 export async function POST(request: NextRequest) {
-    try {
-        const { messages } = await request.json();
+  try {
+    const { messages } = await request.json();
 
-        if (!messages || !Array.isArray(messages)) {
-            return NextResponse.json(
-                { error: 'Formato de mensajes inválido' },
-                { status: 400 }
-            );
-        }
-
-        // Obtener contexto de productos desde Firebase
-        const productsContext = await getProductsContext();
-        
-        // Generar el prompt del sistema con el contexto de productos
-        const SYSTEM_PROMPT = getSystemPrompt(productsContext);
-
-        // Construir el array de mensajes con el contexto del sistema
-        const messagesWithContext = [
-            {
-                role: 'system',
-                content: SYSTEM_PROMPT
-            },
-            ...messages.filter(msg => msg.role !== 'system') // Filtrar cualquier system message que venga del cliente
-        ];
-
-        // Llamada a OpenAI API
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${OPENAI_API_KEY}`,
-            },
-            body: JSON.stringify({
-                model: 'gpt-4o-mini', // o 'gpt-3.5-turbo' para más económico
-                messages: messagesWithContext,
-                temperature: 0.7,
-                max_tokens: 1000, // Ajustado a 1000 para respuestas más concisas
-                top_p: 1,
-                frequency_penalty: 0,
-                presence_penalty: 0,
-            }),
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            console.error('Error de OpenAI:', errorData);
-            throw new Error(`OpenAI API error: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        return NextResponse.json({
-            message: data.choices[0]?.message?.content || 'Lo siento, no pude generar una respuesta.',
-            usage: data.usage, // Opcional: para tracking de tokens
-        });
-
-    } catch (error) {
-        console.error('Error en chat API:', error);
-        return NextResponse.json(
-            { error: 'Error interno del servidor' },
-            { status: 500 }
-        );
+    if (!messages || !Array.isArray(messages)) {
+      return NextResponse.json(
+        { error: "Formato de mensajes inválido" },
+        { status: 400 }
+      );
     }
+
+    // Obtener contexto de productos desde Firebase
+    const productsContext = await getProductsContext();
+
+    // Generar el prompt del sistema con el contexto de productos
+    const SYSTEM_PROMPT = getSystemPrompt(productsContext);
+
+    // Construir el array de mensajes con el contexto del sistema
+    const messagesWithContext = [
+      {
+        role: "system",
+        content: SYSTEM_PROMPT,
+      },
+      ...messages.filter((msg) => msg.role !== "system"), // Filtrar cualquier system message que venga del cliente
+    ];
+
+    // Llamada a OpenAI API
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini", // o 'gpt-3.5-turbo' para más económico
+        messages: messagesWithContext,
+        temperature: 0.7,
+        max_tokens: 1000, // Ajustado a 1000 para respuestas más concisas
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Error de OpenAI:", errorData);
+      throw new Error(`OpenAI API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    return NextResponse.json({
+      message:
+        data.choices[0]?.message?.content ||
+        "Lo siento, no pude generar una respuesta.",
+      usage: data.usage, // Opcional: para tracking de tokens
+    });
+  } catch (error) {
+    console.error("Error en chat API:", error);
+    return NextResponse.json(
+      { error: "Error interno del servidor" },
+      { status: 500 }
+    );
+  }
 }

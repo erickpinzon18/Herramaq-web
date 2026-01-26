@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://herramaq.com/sitemap.xml
+Sitemap: https://herramaq.mx/sitemap.xml
 
 # Crawl-delay para bots educados
 Crawl-delay: 1

@@ -1,14 +1,15 @@
-import ContactPage from '../pages/contact';
-import type { Metadata } from 'next';
+import ContactPage from "../pages/contact";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Contacto - Solicita tu Cotización | Herramaq Querétaro",
-  description: "Contacta a Herramaq en San Juan del Río, Querétaro. Solicita cotización de maquinaria CNC, herramientas de corte o servicios de maquinado. Teléfono: (427) 123 4567 | Email: ventas@herramaq.com | Horario: Lunes a Viernes 8:00 AM - 6:00 PM, Sábados 9:00 AM - 1:00 PM.",
+  description:
+    "Contacta a Herramaq en San Juan del Río, Querétaro. Solicita cotización de maquinaria CNC, herramientas de corte o servicios de maquinado. Teléfono: (427) 123 4567 | Email: herramaq@prodigy.net.mx | Horario: Lunes a Viernes 8:00 AM - 6:00 PM, Sábados 9:00 AM - 1:00 PM.",
   keywords: [
     "contacto Herramaq",
     "cotización maquinaria CNC",
     "solicitar cotización Querétaro",
-    "ventas@herramaq.com",
+    "herramaq@prodigy.net.mx",
     "teléfono Herramaq",
     "(427) 123 4567",
     "San Juan del Río Querétaro",
@@ -24,12 +25,13 @@ export const metadata: Metadata = {
     "visita showroom Querétaro",
     "contacto ventas industriales",
     "correo ventas Herramaq",
-    "formulario contacto"
+    "formulario contacto",
   ],
   openGraph: {
     title: "Contacto - Solicita tu Cotización Personalizada | Herramaq",
-    description: "¿Necesitas maquinaria CNC, herramientas o servicios de maquinado? Contáctanos. Respuesta en menos de 24 horas.",
-    url: "https://herramaq.com/contacto",
+    description:
+      "¿Necesitas maquinaria CNC, herramientas o servicios de maquinado? Contáctanos. Respuesta en menos de 24 horas.",
+    url: "https://herramaq.mx/contacto",
     siteName: "Herramaq",
     images: [
       {
@@ -45,11 +47,12 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Contacto - Solicita tu Cotización | Herramaq",
-    description: "Contáctanos para cotizaciones y asesoría técnica. Respuesta rápida garantizada.",
+    description:
+      "Contáctanos para cotizaciones y asesoría técnica. Respuesta rápida garantizada.",
     images: ["/twitter-image-contact.jpg"],
   },
   alternates: {
-    canonical: "https://herramaq.com/contacto",
+    canonical: "https://herramaq.mx/contacto",
   },
 };
 

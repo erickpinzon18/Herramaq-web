@@ -1,9 +1,11 @@
-import HomePage from './pages/home';
-import type { Metadata } from 'next';
+import HomePage from "./pages/home";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Herramaq - Maquinaria CNC, Herramientas y Servicios de Maquinado en Querétaro",
-  description: "Herramaq en San Juan del Río, Querétaro. Venta de maquinaria CNC (tornos, fresadoras), herramientas de corte especializadas, sistemas de medición y servicios de maquinado de alta precisión. 15+ años de experiencia, 50+ marcas reconocidas, 200+ clientes satisfechos.",
+  title:
+    "Herramaq - Maquinaria CNC, Herramientas y Servicios de Maquinado en Querétaro",
+  description:
+    "Herramaq en San Juan del Río, Querétaro. Venta de maquinaria CNC (tornos, fresadoras), herramientas de corte especializadas, sistemas de medición y servicios de maquinado de alta precisión. 15+ años de experiencia, 50+ marcas reconocidas, 200+ clientes satisfechos.",
   keywords: [
     "Herramaq",
     "maquinaria CNC Querétaro",
@@ -33,12 +35,13 @@ export const metadata: Metadata = {
     "SAFRAN maquinado",
     "equipos de medición certificados",
     "soluciones industriales",
-    "maquinaria industrial Querétaro"
+    "maquinaria industrial Querétaro",
   ],
   openGraph: {
     title: "Herramaq - Soluciones Industriales de Precisión en Querétaro",
-    description: "Maquinaria CNC, herramientas de corte y servicios de maquinado industrial. 15+ años sirviendo a la industria automotriz y aeroespacial en Querétaro.",
-    url: "https://herramaq.com",
+    description:
+      "Maquinaria CNC, herramientas de corte y servicios de maquinado industrial. 15+ años sirviendo a la industria automotriz y aeroespacial en Querétaro.",
+    url: "https://herramaq.mx",
     siteName: "Herramaq",
     images: [
       {
@@ -54,11 +57,12 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Herramaq - Maquinaria CNC y Herramientas Industriales",
-    description: "15+ años de experiencia en maquinaria CNC, herramientas de corte y servicios de maquinado en Querétaro.",
+    description:
+      "15+ años de experiencia en maquinaria CNC, herramientas de corte y servicios de maquinado en Querétaro.",
     images: ["/twitter-image-home.jpg"],
   },
   alternates: {
-    canonical: "https://herramaq.com",
+    canonical: "https://herramaq.mx",
   },
 };
 

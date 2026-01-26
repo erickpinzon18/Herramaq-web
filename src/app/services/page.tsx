@@ -1,9 +1,10 @@
-import ServicesPage from '../pages/services';
-import type { Metadata } from 'next';
+import ServicesPage from "../pages/services";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Servicios de Maquinado CNC de Precisión | Herramaq Querétaro",
-  description: "Servicios profesionales de maquinado CNC en Querétaro: Torno CNC alta precisión, fresado 5 ejes, tratamientos térmicos, control de calidad dimensional y diseño de herramentales. 30+ años de experiencia. Certificaciones ISO 9001 y AS9100. Proveedores de BOSCH, TREMEC, Safran.",
+  description:
+    "Servicios profesionales de maquinado CNC en Querétaro: Torno CNC alta precisión, fresado 5 ejes, tratamientos térmicos, control de calidad dimensional y diseño de herramentales. 30+ años de experiencia. Certificaciones ISO 9001 y AS9100. Proveedores de BOSCH, TREMEC, Safran.",
   keywords: [
     "maquinado CNC Querétaro",
     "torno CNC precisión",
@@ -31,12 +32,13 @@ export const metadata: Metadata = {
     "proveedor TREMEC",
     "maquinado médico",
     "maquinado energético",
-    "San Juan del Río servicios"
+    "San Juan del Río servicios",
   ],
   openGraph: {
     title: "Servicios de Maquinado CNC - Precisión Certificada | Herramaq",
-    description: "Torno CNC, fresado 5 ejes, tratamientos térmicos y control de calidad. 30+ años sirviendo a la industria automotriz y aeroespacial.",
-    url: "https://herramaq.com/servicios",
+    description:
+      "Torno CNC, fresado 5 ejes, tratamientos térmicos y control de calidad. 30+ años sirviendo a la industria automotriz y aeroespacial.",
+    url: "https://herramaq.mx/servicios",
     siteName: "Herramaq",
     images: [
       {
@@ -52,11 +54,12 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Servicios de Maquinado CNC de Precisión | Herramaq",
-    description: "Torno CNC, fresado 5 ejes, tratamientos térmicos. Certificaciones ISO 9001 y AS9100. 30+ años de experiencia.",
+    description:
+      "Torno CNC, fresado 5 ejes, tratamientos térmicos. Certificaciones ISO 9001 y AS9100. 30+ años de experiencia.",
     images: ["/twitter-image-services.jpg"],
   },
   alternates: {
-    canonical: "https://herramaq.com/servicios",
+    canonical: "https://herramaq.mx/servicios",
   },
 };
 
