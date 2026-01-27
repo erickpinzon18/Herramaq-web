@@ -1,18 +1,38 @@
-# robots.txt para Herramaq
+# robots.txt para HERRAMAQ
+# https://herramaq.mx
+
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://herramaq.mx/sitemap.xml
+# Permitir indexación de páginas principales
+Allow: /products
+Allow: /services
+Allow: /contact
+
+# Bloquear áreas administrativas y API
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
 
 # Crawl-delay para bots educados
 Crawl-delay: 1
 
-# Disallow admin o áreas privadas si las hay
-# Disallow: /admin/
-# Disallow: /api/
+# Sitemap
+Sitemap: https://herramaq.mx/sitemap.xml
 
-# Permitir específicamente páginas importantes
-Allow: /products
-Allow: /services
-Allow: /contact
+# Reglas específicas para Googlebot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Reglas para Googlebot-Image
+User-agent: Googlebot-Image
+Allow: /LogoFull.jpeg
+Allow: /logo4k.jpeg
+Allow: /android-chrome-512x512.png
+
+# Reglas para Bingbot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
