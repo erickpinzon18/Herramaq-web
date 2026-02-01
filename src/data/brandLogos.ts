@@ -15,6 +15,7 @@ export interface BrandLogo {
 
 /**
  * Obtiene el logo de una marca
+ * Prioridad: 1) Cache de Firestore (localStorage), 2) Diccionario estático
  * @param brandName - Nombre de la marca
  * @returns URL del logo de la marca o string vacío si no tiene logo
  */
@@ -23,15 +24,33 @@ export const getBrandLogo = (brandName: string): string => {
     return "";
   }
 
-  // Normalizar el nombre de la marca (mayúsculas, sin espacios extras)
   const normalizedBrand = brandName.trim().toUpperCase();
 
-  // Buscar coincidencia exacta
+  // 1. Intentar buscar en cache de Firestore (logos actualizados desde admin)
+  if (typeof window !== "undefined") {
+    try {
+      const cachedBrands = localStorage.getItem("herramaq_brands");
+      if (cachedBrands) {
+        const brands = JSON.parse(cachedBrands);
+        const found = brands.find(
+          (b: { name: string; logoUrl: string }) =>
+            b.name.toUpperCase() === normalizedBrand
+        );
+        if (found && found.logoUrl) {
+          return found.logoUrl;
+        }
+      }
+    } catch (e) {
+      // Si falla localStorage, continuar con fallback
+    }
+  }
+
+  // 2. Fallback: buscar en diccionario estático
   if (brandLogos[normalizedBrand]) {
     return brandLogos[normalizedBrand].logoUrl;
   }
 
-  // Buscar coincidencia parcial (por si tiene espacios o variaciones)
+  // 3. Buscar coincidencia parcial en estático
   const partialMatch = Object.keys(brandLogos).find(
     (key) =>
       key !== "DEFAULT" &&
@@ -42,7 +61,6 @@ export const getBrandLogo = (brandName: string): string => {
     return brandLogos[partialMatch].logoUrl;
   }
 
-  // Si no hay coincidencia, retornar string vacío
   return "";
 };
 

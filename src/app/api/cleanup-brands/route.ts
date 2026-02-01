@@ -1,217 +1,135 @@
-import { NextResponse } from 'next/server';
-import { db } from '@/lib/firebase';
-import { collection, query, where, getDocs, writeBatch, doc } from 'firebase/firestore';
+import { NextResponse } from "next/server";
+import { db } from "@/lib/firebase";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 
-// Marcas a cambiar a GENÉRICO (quitar marca pero mantener productos)
-const BRANDS_TO_GENERIC = [
-    'TIALN',
-    'MASTER-C',
-    'MOLDEX',
-    'NIAGARA',
-    'USA',
-    'POLAND',
-    'DORMER',
-    'ARF',
-    'CRAWFORD',
-    'ALFRA',
-    'CRUCELEGUI',
-];
+export async function POST() {
+  try {
+    console.log("🔍 Buscando marcas duplicadas...");
 
-// Marcas a unificar: { marcaVieja: marcaNueva }
-const BRANDS_TO_UNIFY: Record<string, string> = {
-    'ROYCO': 'OSG', // Unificar ROYCO -> OSG
-};
+    const brandsRef = collection(db, "brands");
+    const snapshot = await getDocs(brandsRef);
+
+    // Agrupar por nombre normalizado
+    const brandsByName = new Map<
+      string,
+      { id: string; name: string; productCount: number }[]
+    >();
+
+    snapshot.docs.forEach((docSnap) => {
+      const data = docSnap.data();
+      const normalized = (data.name || docSnap.id).toUpperCase().trim();
+
+      if (!brandsByName.has(normalized)) {
+        brandsByName.set(normalized, []);
+      }
+      brandsByName.get(normalized)!.push({
+        id: docSnap.id,
+        name: data.name || docSnap.id,
+        productCount: data.productCount || 0,
+      });
+    });
+
+    // Encontrar duplicados y eliminar
+    const duplicates: string[] = [];
+    const kept: string[] = [];
+
+    for (const [normalized, brands] of brandsByName.entries()) {
+      if (brands.length > 1) {
+        console.log(
+          `⚠️ Duplicados encontrados para "${normalized}": ${brands.length} registros`
+        );
+
+        // Ordenar por productCount descendente, mantener el que tenga más productos
+        brands.sort((a, b) => (b.productCount || 0) - (a.productCount || 0));
+
+        // Mantener el primero (mayor productCount), eliminar el resto
+        kept.push(brands[0].id);
+
+        for (let i = 1; i < brands.length; i++) {
+          duplicates.push(brands[i].id);
+          await deleteDoc(doc(db, "brands", brands[i].id));
+          console.log(
+            `🗑️ Eliminado duplicado: ${brands[i].id} (${brands[i].productCount} productos)`
+          );
+        }
+      }
+    }
+
+    console.log(
+      `✅ Limpieza completada: ${duplicates.length} duplicados eliminados`
+    );
+
+    return NextResponse.json({
+      success: true,
+      message: `Se eliminaron ${duplicates.length} marcas duplicadas`,
+      duplicatesRemoved: duplicates,
+      brandsKept: kept,
+      totalBrandsNow: snapshot.docs.length - duplicates.length,
+    });
+  } catch (error) {
+    console.error("Error limpiando duplicados:", error);
+    return NextResponse.json(
+      { success: false, error: "Error al limpiar duplicados" },
+      { status: 500 }
+    );
+  }
+}
 
 export async function GET() {
-    return NextResponse.json({
-        message: 'Script de limpieza de marcas',
-        description: 'Usa POST para ejecutar la limpieza',
-        brandsToGeneric: BRANDS_TO_GENERIC,
-        brandsToUnify: BRANDS_TO_UNIFY,
-        note: '✅ Los productos NO se eliminan, solo se cambia la marca a GENÉRICO',
+  try {
+    console.log("🔍 Analizando marcas duplicadas (sin eliminar)...");
+
+    const brandsRef = collection(db, "brands");
+    const snapshot = await getDocs(brandsRef);
+
+    // Agrupar por nombre normalizado
+    const brandsByName = new Map<
+      string,
+      { id: string; name: string; productCount: number }[]
+    >();
+
+    snapshot.docs.forEach((docSnap) => {
+      const data = docSnap.data();
+      const normalized = (data.name || docSnap.id).toUpperCase().trim();
+
+      if (!brandsByName.has(normalized)) {
+        brandsByName.set(normalized, []);
+      }
+      brandsByName.get(normalized)!.push({
+        id: docSnap.id,
+        name: data.name || docSnap.id,
+        productCount: data.productCount || 0,
+      });
     });
-}
 
-export async function POST(request: Request) {
-    try {
-        const { action, dryRun = true } = await request.json();
+    // Encontrar duplicados
+    const duplicates: { name: string; count: number; ids: string[] }[] = [];
 
-        if (action === 'preview') {
-            return await previewChanges();
-        }
-
-        if (action === 'execute') {
-            if (dryRun) {
-                return NextResponse.json({
-                    error: 'Para ejecutar, envía dryRun: false',
-                    message: 'Primero usa action: "preview" para ver los cambios'
-                }, { status: 400 });
-            }
-            return await executeCleanup();
-        }
-
-        return NextResponse.json({
-            error: 'Acción no válida',
-            validActions: ['preview', 'execute'],
-            example: {
-                preview: { action: 'preview' },
-                execute: { action: 'execute', dryRun: false }
-            }
-        }, { status: 400 });
-
-    } catch (error) {
-        console.error('Error en cleanup:', error);
-        return NextResponse.json({ error: 'Error en el servidor', details: String(error) }, { status: 500 });
+    for (const [normalized, brands] of brandsByName.entries()) {
+      if (brands.length > 1) {
+        duplicates.push({
+          name: normalized,
+          count: brands.length,
+          ids: brands.map((b) => b.id),
+        });
+      }
     }
-}
-
-async function previewChanges() {
-    const productsRef = collection(db, 'products');
-    const results: Record<string, { count: number; action: string; sampleProducts: string[] }> = {};
-
-    // Contar productos a cambiar a GENÉRICO
-    for (const brand of BRANDS_TO_GENERIC) {
-        const q = query(productsRef, where('marca', '==', brand));
-        const snapshot = await getDocs(q);
-        
-        results[brand] = {
-            count: snapshot.size,
-            action: 'CAMBIAR A GENÉRICO',
-            sampleProducts: snapshot.docs.slice(0, 3).map(doc => {
-                const data = doc.data();
-                return `${doc.id}: ${data.tipo || 'Sin tipo'} - ${data.modelo || 'Sin modelo'}`;
-            })
-        };
-    }
-
-    // Contar productos a unificar
-    for (const [oldBrand, newBrand] of Object.entries(BRANDS_TO_UNIFY)) {
-        const q = query(productsRef, where('marca', '==', oldBrand));
-        const snapshot = await getDocs(q);
-        
-        results[oldBrand] = {
-            count: snapshot.size,
-            action: `UNIFICAR -> ${newBrand}`,
-            sampleProducts: snapshot.docs.slice(0, 3).map(doc => {
-                const data = doc.data();
-                return `${doc.id}: ${data.tipo || 'Sin tipo'} - ${data.modelo || 'Sin modelo'}`;
-            })
-        };
-    }
-
-    const totalToGeneric = Object.entries(results)
-        .filter(([_, v]) => v.action === 'CAMBIAR A GENÉRICO')
-        .reduce((sum, [_, v]) => sum + v.count, 0);
-
-    const totalToUnify = Object.entries(results)
-        .filter(([_, v]) => v.action.startsWith('UNIFICAR'))
-        .reduce((sum, [_, v]) => sum + v.count, 0);
 
     return NextResponse.json({
-        message: '📋 Vista previa de cambios',
-        summary: {
-            productosACambiarAGenerico: totalToGeneric,
-            productosAUnificar: totalToUnify,
-            totalAfectados: totalToGeneric + totalToUnify
-        },
-        details: results,
-        nextStep: 'Para ejecutar, envía POST con { action: "execute", dryRun: false }'
+      success: true,
+      totalBrands: snapshot.docs.length,
+      duplicateGroups: duplicates.length,
+      duplicates,
+      message:
+        duplicates.length > 0
+          ? `Encontrados ${duplicates.length} grupos de duplicados. Usa POST para eliminarlos.`
+          : "No se encontraron duplicados.",
     });
-}
-
-async function executeCleanup() {
-    const productsRef = collection(db, 'products');
-    const results = {
-        changedToGeneric: {} as Record<string, number>,
-        unified: {} as Record<string, number>,
-        errors: [] as string[]
-    };
-
-    // Cambiar productos a GENÉRICO (NO eliminar)
-    for (const brand of BRANDS_TO_GENERIC) {
-        try {
-            const q = query(productsRef, where('marca', '==', brand));
-            const snapshot = await getDocs(q);
-            
-            let changedCount = 0;
-            let batchCount = 0;
-            let batch = writeBatch(db);
-            
-            for (const docSnapshot of snapshot.docs) {
-                batch.update(doc(db, 'products', docSnapshot.id), { marca: 'GENÉRICO' });
-                changedCount++;
-                batchCount++;
-                
-                // Firestore batch tiene límite de 500 operaciones
-                if (batchCount >= 500) {
-                    await batch.commit();
-                    batch = writeBatch(db);
-                    batchCount = 0;
-                    console.log(`🔄 Cambiados ${changedCount} productos de ${brand} -> GENÉRICO`);
-                }
-            }
-            
-            // Commit final del batch
-            if (batchCount > 0) {
-                await batch.commit();
-            }
-            
-            results.changedToGeneric[brand] = changedCount;
-            console.log(`✅ ${brand} -> GENÉRICO: ${changedCount} productos actualizados`);
-        } catch (error) {
-            results.errors.push(`Error cambiando ${brand}: ${String(error)}`);
-            console.error(`❌ Error con ${brand}:`, error);
-        }
-    }
-
-    // Unificar marcas
-    for (const [oldBrand, newBrand] of Object.entries(BRANDS_TO_UNIFY)) {
-        try {
-            const q = query(productsRef, where('marca', '==', oldBrand));
-            const snapshot = await getDocs(q);
-            
-            let unifiedCount = 0;
-            let batchCount = 0;
-            let batch = writeBatch(db);
-            
-            for (const docSnapshot of snapshot.docs) {
-                batch.update(doc(db, 'products', docSnapshot.id), { marca: newBrand });
-                unifiedCount++;
-                batchCount++;
-                
-                // Firestore batch tiene límite de 500 operaciones
-                if (batchCount >= 500) {
-                    await batch.commit();
-                    batch = writeBatch(db);
-                    batchCount = 0;
-                    console.log(`🔄 Unificados ${unifiedCount} productos de ${oldBrand} -> ${newBrand}`);
-                }
-            }
-            
-            // Commit final del batch
-            if (batchCount > 0) {
-                await batch.commit();
-            }
-            
-            results.unified[`${oldBrand} -> ${newBrand}`] = unifiedCount;
-            console.log(`✅ ${oldBrand} -> ${newBrand}: ${unifiedCount} productos unificados`);
-        } catch (error) {
-            results.errors.push(`Error unificando ${oldBrand}: ${String(error)}`);
-            console.error(`❌ Error con ${oldBrand}:`, error);
-        }
-    }
-
-    const totalChanged = Object.values(results.changedToGeneric).reduce((a, b) => a + b, 0);
-    const totalUnified = Object.values(results.unified).reduce((a, b) => a + b, 0);
-
-    return NextResponse.json({
-        message: '✅ Limpieza completada',
-        summary: {
-            productosCambiadosAGenerico: totalChanged,
-            productosUnificados: totalUnified,
-            errores: results.errors.length
-        },
-        details: results,
-        timestamp: new Date().toISOString()
-    });
+  } catch (error) {
+    console.error("Error analizando duplicados:", error);
+    return NextResponse.json(
+      { success: false, error: "Error al analizar duplicados" },
+      { status: 500 }
+    );
+  }
 }
