@@ -295,7 +295,7 @@ export default function RootLayout({
       >
         <AuthProvider>
           {children}
-          <ChatWidget />
+          {/* <ChatWidget /> */}
         </AuthProvider>
       </body>
     </html>
