@@ -116,7 +116,7 @@ const servicesCards = [
   {
     category: "Accesorios",
     title: "Chucks, Boquillas y Porta Boquillas",
-    src: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800",
+    src: "https://www.travers.com.mx/media/catalog/product/agility/img/69-500-090.jpg?optimize=high&fit=bounds&height=500&width=500&canvas=500:500",
     content: (
       <div className="bg-gradient-to-br from-orange-900 to-red-900 p-8 md:p-14 rounded-3xl mb-4">
         <p className="text-white text-base md:text-2xl font-sans max-w-3xl mx-auto leading-relaxed">
