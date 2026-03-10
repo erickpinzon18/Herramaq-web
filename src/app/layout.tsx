@@ -139,7 +139,7 @@ export default function RootLayout({
                 "Venta de herramientas, maquinaria y accesorios industriales. Tornos, fresadoras, taladros, brocas, insertos, equipos de medición y más. Más de 20 años de experiencia.",
               url: "https://herramaq.mx",
               telephone: ["+52-427-272-5663", "+52-427-274-8351"],
-              email: "herramaq@prodigy.net.mx",
+              email: "ventas@herramaq.mx",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Calle Verano 11, Betania",

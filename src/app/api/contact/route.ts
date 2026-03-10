@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     
     await resend.emails.send({
       from: 'contacto@herramaq.mx',
-      to: process.env.CONTACT_EMAIL || 'herramaq@prodigy.net.mx',
+      to: process.env.CONTACT_EMAIL || 'ventas@herramaq.mx',
       subject: `Nuevo contacto de ${body.name}`,
       html: `
         <h2>Nuevo mensaje de contacto</h2>

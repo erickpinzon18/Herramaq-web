@@ -4,14 +4,14 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contacto | HERRAMAQ - Herramientas Industriales San Juan del Río",
   description:
-    "Contacta a HERRAMAQ para cotizaciones de herramientas y maquinaria industrial. Teléfonos: (427) 272-5663, (427) 274-8351. Email: herramaq@prodigy.net.mx. WhatsApp: +52 1 427 290 9175. Ubicación: Calle Verano 11, Betania, San Juan del Río, Querétaro. Horario: Lun-Vie 8:00-19:00, Sáb 9:00-13:00.",
+    "Contacta a HERRAMAQ para cotizaciones de herramientas y maquinaria industrial. Teléfonos: (427) 272-5663, (427) 274-8351. Email: ventas@herramaq.mx. WhatsApp: +52 1 427 290 9175. Ubicación: Calle Verano 11, Betania, San Juan del Río, Querétaro. Horario: Lun-Vie 8:00-19:00, Sáb 9:00-13:00.",
   keywords: [
     "contacto HERRAMAQ",
     "teléfono HERRAMAQ",
     "427 272 5663",
     "427 274 8351",
     "whatsapp HERRAMAQ",
-    "herramaq@prodigy.net.mx",
+    "ventas@herramaq.mx",
     "cotización herramientas industriales",
     "ubicación HERRAMAQ",
     "San Juan del Río herramientas",

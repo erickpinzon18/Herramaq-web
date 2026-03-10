@@ -195,7 +195,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ className = "" }) => {
       const errorMessage: Message = {
         role: "assistant",
         content:
-          "Disculpa, tengo problemas técnicos en este momento. Por favor, contáctanos directamente al (427) 123 4567 o escríbenos a herramaq@prodigy.net.mx",
+          "Disculpa, tengo problemas técnicos en este momento. Por favor, contáctanos directamente al (427) 123 4567 o escríbenos a ventas@herramaq.mx",
         timestamp: new Date(),
       };
 

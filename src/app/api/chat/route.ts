@@ -155,7 +155,7 @@ ${
 📞 INFORMACIÓN DE CONTACTO:
 Teléfono: (427) 274 1234
 WhatsApp: +52 427 184 5182 (CANAL PREFERIDO - respuesta rápida!)
-Email: herramaq@prodigy.net.mx
+Email: ventas@herramaq.mx
 Horario: Lunes a Viernes 8:00 AM - 6:00 PM, Sábados 9:00 AM - 2:00 PM
 Ubicación: San Juan del Río, Querétaro, México
 

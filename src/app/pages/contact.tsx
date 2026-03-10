@@ -528,7 +528,7 @@ export default function ContactPage() {
                       <div>
                         <h4 className="font-semibold mb-1 text-sm">Email</h4>
                         <p className="text-slate-300 text-sm">
-                          herramaq@prodigy.net.mx
+                          ventas@herramaq.mx
                         </p>
                       </div>
                     </div>

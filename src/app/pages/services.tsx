@@ -637,10 +637,10 @@ export default function ServicesPage() {
                 </a>
                 <br />
                 <a
-                  href="mailto:herramaq@prodigy.net.mx"
+                  href="mailto:ventas@herramaq.mx"
                   className="hover:text-blue-600"
                 >
-                  herramaq@prodigy.net.mx
+                  ventas@herramaq.mx
                 </a>
               </p>
             </div>
@@ -688,7 +688,7 @@ export default function ServicesPage() {
               variant="outline"
               className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-bold"
             >
-              <a href="mailto:herramaq@prodigy.net.mx">Enviar Email</a>
+              <a href="mailto:ventas@herramaq.mx">Enviar Email</a>
             </RBButton>
           </div>
         </div>
